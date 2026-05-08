@@ -54,6 +54,17 @@ export default function Explorer() {
     setStep("results");
   }
 
+  function changeCountry(nextCountry) {
+    setCountry(nextCountry);
+    setSelectedIndex(0);
+  }
+
+  function changeLanguage(nextLanguage) {
+    setLanguage(nextLanguage);
+  }
+
+  const switcherSelectClass = "w-full rounded-2xl border border-gray-200 bg-white/80 px-4 py-3 text-sm font-bold text-gray-950 outline-none backdrop-blur focus:border-gray-950";
+
   const isEmergency = category === "emergency";
   const callUrl = selectedSite?.web?.startsWith("tel:") ? selectedSite.web : null;
 
@@ -91,7 +102,32 @@ export default function Explorer() {
           <StepShell>
             <div className="glass w-full max-w-5xl rounded-[2rem] p-8 shadow-soft">
               <h1 className="mb-3 text-center text-5xl font-black tracking-[-0.05em]">{t.categoryTitle}</h1>
-              <p className="mb-8 text-center text-gray-500">{countryName} • {language}</p>
+              <p className="mb-6 text-center text-gray-500">{countryName} • {language}</p>
+
+              <div className="mb-8 grid gap-3 rounded-[1.5rem] border border-white/60 bg-white/50 p-3 shadow-sm backdrop-blur md:grid-cols-2">
+                <label className="text-left">
+                  <span className="mb-2 block px-1 text-xs font-black uppercase tracking-[0.2em] text-gray-500">{t.country || "Country"}</span>
+                  <select
+                    value={country}
+                    onChange={(e) => changeCountry(e.target.value)}
+                    className={switcherSelectClass}
+                  >
+                    {countries.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
+                  </select>
+                </label>
+
+                <label className="text-left">
+                  <span className="mb-2 block px-1 text-xs font-black uppercase tracking-[0.2em] text-gray-500">{t.language || "Language"}</span>
+                  <select
+                    value={language}
+                    onChange={(e) => changeLanguage(e.target.value)}
+                    className={switcherSelectClass}
+                  >
+                    {languages.map((item) => <option key={item} value={item}>{item}</option>)}
+                  </select>
+                </label>
+              </div>
+
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {categories.map((item) => (
                   <button
@@ -105,8 +141,8 @@ export default function Explorer() {
                   </button>
                 ))}
               </div>
-              <p className="mt-6 text-center text-sm font-semibold text-gray-500">Click any category to open recommendations directly.</p>
-              <button onClick={() => setStep("language")} className="mt-3 w-full rounded-full bg-gray-100 px-6 py-3 font-bold text-gray-950">{t.changeLanguage}</button>
+              <p className="mt-6 text-center text-sm font-semibold text-gray-500">{t.clickCategoryHint || "Click any category to open recommendations directly."}</p>
+              <button onClick={() => setStep("country")} className="mt-3 w-full rounded-full bg-gray-100 px-6 py-3 font-bold text-gray-950">{t.changeCountry || "Change country"}</button>
             </div>
           </StepShell>
         </PageTransition>
@@ -121,6 +157,29 @@ export default function Explorer() {
                   <button onClick={() => setStep("category")} className="rounded-full bg-gray-100 px-5 py-3 font-bold">← Back</button>
                   <h2 className="mt-6 text-3xl font-black tracking-[-0.04em]">{t.recommendedSites}</h2>
                   <p className="text-gray-500">{countryName} • {labels[category]?.[0] || category} • {language}</p>
+
+                  <div className="mt-5 grid gap-3">
+                    <label>
+                      <span className="mb-2 block px-1 text-xs font-black uppercase tracking-[0.2em] text-gray-500">{t.country || "Country"}</span>
+                      <select
+                        value={country}
+                        onChange={(e) => changeCountry(e.target.value)}
+                        className={switcherSelectClass}
+                      >
+                        {countries.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
+                      </select>
+                    </label>
+                    <label>
+                      <span className="mb-2 block px-1 text-xs font-black uppercase tracking-[0.2em] text-gray-500">{t.language || "Language"}</span>
+                      <select
+                        value={language}
+                        onChange={(e) => changeLanguage(e.target.value)}
+                        className={switcherSelectClass}
+                      >
+                        {languages.map((item) => <option key={item} value={item}>{item}</option>)}
+                      </select>
+                    </label>
+                  </div>
                 </div>
 
                 <div className="flex max-h-[70vh] flex-col gap-3 overflow-auto p-4">

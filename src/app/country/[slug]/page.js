@@ -10,7 +10,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const countryName = getCountryName(params.slug);
   const title = `Best Travel Apps in ${countryName}`;
-  const description = `Discover trusted taxi, train, metro, bus, flight, shopping, food delivery, and maps apps for ${countryName}.`;
+  const description = `Discover trusted SOS emergency, taxi, train, metro, bus, flight, shopping, food delivery, and maps apps for ${countryName}.`;
 
   return {
     title,
@@ -48,7 +48,7 @@ export default function CountryPage({ params }) {
               Best travel apps in {countryName}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600">
-              Find trusted websites and mobile apps for local transport, maps, trains, metro, buses, flights, shopping, and food delivery in {countryName}.
+              Find trusted websites and mobile apps for SOS emergency numbers, local transport, maps, trains, metro, buses, flights, shopping, and food delivery in {countryName}.
             </p>
           </section>
 
@@ -56,6 +56,7 @@ export default function CountryPage({ params }) {
             {categories.map((category) => {
               const apps = data[category.key] || [];
               const label = {
+                emergency: "SOS Emergency",
                 transport: "Local Transport",
                 maps: "Maps",
                 train: "Train",
@@ -64,7 +65,7 @@ export default function CountryPage({ params }) {
                 flights: "Flights",
                 shopping: "Shopping",
                 food: "Food Delivery"
-              }[category.key];
+              }[category.key] || category.key;
 
               return (
                 <div key={category.key} className="rounded-[2rem] border border-gray-200 bg-white p-7 shadow-soft">
@@ -75,6 +76,11 @@ export default function CountryPage({ params }) {
                       <article key={app.name} className="rounded-3xl bg-gray-50 p-5">
                         <h3 className="text-xl font-black">{app.name}</h3>
                         <p className="mt-2 text-gray-600">{app.description}</p>
+                        {app.web?.startsWith("tel:") && (
+                          <a href={app.web} className="mt-4 inline-flex rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700">
+                            Call Now
+                          </a>
+                        )}
                         <div className="mt-4 flex flex-wrap gap-2">
                           {app.badges.map((badge) => (
                             <span key={badge} className="rounded-full bg-white px-3 py-1 text-xs font-bold">{badge}</span>

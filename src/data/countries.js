@@ -37,6 +37,7 @@ export const countries = [
 ];
 
 export const categories = [
+  { key: "emergency", icon: "🆘" },
   { key: "transport", icon: "🚖" },
   { key: "maps", icon: "🗺️" },
   { key: "train", icon: "🚄" },
@@ -71,12 +72,18 @@ export const defaultCountryData = {
   ],
   food: [
     link("Uber Eats", "Food delivery service", "Food ordering and delivery platform.", "https://www.ubereats.com/", "https://play.google.com/store/apps/details?id=com.ubercab.eats", "https://apps.apple.com/app/uber-eats-food-delivery/id1058959277", ["Food", "Delivery", "Global"], ["Check delivery timing.", "Verify address before ordering.", "Review restaurant ratings."])
+  ],
+  emergency: [
+    link("SOS Emergency", "Emergency help and safety numbers", "Call the local emergency service immediately for police, ambulance, or fire support.", "tel:112", "tel:112", "tel:112", ["SOS", "Emergency", "Call Now"], ["Call only during a real emergency.", "Share your exact location clearly.", "Keep your passport or ID details ready if safe."])
   ]
 };
 
 export const countryData = {
   india: {
     ...defaultCountryData,
+    emergency: [
+      link("India SOS Emergency", "National emergency helpline", "Call 112 in India for emergency support. Police can also be reached at 100, ambulance at 108, and fire at 101.", "tel:112", "tel:112", "tel:112", ["SOS", "112", "India"], ["Call 112 for urgent emergency help.", "Police: 100 • Ambulance: 108 • Fire: 101", "Share your location and nearby landmark clearly."])
+    ],
     transport: [
       link("Uber India", "Premium taxi and chauffeur rides", "Premium ride-hailing service with airport, city, and executive rides across India.", "https://www.uber.com/in/en/", "https://play.google.com/store/apps/details?id=com.ubercab", "https://apps.apple.com/app/uber-request-a-ride/id368677368", ["5 Star", "Premium", "Taxi"], ["Enable live location before booking.", "Compare ride categories.", "Check airport pickup instructions."]),
       link("Ola", "Premium local cab service", "Popular premium cab platform with city rides and airport transfers.", "https://www.olacabs.com/", "https://play.google.com/store/apps/details?id=com.olacabs.customer", "https://apps.apple.com/in/app/ola-cabs/id539179365", ["5 Star", "Cab", "Airport Rides"], ["Use Ola Prime for premium rides.", "Check estimated fare.", "Verify driver and vehicle details."])
@@ -99,16 +106,25 @@ export const countryData = {
   },
   japan: {
     ...defaultCountryData,
+    emergency: [
+      link("Japan SOS Emergency", "Police, ambulance, and fire numbers", "Call 110 for police in Japan. Call 119 for ambulance or fire emergency services.", "tel:110", "tel:110", "tel:110", ["SOS", "110", "119"], ["Police: 110", "Ambulance/Fire: 119", "Explain your location slowly and clearly."])
+    ],
     transport: [link("GO Taxi", "Premium taxi booking service", "Trusted taxi service widely used across Japan.", "https://go.goinc.jp/", "https://play.google.com/store/apps/details?id=jp.ne.goinc.go", "https://apps.apple.com/search?term=GO%20Taxi", ["5 Star", "Japan", "Taxi"], ["Best in major cities.", "Confirm pickup point.", "Check payment methods."])],
     shopping: [link("Rakuten Japan", "Shopping marketplace", "Major Japanese shopping platform.", "https://www.rakuten.co.jp/", "https://play.google.com/store/apps/details?id=jp.co.rakuten.pointclub.android", "https://apps.apple.com/jp/app/rakuten-pointclub/id492214705", ["Shopping", "Japan", "Marketplace"], ["Some listings may be Japanese-only.", "Check delivery support.", "Compare seller ratings."])]
   },
   uae: {
     ...defaultCountryData,
+    emergency: [
+      link("UAE SOS Emergency", "Police, ambulance, and fire numbers", "Call 999 for police in the UAE. Ambulance can be reached at 998 and fire at 997.", "tel:999", "tel:999", "tel:999", ["SOS", "999", "UAE"], ["Police: 999", "Ambulance: 998 • Fire: 997", "Share emirate, street, and landmark details."])
+    ],
     transport: [link("Careem", "Premium chauffeur and taxi service", "Luxury and premium ride service popular in UAE cities.", "https://www.careem.com/", "https://play.google.com/store/apps/details?id=com.careem.acma", "https://apps.apple.com/us/app/careem-rides-food-more/id592978487", ["5 Star", "Luxury", "UAE"], ["Choose premium categories.", "Airport transfers available.", "Check city coverage."])],
     shopping: [link("Noon", "Shopping platform", "Popular shopping platform in UAE.", "https://www.noon.com/uae-en/", "https://play.google.com/store/apps/details?id=com.noon.buyerapp", "https://apps.apple.com/us/app/noon-shopping-food-grocery/id1269038866", ["Shopping", "UAE", "Marketplace"], ["Check delivery area.", "Compare sellers.", "Check return policy."])]
   },
   thailand: {
     ...defaultCountryData,
+    emergency: [
+      link("Thailand SOS Emergency", "Tourist and public emergency numbers", "Call 191 for police in Thailand. Tourist police can be reached at 1155 and ambulance at 1669.", "tel:191", "tel:191", "tel:191", ["SOS", "191", "Tourist Police"], ["Police: 191", "Tourist Police: 1155 • Ambulance: 1669", "Tell them your hotel, street, or landmark."])
+    ],
     transport: [link("Grab", "Premium taxi and local rides", "Popular ride service in Thailand and Southeast Asia.", "https://www.grab.com/th/en/", "https://play.google.com/store/apps/details?id=com.grabtaxi.passenger", "https://apps.apple.com/us/app/grab-taxi-food-delivery/id647268330", ["5 Star", "Taxi", "Thailand"], ["Best for city rides.", "Compare fare.", "Verify pickup pin."])],
     food: [link("GrabFood", "Food delivery", "Food delivery service inside Grab.", "https://www.grab.com/th/en/food/", "https://play.google.com/store/apps/details?id=com.grabtaxi.passenger", "https://apps.apple.com/us/app/grab-taxi-food-delivery/id647268330", ["Food", "Delivery", "Thailand"], ["Check restaurant rating.", "Confirm address.", "Check delivery area."])]
   }

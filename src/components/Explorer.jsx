@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Globe2, Smartphone, Apple } from "lucide-react";
+import { Globe2, Smartphone, Apple, PhoneCall } from "lucide-react";
 import { categories, countries, getCountryData, getCountryName } from "@/data/countries";
 import { getTranslation, languages } from "@/data/translations";
 import PageTransition from "@/components/PageTransition";
@@ -11,7 +11,7 @@ export default function Explorer() {
   const [step, setStep] = useState("country");
   const [country, setCountry] = useState("india");
   const [language, setLanguage] = useState("English");
-  const [category, setCategory] = useState("transport");
+  const [category, setCategory] = useState("emergency");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [loadingEffect, setLoadingEffect] = useState(false);
 
@@ -22,6 +22,7 @@ export default function Explorer() {
   const selectedSite = sites[selectedIndex] || null;
 
   const labels = useMemo(() => ({
+    emergency: [t.emergency, t.emergencyDesc],
     transport: [t.localTransport, t.localTransportDesc],
     maps: [t.maps, t.mapsDesc],
     train: [t.train, t.trainDesc],
@@ -101,8 +102,8 @@ export default function Explorer() {
                     className={`rounded-3xl border p-5 text-left transition hover:-translate-y-1 hover:shadow-xl ${category === item.key ? "border-gray-950 bg-gray-950 text-white" : "border-gray-200 bg-white"}`}
                   >
                     <div className="text-3xl">{item.icon}</div>
-                    <strong className="mt-3 block">{labels[item.key][0]}</strong>
-                    <span className={category === item.key ? "text-gray-300" : "text-gray-500"}>{labels[item.key][1]}</span>
+                    <strong className="mt-3 block">{labels[item.key]?.[0] || item.key}</strong>
+                    <span className={category === item.key ? "text-gray-300" : "text-gray-500"}>{labels[item.key]?.[1] || "Useful travel services"}</span>
                   </button>
                 ))}
               </div>
@@ -121,7 +122,7 @@ export default function Explorer() {
                 <div className="border-b border-gray-200 p-6">
                   <button onClick={() => setStep("category")} className="rounded-full bg-gray-100 px-5 py-3 font-bold">← Back</button>
                   <h2 className="mt-6 text-3xl font-black tracking-[-0.04em]">{t.recommendedSites}</h2>
-                  <p className="text-gray-500">{countryName} • {labels[category][0]} • {language}</p>
+                  <p className="text-gray-500">{countryName} • {labels[category]?.[0] || category} • {language}</p>
                 </div>
 
                 <div className="flex max-h-[70vh] flex-col gap-3 overflow-auto p-4">
@@ -150,9 +151,15 @@ export default function Explorer() {
 
                   {selectedSite && (
                     <div className="mt-5 flex flex-wrap gap-3">
-                      <button onClick={() => openLink(selectedSite.web)} className="inline-flex items-center gap-2 rounded-2xl border px-4 py-3 font-bold hover:bg-gray-950 hover:text-white"><Globe2 size={18}/> Web</button>
-                      <button onClick={() => openLink(selectedSite.android)} className="inline-flex items-center gap-2 rounded-2xl border px-4 py-3 font-bold hover:bg-gray-950 hover:text-white"><Smartphone size={18}/> Android</button>
-                      <button onClick={() => openLink(selectedSite.ios)} className="inline-flex items-center gap-2 rounded-2xl border px-4 py-3 font-bold hover:bg-gray-950 hover:text-white"><Apple size={18}/> iOS</button>
+                      {category === "emergency" ? (
+                        <button onClick={() => openLink(selectedSite.web || selectedSite.android || selectedSite.ios)} className="inline-flex items-center gap-2 rounded-2xl border bg-red-600 px-5 py-3 font-bold text-white hover:bg-red-700"><PhoneCall size={18}/> {t.callNow}</button>
+                      ) : (
+                        <>
+                          <button onClick={() => openLink(selectedSite.web)} className="inline-flex items-center gap-2 rounded-2xl border px-4 py-3 font-bold hover:bg-gray-950 hover:text-white"><Globe2 size={18}/> Web</button>
+                          <button onClick={() => openLink(selectedSite.android)} className="inline-flex items-center gap-2 rounded-2xl border px-4 py-3 font-bold hover:bg-gray-950 hover:text-white"><Smartphone size={18}/> Android</button>
+                          <button onClick={() => openLink(selectedSite.ios)} className="inline-flex items-center gap-2 rounded-2xl border px-4 py-3 font-bold hover:bg-gray-950 hover:text-white"><Apple size={18}/> iOS</button>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>

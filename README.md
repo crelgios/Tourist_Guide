@@ -53,3 +53,26 @@ src/components/Explorer.jsx
 src/components/GlobeHero.jsx
 src/app/admin/page.js
 ```
+
+
+## Admin Export JSON
+
+Go to:
+
+```txt
+/admin
+```
+
+Upload your Excel file, then click:
+
+```txt
+Export JSON
+```
+
+This downloads:
+
+```txt
+aliwvide-countries-data.json
+```
+
+Because this is no-backend, it does not update live site automatically. Replace your data file or connect this JSON to a backend later.

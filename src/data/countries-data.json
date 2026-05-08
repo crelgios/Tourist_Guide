@@ -364,10 +364,10 @@
         ]
       },
       {
-        "name": "My Fire Emergency",
+        "name": "India Fire Emergency",
         "type": "Fire number",
-        "description": "Fire brigade emergency number in India: 104444.",
-        "web": "tel:104444",
+        "description": "Fire brigade emergency number in India: 101.",
+        "web": "tel:101",
         "android": "",
         "ios": "",
         "badges": [

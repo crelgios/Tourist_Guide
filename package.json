@@ -1,5 +1,5 @@
 {
-  "name": "tourist-guide-nextjs",
+  "name": "aliwvide-travel-guide",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,11 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "framer-motion": "11.18.2",
+    "lucide-react": "0.468.0",
     "next": "14.2.23",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "framer-motion": "11.18.2",
-    "lucide-react": "0.468.0",
     "xlsx": "0.18.5"
   },
   "devDependencies": {

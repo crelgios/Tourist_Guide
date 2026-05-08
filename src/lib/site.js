@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "Tourist Guide",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.com",
+  name: "Aliwvide",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://aliwvide.com",
   description:
-    "Find trusted transport, train, metro, bus, flights, shopping, food delivery, and map apps by country."
+    "Find trusted transport, maps, train, metro, bus, flight, shopping, and food delivery apps by country."
 };

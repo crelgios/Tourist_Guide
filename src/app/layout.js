@@ -1,47 +1,34 @@
 import "./globals.css";
 
 export const metadata = {
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aliwvide.com"),
   title: {
-    default: "Tourist Guide - Best Travel Apps by Country",
-    template: "%s | Tourist Guide"
+    default: "Aliwvide - Best Travel Apps by Country",
+    template: "%s | Aliwvide"
   },
   description:
     "Find trusted local transport, train, metro, bus, flights, shopping, food delivery, and map apps by country.",
   keywords: [
+    "Aliwvide",
     "best travel apps by country",
     "best taxi app by country",
     "best train app by country",
     "tourist transport apps",
     "country travel guide",
-    "local apps for tourists",
-    "best apps for travelers"
+    "local apps for tourists"
   ],
-  alternates: {
-    canonical: "/"
-  },
   openGraph: {
     type: "website",
-    siteName: "Tourist Guide",
-    title: "Tourist Guide - Best Travel Apps by Country",
+    siteName: "Aliwvide",
+    title: "Aliwvide - Best Travel Apps by Country",
     description:
-      "Discover trusted transport, train, metro, bus, flight, food, shopping, and map apps by country.",
-    url: "/",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Tourist Guide"
-      }
-    ]
+      "Discover trusted transport, maps, train, metro, bus, flight, shopping, and food apps by country.",
+    url: "/"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tourist Guide - Best Travel Apps by Country",
-    description:
-      "Find trusted travel apps, transport services, and local platforms by country.",
-    images: ["/og-image.png"]
+    title: "Aliwvide - Best Travel Apps by Country",
+    description: "Find trusted travel apps and local platforms by country."
   },
   robots: {
     index: true,
@@ -49,7 +36,6 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1
     }

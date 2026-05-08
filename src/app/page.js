@@ -2,12 +2,10 @@ import GlobeHero from "@/components/GlobeHero";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Tourist Guide - Best Travel Apps by Country",
+  title: "Aliwvide - Best Travel Apps by Country",
   description:
     "Find trusted local transport, maps, train, metro, bus, flight, shopping, and food delivery apps for any country.",
-  alternates: {
-    canonical: "/"
-  }
+  alternates: { canonical: "/" }
 };
 
 export default function Home() {
@@ -16,9 +14,7 @@ export default function Home() {
       <GlobeHero />
       <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-7xl">
-          <h2 className="text-5xl font-black tracking-[-0.05em]">
-            What can users discover?
-          </h2>
+          <h2 className="text-5xl font-black tracking-[-0.05em]">What can users discover?</h2>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-gray-600">
             Search a country and discover the main apps tourists need before travelling.
           </p>

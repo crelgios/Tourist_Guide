@@ -1,6 +1,6 @@
-# Tourist Guide Next.js Website
+# Aliwvide Travel Guide
 
-SEO-ready and Vercel-ready travel app guide website.
+Modern Next.js + Tailwind website for discovering trusted travel apps by country.
 
 ## Run locally
 
@@ -22,27 +22,34 @@ npm run build
 npm run start
 ```
 
-## Environment variable
+## Vercel
 
-Create `.env.local`:
+Framework Preset: Next.js  
+Build Command: `npm run build`  
+Install Command: `npm install`
+
+Set environment variable:
 
 ```txt
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
 
-## Important files
+## Hidden Admin
+
+Admin is hidden from public navigation and sitemap.
+
+Open directly:
+
+```txt
+/admin
+```
+
+## Main files
 
 ```txt
 src/data/countries.js
 src/data/translations.js
-src/app/sitemap.js
-src/app/robots.js
-src/app/country/[slug]/page.js
+src/components/Explorer.jsx
+src/components/GlobeHero.jsx
 src/app/admin/page.js
-```
-
-Admin is hidden from public navigation. Open it directly:
-
-```txt
-/admin
 ```

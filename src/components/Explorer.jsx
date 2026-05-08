@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { Globe2, Smartphone, Apple, PhoneCall } from "lucide-react";
 import { categories, countries, getCountryData, getCountryName } from "@/data/countries";
 import { getTranslation, languages } from "@/data/translations";
@@ -57,9 +58,10 @@ export default function Explorer() {
   const callUrl = selectedSite?.web?.startsWith("tel:") ? selectedSite.web : null;
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
+      <AnimatePresence mode="wait" initial={false}>
       {step === "country" && (
-        <PageTransition>
+        <PageTransition key="country-step">
           <StepShell>
             <h1 className="mb-8 text-center text-6xl font-black tracking-[-0.07em] md:text-8xl">{t.whereTitle}</h1>
             <select value={country} onChange={(e) => setCountry(e.target.value)} className="w-full max-w-xl rounded-full border border-gray-300 px-6 py-5 text-center text-xl outline-none focus:border-gray-950">
@@ -71,7 +73,7 @@ export default function Explorer() {
       )}
 
       {step === "language" && (
-        <PageTransition>
+        <PageTransition key="language-step">
           <StepShell>
             <h1 className="mb-4 text-center text-6xl font-black tracking-[-0.07em] md:text-8xl">{t.languageTitle}</h1>
             <p className="mb-8 text-gray-500">{countryName}</p>
@@ -85,7 +87,7 @@ export default function Explorer() {
       )}
 
       {step === "category" && (
-        <PageTransition>
+        <PageTransition key="category-step">
           <StepShell>
             <div className="glass w-full max-w-5xl rounded-[2rem] p-8 shadow-soft">
               <h1 className="mb-3 text-center text-5xl font-black tracking-[-0.05em]">{t.categoryTitle}</h1>
@@ -111,7 +113,7 @@ export default function Explorer() {
       )}
 
       {step === "results" && (
-        <PageTransition>
+        <PageTransition key={`results-${category}`}>
           <main className="min-h-screen bg-white p-5 md:p-8">
             <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[360px_1fr]">
               <aside className="overflow-hidden rounded-[2rem] border border-gray-200 bg-white shadow-soft">
@@ -193,6 +195,7 @@ export default function Explorer() {
           </main>
         </PageTransition>
       )}
+      </AnimatePresence>
     </div>
   );
 }

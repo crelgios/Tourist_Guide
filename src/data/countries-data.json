@@ -367,7 +367,7 @@
         "name": "India Fire Emergency",
         "type": "Fire number",
         "description": "Fire brigade emergency number in India: 101.",
-        "web": "tel:101",
+        "web": "tel:10000000",
         "android": "",
         "ios": "",
         "badges": [

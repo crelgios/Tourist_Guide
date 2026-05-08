@@ -130,7 +130,7 @@ export default function AdminPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "aliwvide-countries-data.json";
+    a.download = "countries-data.json";
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -152,9 +152,9 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-white px-6 py-12">
       <div className="mx-auto max-w-6xl">
-        <h1 className="text-6xl font-black tracking-[-0.07em]">Aliwvide Admin</h1>
+        <h1 className="text-6xl font-black tracking-[-0.07em]">Aliwvide Secure Data Manager</h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-600">
-          Hidden admin route for uploading your Excel workbook, previewing rows, and exporting JSON.
+          Secure data manager for uploading your Excel workbook, previewing rows, and exporting JSON.
         </p>
 
         <div className="mt-10 rounded-[2rem] border border-gray-200 bg-white p-8 shadow-soft">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Globe2, Smartphone, Apple, PhoneCall } from "lucide-react";
 import { categories, countries, getCountryData, getCountryName } from "@/data/countries";
@@ -19,6 +19,74 @@ export default function Explorer() {
   const countryData = getCountryData(country);
   const sites = countryData[category] || [];
   const selectedSite = sites[selectedIndex] || null;
+
+  const historyStateRef = useRef({
+    step: "country",
+    country: "india",
+    language: "English",
+    category: "transport",
+    selectedIndex: 0
+  });
+
+  useEffect(() => {
+    historyStateRef.current = { step, country, language, category, selectedIndex };
+  }, [step, country, language, category, selectedIndex]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const initialState = {
+      aliwvideExplorer: true,
+      step: historyStateRef.current.step,
+      country: historyStateRef.current.country,
+      language: historyStateRef.current.language,
+      category: historyStateRef.current.category,
+      selectedIndex: historyStateRef.current.selectedIndex
+    };
+
+    window.history.replaceState(initialState, "", window.location.href);
+
+    function handlePopState(event) {
+      const nextState = event.state;
+      if (!nextState?.aliwvideExplorer) return;
+
+      setStep(nextState.step || "country");
+      setCountry(nextState.country || "india");
+      setLanguage(nextState.language || "English");
+      setCategory(nextState.category || "transport");
+      setSelectedIndex(Number(nextState.selectedIndex || 0));
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  function writeExplorerHistory(nextValues, mode = "push") {
+    if (typeof window === "undefined") return;
+
+    const nextState = {
+      aliwvideExplorer: true,
+      ...historyStateRef.current,
+      ...nextValues
+    };
+
+    const method = mode === "replace" ? "replaceState" : "pushState";
+    window.history[method](nextState, "", window.location.href);
+    historyStateRef.current = nextState;
+  }
+
+  function goToStep(nextStep) {
+    writeExplorerHistory({ step: nextStep });
+    setStep(nextStep);
+  }
+
+  function goBackToPreviousStep(fallbackStep = "category") {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+    setStep(fallbackStep);
+  }
 
   const labels = useMemo(() => ({
     emergency: [t.emergency, t.emergencyDesc],
@@ -49,17 +117,31 @@ export default function Explorer() {
   }
 
   function openCategory(categoryKey) {
+    writeExplorerHistory({ step: "results", category: categoryKey, selectedIndex: 0 });
     setCategory(categoryKey);
     setSelectedIndex(0);
     setStep("results");
   }
 
   function changeCountry(nextCountry) {
+    writeExplorerHistory({ country: nextCountry, selectedIndex: 0 }, "replace");
     setCountry(nextCountry);
     setSelectedIndex(0);
   }
 
   function changeLanguage(nextLanguage) {
+    writeExplorerHistory({ language: nextLanguage }, "replace");
+    setLanguage(nextLanguage);
+  }
+
+  function chooseCountry(nextCountry) {
+    writeExplorerHistory({ country: nextCountry, selectedIndex: 0 }, "replace");
+    setCountry(nextCountry);
+    setSelectedIndex(0);
+  }
+
+  function chooseLanguage(nextLanguage) {
+    writeExplorerHistory({ language: nextLanguage }, "replace");
     setLanguage(nextLanguage);
   }
 
@@ -75,10 +157,10 @@ export default function Explorer() {
         <PageTransition key="country-step">
           <StepShell>
             <h1 className="mb-8 text-center text-6xl font-black tracking-[-0.07em] md:text-8xl">{t.whereTitle}</h1>
-            <select value={country} onChange={(e) => setCountry(e.target.value)} className="w-full max-w-xl rounded-full border border-gray-300 px-6 py-5 text-center text-xl outline-none focus:border-gray-950">
+            <select value={country} onChange={(e) => chooseCountry(e.target.value)} className="w-full max-w-xl rounded-full border border-gray-300 px-6 py-5 text-center text-xl outline-none focus:border-gray-950">
               {countries.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
             </select>
-            <button onClick={() => setStep("language")} className="mt-6 rounded-full bg-gray-950 px-10 py-4 font-bold text-white">{t.continueBtn}</button>
+            <button onClick={() => goToStep("language")} className="mt-6 rounded-full bg-gray-950 px-10 py-4 font-bold text-white">{t.continueBtn}</button>
           </StepShell>
         </PageTransition>
       )}
@@ -88,11 +170,11 @@ export default function Explorer() {
           <StepShell>
             <h1 className="mb-4 text-center text-6xl font-black tracking-[-0.07em] md:text-8xl">{t.languageTitle}</h1>
             <p className="mb-8 text-gray-500">{countryName}</p>
-            <select value={language} onChange={(e) => setLanguage(e.target.value)} className="w-full max-w-xl rounded-full border border-gray-300 px-6 py-5 text-center text-xl outline-none focus:border-gray-950">
+            <select value={language} onChange={(e) => chooseLanguage(e.target.value)} className="w-full max-w-xl rounded-full border border-gray-300 px-6 py-5 text-center text-xl outline-none focus:border-gray-950">
               {languages.map((item) => <option key={item} value={item}>{item}</option>)}
             </select>
-            <button onClick={() => setStep("category")} className="mt-6 rounded-full bg-gray-950 px-10 py-4 font-bold text-white">{t.continueBtn}</button>
-            <button onClick={() => setStep("country")} className="mt-3 rounded-full bg-gray-100 px-6 py-3 font-bold text-gray-950">{t.changeCountry}</button>
+            <button onClick={() => goToStep("category")} className="mt-6 rounded-full bg-gray-950 px-10 py-4 font-bold text-white">{t.continueBtn}</button>
+            <button onClick={() => goToStep("country")} className="mt-3 rounded-full bg-gray-100 px-6 py-3 font-bold text-gray-950">{t.changeCountry}</button>
           </StepShell>
         </PageTransition>
       )}
@@ -142,7 +224,7 @@ export default function Explorer() {
                 ))}
               </div>
               <p className="mt-6 text-center text-sm font-semibold text-gray-500">{t.clickCategoryHint || "Click any category to open recommendations directly."}</p>
-              <button onClick={() => setStep("country")} className="mt-3 w-full rounded-full bg-gray-100 px-6 py-3 font-bold text-gray-950">{t.changeCountry || "Change country"}</button>
+              <button onClick={() => goToStep("country")} className="mt-3 w-full rounded-full bg-gray-100 px-6 py-3 font-bold text-gray-950">{t.changeCountry || "Change country"}</button>
             </div>
           </StepShell>
         </PageTransition>
@@ -154,7 +236,7 @@ export default function Explorer() {
             <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[360px_1fr]">
               <aside className="overflow-hidden rounded-[2rem] border border-gray-200 bg-white shadow-soft">
                 <div className="border-b border-gray-200 p-6">
-                  <button onClick={() => setStep("category")} className="rounded-full bg-gray-100 px-5 py-3 font-bold">← Back</button>
+                  <button onClick={() => goBackToPreviousStep("category")} className="rounded-full bg-gray-100 px-5 py-3 font-bold">← Back</button>
                   <h2 className="mt-6 text-3xl font-black tracking-[-0.04em]">{t.recommendedSites}</h2>
                   <p className="text-gray-500">{countryName} • {labels[category]?.[0] || category} • {language}</p>
 
@@ -195,7 +277,7 @@ export default function Explorer() {
                         key={`${site.name}-${index}`}
                         className={`rounded-3xl border p-5 text-left transition ${selectedIndex === index ? "border-gray-950 bg-gray-950 text-white" : "border-gray-200 bg-white hover:bg-gray-50"}`}
                       >
-                        <button onClick={() => setSelectedIndex(index)} className="w-full text-left">
+                        <button onClick={() => { writeExplorerHistory({ selectedIndex: index }, "replace"); setSelectedIndex(index); }} className="w-full text-left">
                           <strong>{site.name}</strong>
                           <p className={selectedIndex === index ? "text-sm text-gray-300" : "text-sm text-gray-500"}>{site.type}</p>
                         </button>

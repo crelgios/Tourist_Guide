@@ -11,7 +11,7 @@ export default function Explorer() {
   const [step, setStep] = useState("country");
   const [country, setCountry] = useState("india");
   const [language, setLanguage] = useState("English");
-  const [category, setCategory] = useState("transport");
+  const [category, setCategory] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const t = getTranslation(language);
@@ -24,7 +24,7 @@ export default function Explorer() {
     step: "country",
     country: "india",
     language: "English",
-    category: "transport",
+    category: "",
     selectedIndex: 0
   });
 
@@ -53,7 +53,7 @@ export default function Explorer() {
       setStep(nextState.step || "country");
       setCountry(nextState.country || "india");
       setLanguage(nextState.language || "English");
-      setCategory(nextState.category || "transport");
+      setCategory(nextState.category || "");
       setSelectedIndex(Number(nextState.selectedIndex || 0));
     }
 
@@ -124,8 +124,10 @@ export default function Explorer() {
   }
 
   function changeCountry(nextCountry) {
-    writeExplorerHistory({ country: nextCountry, selectedIndex: 0 }, "replace");
+    const nextCategory = step === "category" ? "" : category;
+    writeExplorerHistory({ country: nextCountry, category: nextCategory, selectedIndex: 0 }, "replace");
     setCountry(nextCountry);
+    if (step === "category") setCategory("");
     setSelectedIndex(0);
   }
 

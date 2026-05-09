@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const DEFAULT_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqenywva";
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -13,15 +13,7 @@ export default function ContactForm() {
     event.preventDefault();
     setStatus({ type: "", message: "" });
 
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || DEFAULT_ENDPOINT;
-
-    if (!endpoint || endpoint.includes("YOUR_FORM_ID")) {
-      setStatus({
-        type: "error",
-        message: "Contact form is ready, but Formspree ID is not added yet. Add NEXT_PUBLIC_FORMSPREE_ENDPOINT in .env.local or replace YOUR_FORM_ID."
-      });
-      return;
-    }
+    const endpoint = FORMSPREE_ENDPOINT;
 
     setLoading(true);
 

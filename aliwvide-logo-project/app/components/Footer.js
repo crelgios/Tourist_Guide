@@ -1,0 +1,1 @@
+export default function Footer(){return <footer className="footer"><div className="container"><strong>Aliwvide</strong><p>Worldwide travel and transport app discovery platform.</p><p><a href="/sitemap.xml">Sitemap</a> · <a href="/robots.txt">Robots</a></p></div></footer>}

@@ -85,3 +85,14 @@ Set these environment variables in Vercel:
 Do not put real credentials inside the code. Use Vercel Project Settings → Environment Variables.
 
 After setting env variables, redeploy the project.
+
+
+## Admin Page Restored
+
+The admin Excel-to-JSON manager is available at:
+
+https://aliwvide.com/secure-aliwvide-control-9xq2m
+
+No username/password environment variables are required in this version. The contact form uses this hardcoded Formspree endpoint:
+
+https://formspree.io/f/xqenywva

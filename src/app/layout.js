@@ -1,44 +1,47 @@
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aliwvide.com";
+
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://aliwvide.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Aliwvide - Best Travel Apps by Country",
+    default: "Best Travel Apps in India & Worldwide | Aliwvide",
     template: "%s | Aliwvide"
   },
   description:
-    "Find trusted local transport, train, metro, bus, flights, shopping, food delivery, and map apps by country.",
+    "Discover the best taxi apps, train apps, metro apps, food delivery apps and tourist travel apps used in India and around the world.",
   keywords: [
-    "Aliwvide",
-    "best travel apps by country",
-    "best taxi app by country",
-    "best train app by country",
-    "tourist transport apps",
-    "country travel guide",
-    "local apps for tourists"
+    "best taxi apps in India",
+    "India travel apps",
+    "Uber alternatives India",
+    "metro apps India",
+    "train booking apps India",
+    "tourist apps India",
+    "travel apps by country",
+    "cab booking apps India",
+    "Delhi metro apps",
+    "Aliwvide"
   ],
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
     type: "website",
     siteName: "Aliwvide",
-    title: "Aliwvide - Best Travel Apps by Country",
+    title: "Best Travel Apps in India & Worldwide",
     description:
-      "Discover trusted transport, maps, train, metro, bus, flight, shopping, and food apps by country.",
-    url: "/"
+      "Compare transport, taxi, train, metro, maps, shopping and food apps used by tourists in India.",
+    url: siteUrl
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aliwvide - Best Travel Apps by Country",
-    description: "Find trusted travel apps and local platforms by country."
+    title: "Best Travel Apps in India & Worldwide",
+    description:
+      "Discover trusted transport and travel apps for India and worldwide travel."
   },
   robots: {
     index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1
-    }
+    follow: true
   }
 };
 

@@ -53,7 +53,7 @@ export default function GlobeHero() {
         </div>
         <div className="hidden items-center gap-8 md:flex">
           <Link href="/">Home</Link>
-          <Link href="/explore">Explore</Link>
+          <Link href="/category">Explore</Link>
           <Link href="/faq">FAQ</Link>
         </div>
       </nav>
@@ -75,7 +75,7 @@ export default function GlobeHero() {
             Trusted local apps, transport, maps, food, shopping, and travel tools for every destination.
           </p>
           <Link
-            href="/explore"
+            href="/category"
             className="mt-10 inline-flex rounded-full bg-white px-7 py-4 text-lg font-bold text-gray-950 shadow-2xl transition hover:scale-105"
           >
             Start exploring →

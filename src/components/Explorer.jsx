@@ -7,8 +7,9 @@ import { categories, countries, getCountryData, getCountryName } from "@/data/co
 import { getTranslation, languages } from "@/data/translations";
 import PageTransition from "@/components/PageTransition";
 
-export default function Explorer() {
-  const [step, setStep] = useState("country");
+export default function Explorer({ initialStep = "country" }) {
+  const safeInitialStep = ["country", "language", "category", "results"].includes(initialStep) ? initialStep : "country";
+  const [step, setStep] = useState(safeInitialStep);
   const [country, setCountry] = useState("india");
   const [language, setLanguage] = useState("English");
   const [category, setCategory] = useState("");
@@ -21,7 +22,7 @@ export default function Explorer() {
   const selectedSite = sites[selectedIndex] || null;
 
   const historyStateRef = useRef({
-    step: "country",
+    step: safeInitialStep,
     country: "india",
     language: "English",
     category: "",

@@ -1,6 +1,6 @@
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aliwvide.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -30,7 +30,7 @@ export const metadata = {
     siteName: "Aliwvide",
     title: "Best Travel Apps in India & Worldwide",
     description:
-      "Compare transport, taxi, train, metro, maps, shopping and food apps used by tourists in India.",
+      "Compare transport, taxi, train, metro, maps, shopping, food delivery and grocery fast delivery apps used by tourists in India.",
     url: siteUrl
   },
   twitter: {

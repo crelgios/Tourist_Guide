@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site";
 export default function sitemap() {
   const now = new Date();
 
-  const staticRoutes = ["", "/explore", "/faq", "/contact", "/terms"].map((route) => ({
+  const staticRoutes = ["", "/category", "/explore", "/faq", "/contact", "/terms", "/india/taxi-apps"].map((route) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: now,
     changeFrequency: route === "" ? "weekly" : "monthly",

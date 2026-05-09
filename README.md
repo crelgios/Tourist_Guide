@@ -91,7 +91,7 @@ After setting env variables, redeploy the project.
 
 The admin Excel-to-JSON manager is available at:
 
-https://aliwvide.com/secure-aliwvide-control-9xq2m
+https://www.aliwvide.com/secure-aliwvide-control-9xq2m
 
 No username/password environment variables are required in this version. The contact form uses this hardcoded Formspree endpoint:
 

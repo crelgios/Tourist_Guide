@@ -266,6 +266,42 @@
           "Confirm delivery address.",
           "Review fees before payment."
         ]
+      },
+      {
+        "name": "Blinkit",
+        "type": "Quick commerce / grocery delivery",
+        "description": "Instant grocery and daily essentials delivery app in India",
+        "web": "https://blinkit.com/",
+        "android": "https://play.google.com/store/apps/details?id=com.grofers.customerapp",
+        "ios": "https://apps.apple.com/in/app/blinkit-groceries-more/id960335206",
+        "badges": [
+          "Grocery",
+          "Quick Commerce",
+          "India"
+        ],
+        "docs": [
+          "Check delivery availability by location.",
+          "Confirm delivery address.",
+          "Review fees before payment."
+        ]
+      },
+      {
+        "name": "Zepto",
+        "type": "Quick commerce / food & grocery delivery",
+        "description": "Fast grocery, daily essentials and quick food delivery service in India",
+        "web": "https://www.zepto.com/",
+        "android": "https://play.google.com/store/apps/details?id=com.zeptoconsumerapp",
+        "ios": "https://apps.apple.com/in/app/zepto-groceries-in-minutes/id1575323645",
+        "badges": [
+          "Grocery",
+          "Quick Delivery",
+          "India"
+        ],
+        "docs": [
+          "Check delivery availability by location.",
+          "Confirm delivery address.",
+          "Review fees before payment."
+        ]
       }
     ],
     "payment": [
@@ -378,7 +414,7 @@
         "docs": [
           "Leave unsafe place first.",
           "Call from safe location.",
-          "Verify locally if number changes."
+          "Use 112 for integrated emergency support if needed."
         ]
       }
     ]

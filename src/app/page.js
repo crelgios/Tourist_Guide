@@ -113,8 +113,10 @@ function buildTopAppsForCountry(slug, data) {
   };
 }
 
-const topCountrySections = Object.entries(countryData)
-  .map(([slug, data]) => buildTopAppsForCountry(slug, data))
+const homepageTopCountrySlugs = ["india", "japan", "saudiarabia"];
+
+const topCountrySections = homepageTopCountrySlugs
+  .map((slug) => buildTopAppsForCountry(slug, countryData[slug]))
   .filter((country) => country.apps.length > 0);
 
 const faqs = [
@@ -298,25 +300,21 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="hidden md:block">
-              <div className="relative mx-auto h-[520px] max-w-[430px] rounded-[3rem] border border-white/15 bg-white/10 p-4 shadow-[0_30px_100px_rgba(0,0,0,.45)] backdrop-blur-xl">
-                <div className="h-full rounded-[2.3rem] bg-white p-5 text-slate-950">
-                  <p className="text-sm font-black uppercase tracking-[.2em] text-violet-500">Featured country</p>
-                  <div
-                    className="mt-4 h-56 rounded-[1.8rem] bg-cover bg-center"
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=900&q=80')" }}
-                  />
-                  <h2 className="mt-6 text-4xl font-black">India</h2>
-                  <p className="mt-2 text-slate-500">Taxi, train, metro, food delivery, grocery fast delivery and tourist apps.</p>
-                  <div className="mt-6 grid grid-cols-2 gap-3">
-                    {indiaApps.slice(0, 4).map(([name, type, rating, theme, logo]) => (
-                      <div key={name} className="rounded-3xl bg-slate-50 p-4">
-                        <div className={`grid h-12 w-12 place-items-center rounded-2xl text-sm font-black ${theme}`}>{logo}</div>
-                        <p className="mt-3 text-sm font-black">{name}</p>
-                        <p className="text-xs text-slate-500">{type}</p>
-                        <p className="mt-1 text-sm font-bold">{rating} ⭐</p>
-                      </div>
-                    ))}
+            <div className="hidden md:flex items-center justify-center">
+              <div className="max-w-md rounded-[3rem] border border-white/15 bg-white/10 p-8 shadow-[0_30px_100px_rgba(0,0,0,.45)] backdrop-blur-xl">
+                <div className="grid gap-4">
+                  <div className="rounded-[2rem] bg-white/12 p-5">
+                    <p className="text-sm font-black uppercase tracking-[.2em] text-sky-200">Worldwide guide</p>
+                    <h2 className="mt-3 text-4xl font-black">Apps by country</h2>
+                    <p className="mt-3 text-white/75">Find local apps for transport, maps, food, grocery, trains and travel before you visit.</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div className="rounded-3xl bg-white p-4 text-slate-950"><div className="text-2xl">🚕</div><p className="mt-2 text-xs font-black">Taxi</p></div>
+                    <div className="rounded-3xl bg-white p-4 text-slate-950"><div className="text-2xl">🗺️</div><p className="mt-2 text-xs font-black">Maps</p></div>
+                    <div className="rounded-3xl bg-white p-4 text-slate-950"><div className="text-2xl">🍔</div><p className="mt-2 text-xs font-black">Food</p></div>
+                    <div className="rounded-3xl bg-white p-4 text-slate-950"><div className="text-2xl">🚆</div><p className="mt-2 text-xs font-black">Train</p></div>
+                    <div className="rounded-3xl bg-white p-4 text-slate-950"><div className="text-2xl">🛒</div><p className="mt-2 text-xs font-black">Grocery</p></div>
+                    <div className="rounded-3xl bg-white p-4 text-slate-950"><div className="text-2xl">🆘</div><p className="mt-2 text-xs font-black">SOS</p></div>
                   </div>
                 </div>
               </div>
@@ -374,10 +372,10 @@ export default function Home() {
         <section className="bg-gradient-to-br from-slate-50 to-violet-50 px-6 py-20">
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
-              <p className="inline-flex rounded-full bg-white px-4 py-2 font-black shadow-sm">🌍 ALL COUNTRIES</p>
+              <p className="inline-flex rounded-full bg-white px-4 py-2 font-black shadow-sm">🌍 QUICK PREVIEW</p>
               <h2 className="mt-5 text-4xl font-black tracking-[-0.04em] md:text-5xl">Top Travel Apps by Country</h2>
               <p className="mt-5 leading-8 text-slate-600">
-                Explore the most useful travel, taxi, maps, train, metro, food delivery, shopping, hotel and emergency apps for every country in the Aliwvide guide.
+                Preview useful travel, taxi, maps, train, food delivery and grocery apps for India, Japan and Saudi Arabia. Open the category page to explore all countries.
               </p>
             </div>
 

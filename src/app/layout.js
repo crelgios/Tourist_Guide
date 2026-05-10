@@ -5,7 +5,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Best Travel Apps in India & Worldwide | Aliwvide",
+    default: "Discover Travel Apps Used Around the World | Aliwvide",
     template: "%s | Aliwvide"
   },
   description:
@@ -28,14 +28,14 @@ export const metadata = {
   openGraph: {
     type: "website",
     siteName: "Aliwvide",
-    title: "Best Travel Apps in India & Worldwide",
+    title: "Discover Travel Apps Used Around the World",
     description:
       "Compare transport, taxi, train, metro, maps, shopping, food delivery and grocery fast delivery apps used by tourists in India.",
     url: siteUrl
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Travel Apps in India & Worldwide",
+    title: "Discover Travel Apps Used Around the World",
     description:
       "Discover trusted transport and travel apps for India and worldwide travel."
   },

@@ -73,21 +73,35 @@ function getInitials(name = "App") {
 }
 
 
-function getAppIcon(app) {
+function getFallbackIcon(app) {
   const text = `${app?.name || ""} ${app?.category || ""} ${app?.label || ""}`.toLowerCase();
 
-  if (text.includes("uber") || text.includes("ola") || text.includes("taxi") || text.includes("cab") || text.includes("ride") || text.includes("transport")) return "🚕";
   if (text.includes("train") || text.includes("rail") || text.includes("irctc")) return "🚆";
   if (text.includes("metro") || text.includes("subway")) return "🚇";
-  if (text.includes("map") || text.includes("navigation") || text.includes("google maps") || text.includes("waze")) return "🗺️";
-  if (text.includes("food") || text.includes("zomato") || text.includes("swiggy") || text.includes("delivery")) return "🍔";
-  if (text.includes("blinkit") || text.includes("zepto") || text.includes("instamart") || text.includes("grocery")) return "🛒";
-  if (text.includes("flight") || text.includes("air") || text.includes("airport")) return "✈️";
+  if (text.includes("map") || text.includes("navigation")) return "🗺️";
+  if (text.includes("food") || text.includes("delivery")) return "🍔";
+  if (text.includes("grocery") || text.includes("blinkit") || text.includes("zepto") || text.includes("instamart")) return "🛒";
+  if (text.includes("flight") || text.includes("air")) return "✈️";
   if (text.includes("hotel") || text.includes("stay") || text.includes("booking")) return "🏨";
   if (text.includes("shopping") || text.includes("shop")) return "🛍️";
   if (text.includes("emergency") || text.includes("sos") || text.includes("police") || text.includes("ambulance")) return "🆘";
 
   return "📱";
+}
+
+function getAppIconUrl(app) {
+  const url = app?.web || app?.android || app?.ios || "";
+
+  if (!url || url.startsWith("tel:")) {
+    return null;
+  }
+
+  try {
+    const domain = new URL(url).hostname.replace(/^www\./, "");
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+  } catch {
+    return null;
+  }
 }
 
 function buildTopAppsForCountry(slug, data) {
@@ -296,8 +310,19 @@ export default function Home() {
                           key={`${country.slug}-${app.name}-${index}`}
                           className="w-[150px] shrink-0 rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:shadow-md"
                         >
-                          <div className={`grid h-14 w-14 place-items-center rounded-2xl text-2xl font-black ${appLogoThemes[index % appLogoThemes.length]}`}>
-                            {getAppIcon(app)}
+                          <div className="grid h-14 w-14 place-items-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+                            {getAppIconUrl(app) ? (
+                              <img
+                                src={getAppIconUrl(app)}
+                                alt={`${app.name} app icon`}
+                                className="h-10 w-10 rounded-xl object-contain"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <span className={`grid h-14 w-14 place-items-center text-2xl ${appLogoThemes[index % appLogoThemes.length]}`}>
+                                {getFallbackIcon(app)}
+                              </span>
+                            )}
                           </div>
                           <h4 className="mt-3 line-clamp-2 min-h-[40px] text-sm font-black leading-5">{app.name}</h4>
                           <p className="mt-1 line-clamp-1 text-xs capitalize text-slate-500">{app.label}</p>

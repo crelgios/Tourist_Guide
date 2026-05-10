@@ -156,7 +156,7 @@ export default function Home() {
               India travel app guide
             </p>
             <h1 className="text-5xl font-black tracking-[-0.05em] md:text-6xl">
-              Best Travel Apps in India for Tourists
+              Travel Apps by Country
             </h1>
 
             <p className="mt-6 max-w-4xl text-lg leading-8 text-gray-600">

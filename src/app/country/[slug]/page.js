@@ -5,10 +5,48 @@ import { siteConfig } from "@/lib/site";
 
 export const dynamicParams = true;
 
+const categoryLabels = {
+  transport: "Local Transport",
+  train: "Train",
+  metro: "Metro",
+  bus: "Bus",
+  flights: "Flights",
+  maps: "Maps",
+  navigation: "Navigation",
+  shopping: "Shopping",
+  food: "Food Delivery",
+  hotel: "Hotels",
+  emergency: "SOS & Emergency Helplines"
+};
+
+function AppCard({ app, emergency = false }) {
+  return (
+    <article className={`rounded-3xl p-5 ${emergency ? "bg-red-50" : "bg-gray-50"}`}>
+      <h3 className="text-xl font-black">{app.name}</h3>
+      <p className="mt-2 text-gray-600">{app.description}</p>
+      {app.web?.startsWith("tel:") && (
+        <a
+          href={app.web}
+          className="mt-4 inline-flex rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700"
+        >
+          Call Now
+        </a>
+      )}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {(app.badges || []).map((badge) => (
+          <span key={badge} className="rounded-full bg-white px-3 py-1 text-xs font-bold">
+            {badge}
+          </span>
+        ))}
+      </div>
+    </article>
+  );
+}
+
 export function generateMetadata({ params }) {
   const countryName = getCountryName(params.slug);
   const title = `Best Travel Apps in ${countryName}`;
-  const description = `Discover trusted SOS emergency, taxi, train, metro, bus, flight, shopping, food delivery, and maps apps for ${countryName}.`;
+  const description = `Discover trusted taxi, train, metro, bus, flight, maps, navigation, shopping, food delivery and emergency helpline apps for ${countryName}.`;
 
   return {
     title,
@@ -33,12 +71,17 @@ export function generateMetadata({ params }) {
 export default function CountryPage({ params }) {
   const countryName = getCountryName(params.slug);
   const data = getCountryData(params.slug);
+  const mainCategories = categories.filter((category) => category.key !== "emergency");
+  const emergencyCategory = categories.find((category) => category.key === "emergency");
+  const emergencyApps = data.emergency || [];
 
   return (
     <>
       <main className="min-h-screen bg-white px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <Link href="/explore" className="rounded-full bg-gray-100 px-5 py-3 font-bold text-gray-900">← Explore</Link>
+          <Link href="/explore" className="rounded-full bg-gray-100 px-5 py-3 font-bold text-gray-900">
+            ← Explore
+          </Link>
 
           <section className="mt-12 rounded-[2.5rem] bg-gradient-to-br from-gray-50 to-indigo-50 p-8 md:p-12">
             <p className="font-bold text-blue-600">Aliwvide country guide</p>
@@ -46,24 +89,14 @@ export default function CountryPage({ params }) {
               Best travel apps in {countryName}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600">
-              Find trusted websites and mobile apps for SOS emergency numbers, local transport, maps, trains, metro, buses, flights, shopping, and food delivery in {countryName}.
+              Find trusted websites and mobile apps for local transport, taxi, maps, trains, metro, buses, flights, shopping and food delivery in {countryName}. Emergency helplines are listed near the bottom for quick reference.
             </p>
           </section>
 
           <section className="mt-12 grid gap-6 md:grid-cols-2">
-            {categories.map((category) => {
+            {mainCategories.map((category) => {
               const apps = data[category.key] || [];
-              const label = {
-                emergency: "SOS Emergency",
-                transport: "Local Transport",
-                maps: "Maps",
-                train: "Train",
-                metro: "Metro",
-                bus: "Bus",
-                flights: "Flights",
-                shopping: "Shopping",
-                food: "Food Delivery"
-              }[category.key] || category.key;
+              const label = categoryLabels[category.key] || category.key;
 
               return (
                 <div key={category.key} className="rounded-[2rem] border border-gray-200 bg-white p-7 shadow-soft">
@@ -71,26 +104,36 @@ export default function CountryPage({ params }) {
                   <h2 className="mt-4 text-2xl font-black">{label}</h2>
                   <div className="mt-5 space-y-4">
                     {apps.map((app) => (
-                      <article key={app.name} className="rounded-3xl bg-gray-50 p-5">
-                        <h3 className="text-xl font-black">{app.name}</h3>
-                        <p className="mt-2 text-gray-600">{app.description}</p>
-                        {app.web?.startsWith("tel:") && (
-                          <a href={app.web} className="mt-4 inline-flex rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700">
-                            Call Now
-                          </a>
-                        )}
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {app.badges.map((badge) => (
-                            <span key={badge} className="rounded-full bg-white px-3 py-1 text-xs font-bold">{badge}</span>
-                          ))}
-                        </div>
-                      </article>
+                      <AppCard key={app.name} app={app} />
                     ))}
+                    {apps.length === 0 && <p className="text-gray-500">More trusted apps will be added soon.</p>}
                   </div>
                 </div>
               );
             })}
           </section>
+
+          {emergencyCategory && emergencyApps.length > 0 && (
+            <section className="mt-12 rounded-[2.5rem] border border-red-100 bg-red-50 p-8 md:p-10">
+              <div className="flex items-center gap-4">
+                <div className="text-4xl">{emergencyCategory.icon}</div>
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.2em] text-red-600">Safety information</p>
+                  <h2 className="mt-2 text-3xl font-black tracking-[-0.04em] text-gray-950">
+                    SOS & emergency helplines in {countryName}
+                  </h2>
+                </div>
+              </div>
+              <p className="mt-4 max-w-3xl text-gray-600">
+                Use these only when needed. Always verify local emergency numbers and share your exact location clearly with emergency services.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {emergencyApps.map((app) => (
+                  <AppCard key={app.name} app={app} emergency />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </main>
       <Footer />

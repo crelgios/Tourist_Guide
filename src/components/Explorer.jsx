@@ -100,12 +100,7 @@ export default function Explorer({ initialStep = "country" }) {
     shopping: [t.shopping, t.shoppingDesc],
     food: [t.food, t.foodDesc],
     navigation: [t.navigation || "Navigation", t.navigationDesc || "Routes, maps and local travel guidance"],
-    payment: [t.payment || "Payments", t.paymentDesc || "Payment, wallet and local money apps"],
-    hotel: [t.hotel || "Hotels", t.hotelDesc || "Hotel booking and travel stay options"],
-    stay: [t.stay || "Stay", t.stayDesc || "Apartments, rooms and accommodation"],
-    attractions: [t.attractions || "Attractions", t.attractionsDesc || "Places to visit and tourist activities"],
-    translation: [t.translation || "Translation", t.translationDesc || "Language and translator tools"],
-    currency: [t.currency || "Currency", t.currencyDesc || "Currency exchange and money conversion"]
+    hotel: [t.hotel || "Hotels", t.hotelDesc || "Hotel booking and travel options"]
   }), [t]);
 
   function openLink(url) {

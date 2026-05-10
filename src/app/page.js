@@ -1,103 +1,34 @@
 import Link from "next/link";
+import GlobeHero from "@/components/GlobeHero";
 import Footer from "@/components/Footer";
-import { siteConfig } from "@/lib/site";
-import { countryData, getCountryName } from "@/data/countries";
 
 export const metadata = {
-  title: "Discover Travel Apps Used Around the World | Aliwvide",
+  title: "Best Travel Apps in India for Tourists (2026)",
   description:
-    "Find the best travel, transport, food delivery, grocery delivery, navigation, taxi, train, metro and tourist apps used in countries around the world.",
+    "Find taxi, train, metro, bus, flight, maps, food, shopping, payment, hotel, attraction, translation and SOS helpline apps for India travel.",
   keywords: [
-    "travel apps by country",
-    "Discover Travel Apps Used Around the World",
-    "best travel apps worldwide",
-    "transport apps by country",
-    "taxi apps by country",
-    "food delivery apps by country",
+    "best taxi apps in India",
+    "India travel apps",
+    "India transport apps",
+    "SOS helpline India tourists",
+    "emergency apps India",
+    "Uber India",
+    "Ola app",
+    "Rapido app",
+    "IRCTC Rail Connect",
+    "Delhi metro apps",
+    "food delivery apps India",
     "best grocery app in Delhi India",
     "grocery fast delivery India",
     "instant grocery delivery Delhi",
     "Blinkit delivery app",
     "Zepto grocery delivery",
     "Swiggy Instamart fast delivery",
-    "best taxi apps in India",
-    "India travel apps",
-    "SOS helpline India tourists",
-    "emergency apps India",
-    "IRCTC Rail Connect",
-    "Delhi metro apps"
+    "payment apps India",
+    "hotel booking apps India"
   ],
-  alternates: { canonical: siteConfig.url },
-  openGraph: {
-    title: "Discover Travel Apps Used Around the World | Aliwvide",
-    description:
-      "Explore trusted travel, transport, navigation, taxi, train, metro, food delivery and tourist apps used worldwide.",
-    url: siteConfig.url,
-    siteName: "Aliwvide",
-    type: "website"
-  }
+  alternates: { canonical: "/" }
 };
-
-
-const topAppCategoryPriority = [
-  "transport",
-  "maps",
-  "food",
-  "train",
-  "metro",
-  "flights",
-  "shopping",
-  "hotel",
-  "emergency"
-];
-
-const appLogoThemes = [
-  "bg-black text-white",
-  "bg-indigo-100 text-indigo-800",
-  "bg-red-100 text-red-700",
-  "bg-blue-100 text-blue-700",
-  "bg-yellow-200 text-black",
-  "bg-purple-100 text-purple-800",
-  "bg-orange-100 text-orange-700",
-  "bg-emerald-100 text-emerald-700"
-];
-
-function getInitials(name = "App") {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
-}
-
-function buildTopAppsForCountry(slug, data) {
-  const apps = [];
-
-  topAppCategoryPriority.forEach((category) => {
-    const categoryApps = data?.[category] || [];
-    categoryApps.slice(0, 2).forEach((app) => {
-      if (!apps.find((item) => item.name === app.name)) {
-        apps.push({
-          ...app,
-          category,
-          label: app.type || category.replace(/-/g, " ")
-        });
-      }
-    });
-  });
-
-  return {
-    slug,
-    name: getCountryName(slug),
-    apps: apps.slice(0, 6)
-  };
-}
-
-const topCountrySections = Object.entries(countryData)
-  .map(([slug, data]) => buildTopAppsForCountry(slug, data))
-  .filter((country) => country.apps.length > 0);
 
 const faqs = [
   {
@@ -114,6 +45,11 @@ const faqs = [
     q: "Which metro apps should I use in India?",
     a: "Metro apps depend on the city. Delhi Metro, Mumbai Metro, Bengaluru Metro and other local metro apps help with route maps, fare information and station guidance.",
     category: "Metro"
+  },
+  {
+    q: "Which maps and navigation apps work well in India?",
+    a: "Google Maps is widely used in India for road navigation, public transport routes and local places. Some travellers also use local transit and offline map apps.",
+    category: "Maps & Navigation"
   },
   {
     q: "Which food delivery apps are popular in India?",
@@ -141,9 +77,29 @@ const faqs = [
     category: "Food & Grocery"
   },
   {
-    q: "Which maps and navigation apps work well for travellers?",
-    a: "Google Maps is widely used in many countries for navigation, public transport routes and nearby places. Travellers should also check local transit apps for each country.",
-    category: "Maps & Navigation"
+    q: "Which shopping apps are useful for travellers in India?",
+    a: "Amazon India, Flipkart and local delivery platforms are useful for shopping, travel essentials and quick product delivery where available.",
+    category: "Shopping"
+  },
+  {
+    q: "Which payment apps are commonly used in India?",
+    a: "UPI-based payment apps such as PhonePe, Google Pay and Paytm are widely used in India, but international travellers should check whether their bank and SIM support local payments.",
+    category: "Payments"
+  },
+  {
+    q: "Which hotel and stay apps are useful in India?",
+    a: "Travellers can compare hotels and stays using booking platforms, hotel apps and local accommodation services. Always check reviews, location and cancellation rules.",
+    category: "Hotels & Stay"
+  },
+  {
+    q: "Which apps help with tourist attractions in India?",
+    a: "Maps, travel guide apps and local attraction platforms can help tourists find monuments, nearby places, tickets, timings and reviews.",
+    category: "Attractions"
+  },
+  {
+    q: "Which translation apps help tourists in India?",
+    a: "Google Translate and other translation apps can help with Hindi and regional languages. Offline language packs are useful when mobile internet is weak.",
+    category: "Translation"
   },
   {
     q: "What is the SOS or emergency helpline number in India?",
@@ -152,7 +108,7 @@ const faqs = [
   },
   {
     q: "Where can I find all travel app categories on Aliwvide?",
-    a: "Open the category page to choose taxi, emergency, train, metro, bus, flights, maps, navigation, food, shopping and hotel apps by country.",
+    a: "Open the category page to choose taxi, emergency, train, metro, bus, flights, maps, food, shopping, payment, hotel, stay, attractions, translation and currency tools by country.",
     category: "All Categories"
   }
 ];
@@ -170,60 +126,19 @@ const faqSchema = {
   }))
 };
 
-const countries = [
-  {
-    name: "India",
-    label: "Taxi, train, food & grocery apps",
-    href: "/country/india",
-    image:
-      "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    name: "UAE",
-    label: "Metro, taxi & travel apps",
-    href: "/country/unitedarabemirates",
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    name: "Japan",
-    label: "Train, maps & local travel apps",
-    href: "/country/japan",
-    image:
-      "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    name: "Thailand",
-    label: "Transport, food & local guide apps",
-    href: "/country/thailand",
-    image:
-      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=900&q=80"
-  },
-  {
-    name: "USA",
-    label: "Ride, delivery & city travel apps",
-    href: "/country/unitedstates",
-    image:
-      "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=900&q=80"
-  }
-];
-
-const indiaApps = [
-  ["Uber", "Taxi & Cabs", "4.5", "bg-black text-white", "Uber"],
-  ["IRCTC Rail Connect", "Train Booking", "4.4", "bg-indigo-100 text-indigo-800", "IR"],
-  ["Zomato", "Food Delivery", "4.4", "bg-red-500 text-white", "Z"],
-  ["Google Maps", "Navigation", "4.6", "bg-blue-100 text-blue-700", "G"],
-  ["Rapido", "Bike Taxi", "4.3", "bg-yellow-300 text-black", "R"],
-  ["Blinkit", "Grocery Fast Delivery", "4.4", "bg-yellow-200 text-black", "B"],
-  ["Zepto", "Instant Grocery", "4.4", "bg-purple-100 text-purple-800", "Zp"],
-  ["Swiggy Instamart", "Grocery Delivery", "4.4", "bg-orange-100 text-orange-700", "SI"]
-];
-
-const stats = [
-  ["100+", "Countries"],
-  ["50+", "Categories"],
-  ["1000+", "Apps"],
-  ["1M+", "Happy Travellers"]
+const categoryCards = [
+  ["🚨", "SOS & Emergency", "Emergency helplines, police, ambulance and traveller safety support"],
+  ["🚖", "Taxi Apps", "Uber, Ola, Rapido and local ride apps"],
+  ["🚄", "Train & Metro", "Railway, metro and local route apps used in India"],
+  ["🚌", "Bus & Local Transport", "Bus, public transport and city travel apps"],
+  ["🗺️", "Maps & Navigation", "Maps, route planning and offline navigation tools"],
+  ["✈️", "Flights", "Airline and flight booking platforms"],
+  ["🍽️", "Food & Grocery", "Food delivery, Blinkit, Zepto and Instamart grocery apps"],
+  ["🛍️", "Shopping", "Shopping and local delivery apps"],
+  ["💳", "Payments", "Wallet, UPI and travel payment apps"],
+  ["🏨", "Hotels & Stay", "Hotel booking and accommodation apps"],
+  ["📍", "Attractions", "Tourist places, activities and local guides"],
+  ["🌐", "Translation & Currency", "Translator and currency conversion tools"]
 ];
 
 export default function Home() {
@@ -233,211 +148,89 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
+      <GlobeHero />
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-5xl">
+            <p className="mb-4 inline-flex rounded-full bg-gray-100 px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-gray-600">
+              India travel app guide
+            </p>
+            <h1 className="text-5xl font-black tracking-[-0.05em] md:text-6xl">
+              Best Travel Apps in India for Tourists
+            </h1>
 
-      <main className="overflow-hidden bg-white text-slate-950">
-        <section className="relative min-h-screen overflow-hidden bg-[#020817] text-white">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(2,8,23,.96) 0%, rgba(2,8,23,.74) 36%, rgba(2,8,23,.16) 100%), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=85')"
-            }}
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(96,165,250,.36),transparent_30%),radial-gradient(circle_at_20%_82%,rgba(168,85,247,.24),transparent_34%)]" />
+            <p className="mt-6 max-w-4xl text-lg leading-8 text-gray-600">
+              Aliwvide helps tourists and travellers discover trusted taxi apps,
+              SOS helplines, metro apps, train booking apps, food delivery apps, grocery fast delivery apps,
+              payment apps, hotel apps and navigation apps used across India.
+            </p>
 
-          <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-            <Link href="/" className="flex items-center gap-3 text-2xl font-black">
-              <span className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur">🌐</span>
-              Aliwvide
-            </Link>
-            <div className="hidden items-center gap-8 text-sm font-semibold text-white/90 md:flex">
-              <Link href="/">Home</Link>
-              <Link href="/category">Categories</Link>
-              <Link href="/explore">Explore</Link>
-              <Link href="/faq">FAQ</Link>
-              <Link href="/contact">Contact</Link>
-            </div>
-          </nav>
-
-          <div className="relative z-10 mx-auto grid min-h-[calc(100vh-92px)] max-w-7xl items-center px-6 py-12 md:grid-cols-[1.05fr_.95fr]">
-            <div className="max-w-3xl">
-              <p className="mb-6 inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-blue-100 backdrop-blur">
-                Travel apps by country
-              </p>
-              <h1 className="text-5xl font-black leading-[.94] tracking-[-0.06em] sm:text-6xl md:text-8xl">
-                Discover <span className="bg-gradient-to-r from-sky-300 to-violet-400 bg-clip-text text-transparent">Travel Apps</span> Used Around the World
-              </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
-                Explore trusted travel, transport, navigation, taxi, train, metro, food delivery and grocery apps used by locals and tourists worldwide.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Link href="/category" className="rounded-full bg-gradient-to-r from-sky-400 to-violet-500 px-7 py-4 font-black text-white shadow-2xl transition hover:-translate-y-1">
-                  Explore Countries
-                </Link>
-                <Link href="#how-it-works" className="rounded-full border border-white/25 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur transition hover:bg-white/20">
-                  How it works
-                </Link>
-              </div>
-            </div>
-
-            <div className="hidden md:block">
-              <div className="relative mx-auto h-[520px] max-w-[430px] rounded-[3rem] border border-white/15 bg-white/10 p-4 shadow-[0_30px_100px_rgba(0,0,0,.45)] backdrop-blur-xl">
-                <div className="h-full rounded-[2.3rem] bg-white p-5 text-slate-950">
-                  <p className="text-sm font-black uppercase tracking-[.2em] text-violet-500">Featured country</p>
-                  <div
-                    className="mt-4 h-56 rounded-[1.8rem] bg-cover bg-center"
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=900&q=80')" }}
-                  />
-                  <h2 className="mt-6 text-4xl font-black">India</h2>
-                  <p className="mt-2 text-slate-500">Taxi, train, metro, food delivery, grocery fast delivery and tourist apps.</p>
-                  <div className="mt-6 grid grid-cols-2 gap-3">
-                    {indiaApps.slice(0, 4).map(([name, type, rating, theme, logo]) => (
-                      <div key={name} className="rounded-3xl bg-slate-50 p-4">
-                        <div className={`grid h-12 w-12 place-items-center rounded-2xl text-sm font-black ${theme}`}>{logo}</div>
-                        <p className="mt-3 text-sm font-black">{name}</p>
-                        <p className="text-xs text-slate-500">{type}</p>
-                        <p className="mt-1 text-sm font-bold">{rating} ⭐</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-[#030712] px-6 py-8 text-white">
-          <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map(([value, label]) => (
-              <div key={label} className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur">
-                <p className="text-3xl font-black">{value}</p>
-                <p className="mt-1 text-white/70">{label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="how-it-works" className="px-6 py-20">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-center">
-            <div>
-              <p className="font-black uppercase tracking-[.2em] text-violet-500">Browse by country</p>
-              <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] md:text-5xl">Find the best apps in every country</h2>
-              <p className="mt-5 leading-8 text-slate-600">
-                From popular transport apps to must-have travel apps, Aliwvide brings useful country-based app information into one place.
-              </p>
-              <Link href="/category" className="mt-8 inline-flex rounded-2xl bg-slate-950 px-6 py-4 font-black text-white transition hover:-translate-y-1 hover:shadow-xl">
-                View all categories →
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/category" className="rounded-full bg-gray-950 px-7 py-4 font-bold text-white transition hover:-translate-y-1 hover:shadow-xl">
+                Explore all categories
               </Link>
             </div>
+          </div>
 
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-              {countries.map((country) => (
-                <Link
-                  href={country.href}
-                  key={country.name}
-                  className="group relative min-h-[310px] overflow-hidden rounded-[2rem] bg-slate-900 p-5 text-white shadow-xl transition hover:-translate-y-2"
-                >
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition duration-500 group-hover:scale-110"
-                    style={{ backgroundImage: `url('${country.image}')` }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-                  <div className="relative flex h-full flex-col justify-end">
-                    <h3 className="text-2xl font-black">{country.name}</h3>
-                    <p className="mt-2 text-sm text-white/80">{country.label}</p>
-                    <span className="mt-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-950">→</span>
-                  </div>
-                </Link>
-              ))}
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {categoryCards.map(([icon, title, desc]) => (
+              <Link href="/category" key={title} className="rounded-[2rem] border border-gray-200 bg-white p-7 shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
+                <div className="text-4xl">{icon}</div>
+                <h2 className="mt-5 text-xl font-black">{title}</h2>
+                <p className="mt-2 text-gray-500">{desc}</p>
+                <span className="mt-5 inline-block text-sm font-black text-gray-950">Open category →</span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-20 grid gap-10 md:grid-cols-2">
+            <div className="rounded-[2rem] bg-gray-50 p-8">
+              <h2 className="text-3xl font-black">Why tourists use Aliwvide</h2>
+              <p className="mt-4 text-gray-600 leading-8">
+                Travellers often struggle to know which local apps work in a new country.
+                Aliwvide simplifies this by grouping apps into useful categories like emergency,
+                taxi, train, metro, maps, food, shopping, payment and hotel booking.
+              </p>
+            </div>
+
+            <div className="rounded-[2rem] bg-gray-50 p-8">
+              <h2 className="text-3xl font-black">Popular travel app categories</h2>
+              <ul className="mt-4 space-y-3 text-gray-600">
+                <li>• SOS and emergency helplines</li>
+                <li>• Taxi, cab and local transport apps</li>
+                <li>• Train, metro and bus apps</li>
+                <li>• Maps, navigation and translation tools</li>
+                <li>• Food, shopping, payment and hotel apps</li>
+              </ul>
             </div>
           </div>
-        </section>
 
-        <section className="bg-gradient-to-br from-slate-50 to-violet-50 px-6 py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="inline-flex rounded-full bg-white px-4 py-2 font-black shadow-sm">🌍 ALL COUNTRIES</p>
-              <h2 className="mt-5 text-4xl font-black tracking-[-0.04em] md:text-5xl">Top Travel Apps by Country</h2>
-              <p className="mt-5 leading-8 text-slate-600">
-                Explore the most useful travel, taxi, maps, train, metro, food delivery, shopping, hotel and emergency apps for every country in the Aliwvide guide.
-              </p>
-            </div>
+          <div className="mt-24" id="faq">
+            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+              <div>
+                <h2 className="text-4xl font-black">Frequently Asked Questions</h2>
+                <p className="mt-3 max-w-3xl text-gray-600">
+                  Quick answers for India travel apps, SOS helplines and all major tourist categories.
+                </p>
+              </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {topCountrySections.map((country) => (
-                <article key={country.slug} className="rounded-[2.2rem] border border-white bg-white/90 p-6 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:shadow-xl">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-xs font-black uppercase tracking-[.2em] text-violet-500">Top apps</p>
-                      <h3 className="mt-2 text-2xl font-black tracking-[-0.03em]">{country.name}</h3>
-                    </div>
-                    <Link href={`/country/${country.slug}`} className="rounded-full bg-slate-950 px-4 py-2 text-sm font-black text-white">
-                      Open →
-                    </Link>
-                  </div>
-
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    {country.apps.map((app, index) => (
-                      <Link href={`/country/${country.slug}`} key={`${country.slug}-${app.name}`} className="rounded-3xl bg-slate-50 p-4 transition hover:bg-white hover:shadow-md">
-                        <div className={`grid h-12 w-12 place-items-center rounded-2xl text-sm font-black ${appLogoThemes[index % appLogoThemes.length]}`}>
-                          {getInitials(app.name)}
-                        </div>
-                        <h4 className="mt-3 text-sm font-black leading-5">{app.name}</h4>
-                        <p className="mt-1 text-xs capitalize text-slate-500">{app.label}</p>
-                      </Link>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 py-20">
-          <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2">
-            <div className="rounded-[2.5rem] bg-slate-950 p-8 text-white md:p-10">
-              <p className="font-black uppercase tracking-[.2em] text-sky-300">Tourist friendly</p>
-              <h2 className="mt-4 text-4xl font-black">Why travellers use Aliwvide</h2>
-              <p className="mt-5 leading-8 text-slate-300">
-                Travellers often struggle to know which local apps work in a new country. Aliwvide groups apps into useful categories like emergency, taxi, train, metro, maps, food, grocery, shopping, payment and hotel booking.
-              </p>
-            </div>
-            <div className="rounded-[2.5rem] bg-slate-100 p-8 md:p-10">
-              <p className="font-black uppercase tracking-[.2em] text-violet-500">SEO content</p>
-              <h2 className="mt-4 text-4xl font-black">Travel apps by country</h2>
-              <p className="mt-5 leading-8 text-slate-600">
-                The homepage focuses on worldwide travel app discovery, while country pages can target specific searches like best taxi apps in India, food delivery apps India, and best grocery app in Delhi India.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="faq" className="bg-slate-50 px-6 py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="font-black uppercase tracking-[.2em] text-violet-500">FAQ</p>
-              <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] md:text-5xl">Frequently Asked Questions</h2>
-              <p className="mt-4 leading-8 text-slate-600">
-                Quick answers for worldwide travel apps, India travel apps, SOS helplines, food delivery and grocery fast delivery categories.
-              </p>
             </div>
 
             <div className="mt-10 grid gap-5 md:grid-cols-2">
               {faqs.map((item) => (
-                <article key={item.q} className="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-sm">
-                  <span className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">{item.category}</span>
-                  <h3 className="mt-3 text-xl font-black">{item.q}</h3>
-                  <p className="mt-3 leading-7 text-slate-600">{item.a}</p>
-                  <Link href="/category" className="mt-4 inline-block font-black text-slate-950">
+                <div key={item.q} className="rounded-[1.5rem] border border-gray-200 bg-white p-6 shadow-sm">
+                  <span className="text-xs font-black uppercase tracking-[0.18em] text-gray-400">{item.category}</span>
+                  <h3 className="mt-3 text-xl font-bold">{item.q}</h3>
+                  <p className="mt-3 text-gray-600 leading-7">{item.a}</p>
+                  <Link href="/category" className="mt-4 inline-block font-black text-gray-950">
                     View related category →
                   </Link>
-                </article>
+                </div>
               ))}
             </div>
           </div>
-        </section>
-      </main>
-
+        </div>
+      </section>
       <Footer />
     </>
   );

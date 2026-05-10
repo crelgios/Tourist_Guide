@@ -36,3 +36,27 @@ body {
     display: none;
   }
 }
+
+
+.aliwvide-app-marquee {
+  animation: aliwvide-marquee 26s linear infinite;
+}
+
+.aliwvide-app-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes aliwvide-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aliwvide-app-marquee {
+    animation: none;
+  }
+}

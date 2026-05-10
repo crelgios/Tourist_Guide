@@ -127,11 +127,14 @@ export default function CountryPage({ params }) {
               <p className="mt-4 max-w-3xl text-gray-600">
                 Use these only when needed. Always verify local emergency numbers and share your exact location clearly with emergency services.
               </p>
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className="mt-6 flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-visible md:pb-0">
                 {emergencyApps.map((app) => (
-                  <AppCard key={app.name} app={app} emergency />
+                  <div key={app.name} className="min-w-[82%] snap-start sm:min-w-[48%] md:min-w-0">
+                    <AppCard app={app} emergency />
+                  </div>
                 ))}
               </div>
+              {emergencyApps.length > 1 && <p className="mt-3 text-xs font-bold text-red-400 md:hidden">Swipe left to see more emergency contacts →</p>}
             </section>
           )}
         </div>

@@ -72,6 +72,24 @@ function getInitials(name = "App") {
     .toUpperCase();
 }
 
+
+function getAppIcon(app) {
+  const text = `${app?.name || ""} ${app?.category || ""} ${app?.label || ""}`.toLowerCase();
+
+  if (text.includes("uber") || text.includes("ola") || text.includes("taxi") || text.includes("cab") || text.includes("ride") || text.includes("transport")) return "🚕";
+  if (text.includes("train") || text.includes("rail") || text.includes("irctc")) return "🚆";
+  if (text.includes("metro") || text.includes("subway")) return "🚇";
+  if (text.includes("map") || text.includes("navigation") || text.includes("google maps") || text.includes("waze")) return "🗺️";
+  if (text.includes("food") || text.includes("zomato") || text.includes("swiggy") || text.includes("delivery")) return "🍔";
+  if (text.includes("blinkit") || text.includes("zepto") || text.includes("instamart") || text.includes("grocery")) return "🛒";
+  if (text.includes("flight") || text.includes("air") || text.includes("airport")) return "✈️";
+  if (text.includes("hotel") || text.includes("stay") || text.includes("booking")) return "🏨";
+  if (text.includes("shopping") || text.includes("shop")) return "🛍️";
+  if (text.includes("emergency") || text.includes("sos") || text.includes("police") || text.includes("ambulance")) return "🆘";
+
+  return "📱";
+}
+
 function buildTopAppsForCountry(slug, data) {
   const apps = [];
 
@@ -363,30 +381,37 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-10 flex gap-5 overflow-x-auto pb-5 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-visible md:pb-0 xl:grid-cols-3">
               {topCountrySections.map((country) => (
-                <article key={country.slug} className="rounded-[2.2rem] border border-white bg-white/90 p-6 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:shadow-xl">
+                <article key={country.slug} className="min-w-[86%] snap-start rounded-[2.2rem] border border-white bg-white/90 p-5 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:shadow-xl sm:min-w-[68%] md:min-w-0 md:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-xs font-black uppercase tracking-[.2em] text-violet-500">Top apps</p>
                       <h3 className="mt-2 text-2xl font-black tracking-[-0.03em]">{country.name}</h3>
                     </div>
-                    <Link href={`/country/${country.slug}`} className="rounded-full bg-slate-950 px-4 py-2 text-sm font-black text-white">
+                    <Link href={`/country/${country.slug}`} className="shrink-0 rounded-full bg-slate-950 px-4 py-2 text-sm font-black text-white">
                       Open →
                     </Link>
                   </div>
 
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    {country.apps.map((app, index) => (
-                      <Link href={`/country/${country.slug}`} key={`${country.slug}-${app.name}`} className="rounded-3xl bg-slate-50 p-4 transition hover:bg-white hover:shadow-md">
-                        <div className={`grid h-12 w-12 place-items-center rounded-2xl text-sm font-black ${appLogoThemes[index % appLogoThemes.length]}`}>
-                          {getInitials(app.name)}
-                        </div>
-                        <h4 className="mt-3 text-sm font-black leading-5">{app.name}</h4>
-                        <p className="mt-1 text-xs capitalize text-slate-500">{app.label}</p>
-                      </Link>
-                    ))}
+                  <div className="mt-6 overflow-hidden rounded-[1.8rem] bg-slate-50/70 p-2">
+                    <div className="aliwvide-app-marquee flex w-max gap-3">
+                      {[...country.apps, ...country.apps].map((app, index) => (
+                        <Link
+                          href={`/country/${country.slug}`}
+                          key={`${country.slug}-${app.name}-${index}`}
+                          className="w-[150px] shrink-0 rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:shadow-md"
+                        >
+                          <div className={`grid h-14 w-14 place-items-center rounded-2xl text-2xl font-black ${appLogoThemes[index % appLogoThemes.length]}`}>
+                            {getAppIcon(app)}
+                          </div>
+                          <h4 className="mt-3 line-clamp-2 min-h-[40px] text-sm font-black leading-5">{app.name}</h4>
+                          <p className="mt-1 line-clamp-1 text-xs capitalize text-slate-500">{app.label}</p>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
+                  <p className="mt-3 text-xs font-bold text-slate-400">Auto sliding preview — swipe anytime →</p>
                 </article>
               ))}
             </div>

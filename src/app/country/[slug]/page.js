@@ -1,11 +1,9 @@
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { categories, countries, getCountryData, getCountryName } from "@/data/countries";
+import { categories, getCountryData, getCountryName } from "@/data/countries";
 import { siteConfig } from "@/lib/site";
 
-export function generateStaticParams() {
-  return countries.map((country) => ({ slug: country.slug }));
-}
+export const dynamicParams = true;
 
 export function generateMetadata({ params }) {
   const countryName = getCountryName(params.slug);

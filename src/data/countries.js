@@ -208,9 +208,14 @@ export const categories = [
   { key: "flights", icon: "✈️" },
   { key: "maps", icon: "🗺️" },
   { key: "navigation", icon: "🧭" },
+  { key: "payment", icon: "💳" },
   { key: "shopping", icon: "🛍️" },
   { key: "food", icon: "🍔" },
-  { key: "hotel", icon: "🏨" }
+  { key: "hotel", icon: "🏨" },
+  { key: "stay", icon: "🛏️" },
+  { key: "attractions", icon: "🎡" },
+  { key: "translation", icon: "🌐" },
+  { key: "currency", icon: "💱" }
 ];
 
 export const countries = Object.keys(countriesData).map((slug) => ({

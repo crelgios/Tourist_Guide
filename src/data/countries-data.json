@@ -269,56 +269,38 @@
       },
       {
         "name": "Blinkit",
-        "type": "Instant grocery delivery",
-        "description": "Fast grocery, snacks, beverages and daily essentials delivery in India.",
+        "type": "Quick commerce / grocery delivery",
+        "description": "Instant grocery and daily essentials delivery app in India",
         "web": "https://blinkit.com/",
-        "android": "https://play.google.com/store/search?q=Blinkit&c=apps",
-        "ios": "https://apps.apple.com/search?term=Blinkit",
-        "badges": [
-          "Grocery",
-          "Fast Delivery",
-          "India"
-        ],
-        "docs": [
-          "Check service availability in your area.",
-          "Confirm delivery address and delivery fee.",
-          "Useful for water bottles, snacks and travel essentials."
-        ]
-      },
-      {
-        "name": "Zepto",
-        "type": "Quick commerce grocery delivery",
-        "description": "Instant grocery and daily essentials delivery service in major Indian cities.",
-        "web": "https://www.zeptonow.com/",
-        "android": "https://play.google.com/store/search?q=Zepto&c=apps",
-        "ios": "https://apps.apple.com/search?term=Zepto",
+        "android": "https://play.google.com/store/apps/details?id=com.grofers.customerapp",
+        "ios": "https://apps.apple.com/in/app/blinkit-groceries-more/id960335206",
         "badges": [
           "Grocery",
           "Quick Commerce",
           "India"
         ],
         "docs": [
-          "Check service availability in your city.",
-          "Review delivery time and charges before ordering.",
-          "Useful for snacks, groceries and emergency essentials."
+          "Check delivery availability by location.",
+          "Confirm delivery address.",
+          "Review fees before payment."
         ]
       },
       {
-        "name": "Swiggy Instamart",
-        "type": "Grocery fast delivery",
-        "description": "Grocery and daily essentials delivery service by Swiggy in India.",
-        "web": "https://www.swiggy.com/instamart",
-        "android": "https://play.google.com/store/search?q=Swiggy%20Instamart&c=apps",
-        "ios": "https://apps.apple.com/search?term=Swiggy%20Instamart",
+        "name": "Zepto",
+        "type": "Quick commerce / food & grocery delivery",
+        "description": "Fast grocery, daily essentials and quick food delivery service in India",
+        "web": "https://www.zepto.com/",
+        "android": "https://play.google.com/store/apps/details?id=com.zeptoconsumerapp",
+        "ios": "https://apps.apple.com/in/app/zepto-groceries-in-minutes/id1575323645",
         "badges": [
           "Grocery",
-          "Essentials",
-          "Fast Delivery"
+          "Quick Delivery",
+          "India"
         ],
         "docs": [
-          "Check delivery area before ordering.",
-          "Confirm address carefully in hotels or guest houses.",
-          "Review item substitutions and fees."
+          "Check delivery availability by location.",
+          "Confirm delivery address.",
+          "Review fees before payment."
         ]
       }
     ],
@@ -432,7 +414,7 @@
         "docs": [
           "Leave unsafe place first.",
           "Call from safe location.",
-          "Verify locally if number changes."
+          "Use 112 for integrated emergency support if needed."
         ]
       }
     ]

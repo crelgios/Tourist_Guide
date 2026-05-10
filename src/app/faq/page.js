@@ -20,7 +20,12 @@ const faqs = [
   ["Grocery Delivery", "Which apps provide fast grocery delivery in India?", "Blinkit, Zepto and Swiggy Instamart are popular instant grocery delivery apps in India. Delivery speed depends on the city, area, store availability and time of day."],
   ["Grocery Delivery", "Can tourists use Blinkit, Zepto and Instamart in India?", "Yes, tourists can use Blinkit, Zepto and Swiggy Instamart in supported Indian cities to order groceries, packaged food, water bottles, snacks, hygiene items and travel essentials."],
   ["Food & Grocery", "Which apps are best for food delivery and grocery fast delivery?", "For food delivery, Swiggy and Zomato are widely used. For grocery fast delivery, Blinkit, Zepto and Swiggy Instamart are useful in many Indian cities including Delhi."],
-  ["Shopping", "Which shopping apps help travellers?", "Amazon India, Flipkart and local delivery platforms can help travellers buy essentials during travel."],
+  ["Shopping", "Which shopping apps help travellers?", "Amazon India, Flipkart and local delivery platforms can help travellers buy essentials during their stay."],
+  ["Payments", "Which payment apps are common in India?", "UPI payment apps like PhonePe, Google Pay and Paytm are common, but foreign travellers should check bank, SIM and KYC support."],
+  ["Hotels & Stay", "Which hotel apps should travellers use?", "Hotel booking and stay apps help compare prices, reviews, location and cancellation policies."],
+  ["Attractions", "How can I find tourist attractions in India?", "Use maps, travel guide apps and local attraction platforms to find places to visit, timings, tickets and reviews."],
+  ["Translation", "Do tourists need translation apps in India?", "Translation apps can help with Hindi and regional languages. Download offline language packs before travel."],
+  ["Currency", "Do tourists need currency apps in India?", "Currency converter apps help estimate local prices and compare exchange rates while travelling."],
 ];
 
 const faqSchema = {

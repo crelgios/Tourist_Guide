@@ -269,56 +269,38 @@
       },
       {
         "name": "Blinkit",
-        "type": "Instant grocery delivery",
-        "description": "Fast grocery, snacks, beverages and daily essentials delivery in India.",
+        "type": "Quick commerce / grocery delivery",
+        "description": "Instant grocery and daily essentials delivery app in India",
         "web": "https://blinkit.com/",
-        "android": "https://play.google.com/store/search?q=Blinkit&c=apps",
-        "ios": "https://apps.apple.com/search?term=Blinkit",
-        "badges": [
-          "Grocery",
-          "Fast Delivery",
-          "India"
-        ],
-        "docs": [
-          "Check service availability in your area.",
-          "Confirm delivery address and delivery fee.",
-          "Useful for water bottles, snacks and travel essentials."
-        ]
-      },
-      {
-        "name": "Zepto",
-        "type": "Quick commerce grocery delivery",
-        "description": "Instant grocery and daily essentials delivery service in major Indian cities.",
-        "web": "https://www.zeptonow.com/",
-        "android": "https://play.google.com/store/search?q=Zepto&c=apps",
-        "ios": "https://apps.apple.com/search?term=Zepto",
+        "android": "https://play.google.com/store/apps/details?id=com.grofers.customerapp",
+        "ios": "https://apps.apple.com/in/app/blinkit-groceries-more/id960335206",
         "badges": [
           "Grocery",
           "Quick Commerce",
           "India"
         ],
         "docs": [
-          "Check service availability in your city.",
-          "Review delivery time and charges before ordering.",
-          "Useful for snacks, groceries and emergency essentials."
+          "Check delivery availability by location.",
+          "Confirm delivery address.",
+          "Review fees before payment."
         ]
       },
       {
-        "name": "Swiggy Instamart",
-        "type": "Grocery fast delivery",
-        "description": "Grocery and daily essentials delivery service by Swiggy in India.",
-        "web": "https://www.swiggy.com/instamart",
-        "android": "https://play.google.com/store/search?q=Swiggy%20Instamart&c=apps",
-        "ios": "https://apps.apple.com/search?term=Swiggy%20Instamart",
+        "name": "Zepto",
+        "type": "Quick commerce / food & grocery delivery",
+        "description": "Fast grocery, daily essentials and quick food delivery service in India",
+        "web": "https://www.zepto.com/",
+        "android": "https://play.google.com/store/apps/details?id=com.zeptoconsumerapp",
+        "ios": "https://apps.apple.com/in/app/zepto-groceries-in-minutes/id1575323645",
         "badges": [
           "Grocery",
-          "Essentials",
-          "Fast Delivery"
+          "Quick Delivery",
+          "India"
         ],
         "docs": [
-          "Check delivery area before ordering.",
-          "Confirm address carefully in hotels or guest houses.",
-          "Review item substitutions and fees."
+          "Check delivery availability by location.",
+          "Confirm delivery address.",
+          "Review fees before payment."
         ]
       }
     ],
@@ -432,7 +414,7 @@
         "docs": [
           "Leave unsafe place first.",
           "Call from safe location.",
-          "Verify locally if number changes."
+          "Use 112 for integrated emergency support if needed."
         ]
       }
     ]
@@ -40522,203 +40504,347 @@
     ]
   },
   "saudiarabia": {
-    "navigation": [
+    "transport": [
+      {
+        "name": "Careem",
+        "type": "Ride hailing",
+        "description": "Taxi and ride booking service available in Saudi Arabia.",
+        "web": "https://www.careem.com/en-AE/ksa-rides/",
+        "android": "https://play.google.com/store/apps/details?id=com.careem.acma",
+        "ios": "https://apps.apple.com/sa/app/careem-rides-food-grocery/id592978487",
+        "badges": [
+          "Taxi",
+          "Local",
+          "KSA"
+        ],
+        "docs": [
+          "Enable GPS before booking.",
+          "Check fare and pickup point.",
+          "Verify driver and vehicle details."
+        ]
+      },
+      {
+        "name": "Uber Saudi Arabia",
+        "type": "Ride hailing",
+        "description": "Ride booking and taxi service available in cities across Saudi Arabia.",
+        "web": "https://www.uber.com/sa/en/",
+        "android": "https://play.google.com/store/apps/details?id=com.ubercab",
+        "ios": "https://apps.apple.com/sa/app/uber-request-a-ride/id368677368",
+        "badges": [
+          "Taxi",
+          "Global",
+          "KSA"
+        ],
+        "docs": [
+          "Enable GPS before booking.",
+          "Check fare and pickup point.",
+          "Verify driver and vehicle details."
+        ]
+      },
+      {
+        "name": "Jeeny",
+        "type": "Ride hailing",
+        "description": "Saudi ride-hailing app for affordable local rides in Saudi Arabia.",
+        "web": "https://www.jeeny.me/",
+        "android": "https://play.google.com/store/apps/details?id=me.com.easytaxi",
+        "ios": "https://apps.apple.com/sa/app/jeeny-book-affordable-rides/id1178701124",
+        "badges": [
+          "Taxi",
+          "Local",
+          "KSA"
+        ],
+        "docs": [
+          "Enable GPS before booking.",
+          "Compare pickup ETA and fare.",
+          "Verify driver and vehicle details."
+        ]
+      }
+    ],
+    "metro": [
+      {
+        "name": "darb",
+        "type": "Public transport",
+        "description": "Riyadh public transport app for metro, buses and journey planning.",
+        "web": "https://my.gov.sa/en/services/883954",
+        "android": "https://play.google.com/store/apps/details?id=com.rcrc.riyadhjourneyplanner",
+        "ios": "https://apps.apple.com/sa/app/darb-%D8%AF%D8%B1%D8%A8/id1549817739",
+        "badges": [
+          "Metro",
+          "Bus",
+          "Riyadh"
+        ],
+        "docs": [
+          "Check routes before travel.",
+          "Use live arrival information where available.",
+          "Confirm last service time."
+        ]
+      }
+    ],
+    "bus": [
+      {
+        "name": "SAPTCO",
+        "type": "Bus transport",
+        "description": "Official Saudi Public Transport Company services for bus travel and reservations.",
+        "web": "https://saptco.com.sa/en",
+        "android": "https://play.google.com/store/search?q=SAPTCO&c=apps",
+        "ios": "https://apps.apple.com/sa/app/saptco/id1074204412",
+        "badges": [
+          "Bus",
+          "Official",
+          "KSA"
+        ],
+        "docs": [
+          "Confirm departure point carefully.",
+          "Reach the stop before departure.",
+          "Keep ticket or booking details ready."
+        ]
+      }
+    ],
+    "train": [
+      {
+        "name": "SAR North East",
+        "type": "Official railway",
+        "description": "Official Saudi Arabia Railways app for North and East passenger train bookings.",
+        "web": "https://www.sar.com.sa/",
+        "android": "https://play.google.com/store/apps/details?id=com.sar.north.east.app",
+        "ios": "https://apps.apple.com/sa/app/sar-north-east/id6473369520",
+        "badges": [
+          "Train",
+          "Official",
+          "KSA"
+        ],
+        "docs": [
+          "Check timetable before booking.",
+          "Keep passport or ID ready.",
+          "Arrive before departure time."
+        ]
+      },
+      {
+        "name": "HHR Train",
+        "type": "High-speed railway",
+        "description": "Official Haramain High Speed Railway app for Makkah, Jeddah and Madinah journeys.",
+        "web": "https://sar.hhr.sa/timetable",
+        "android": "https://play.google.com/store/apps/details?id=com.indra.haramain.pro",
+        "ios": "https://apps.apple.com/sa/app/hhr-train/id1533264335",
+        "badges": [
+          "Train",
+          "Haramain",
+          "Official"
+        ],
+        "docs": [
+          "Check station and train time.",
+          "Book early during busy periods.",
+          "Keep ticket ready at boarding."
+        ]
+      }
+    ],
+    "flights": [
+      {
+        "name": "Saudia",
+        "type": "Airline",
+        "description": "Official Saudi national airline app for booking, check-in and trip management.",
+        "web": "https://www.saudia.com/",
+        "android": "https://play.google.com/store/apps/details?id=com.saudia.SaudiaApp",
+        "ios": "https://apps.apple.com/sa/app/saudia/id892721808",
+        "badges": [
+          "Flights",
+          "Airline",
+          "KSA"
+        ],
+        "docs": [
+          "Check baggage rules.",
+          "Reach airport early.",
+          "Keep passport and visa ready."
+        ]
+      },
+      {
+        "name": "flynas",
+        "type": "Airline",
+        "description": "Saudi low-cost airline app for flight booking, check-in and trip management.",
+        "web": "https://www.flynas.com/en",
+        "android": "https://play.google.com/store/apps/details?id=com.flynas.android.app",
+        "ios": "https://apps.apple.com/sa/app/flynas-%D8%B7%D9%8A%D8%B1%D8%A7%D9%86-%D9%86%D8%A7%D8%B3/id871947665",
+        "badges": [
+          "Flights",
+          "Airline",
+          "KSA"
+        ],
+        "docs": [
+          "Check baggage rules.",
+          "Reach airport early.",
+          "Keep passport and visa ready."
+        ]
+      }
+    ],
+    "maps": [
       {
         "name": "Google Maps",
-        "type": "Maps and navigation",
-        "description": "Maps, routes, local places and transit directions useful for tourists in Saudi Arabia.",
+        "type": "Navigation",
+        "description": "Maps, routes, traffic and local place discovery in Saudi Arabia.",
         "web": "https://www.google.com/maps",
         "android": "https://play.google.com/store/apps/details?id=com.google.android.apps.maps",
         "ios": "https://apps.apple.com/app/google-maps/id585027354",
         "badges": [
           "Maps",
           "Navigation",
-          "Saudi Arabia"
+          "Global"
         ],
         "docs": [
-          "Download offline maps before travel.",
-          "Check public transport directions where available.",
-          "Confirm opening hours before visiting."
-        ]
-      }
-    ],
-    "transport": [
-      {
-        "name": "Rome2Rio",
-        "type": "Route planner",
-        "description": "Compares transport options such as flights, trains, buses, ferries and driving routes for Saudi Arabia.",
-        "web": "https://www.rome2rio.com/",
-        "android": "https://play.google.com/store/apps/details?id=com.rome2rio.www.rome2rio",
-        "ios": "https://apps.apple.com/app/rome2rio-trip-planner/id569793256",
-        "badges": [
-          "Transport",
-          "Planner",
-          "Saudi Arabia"
-        ],
-        "docs": [
-          "Compare route options before booking.",
-          "Check final ticket price on operator website.",
-          "Verify visa or border rules for cross-border trips."
-        ]
-      }
-    ],
-    "hotel": [
-      {
-        "name": "Booking.com",
-        "type": "Hotel booking",
-        "description": "Hotel, apartment and stay booking options for travelers visiting Saudi Arabia.",
-        "web": "https://www.booking.com/",
-        "android": "https://play.google.com/store/apps/details?id=com.booking",
-        "ios": "https://apps.apple.com/app/booking-com-hotels-travel/id367003839",
-        "badges": [
-          "Hotels",
-          "Stay",
-          "Saudi Arabia"
-        ],
-        "docs": [
-          "Check cancellation policy carefully.",
-          "Read recent guest reviews.",
-          "Confirm check-in time and taxes."
-        ]
-      }
-    ],
-    "stay": [
-      {
-        "name": "Airbnb",
-        "type": "Vacation rental",
-        "description": "Homes, rooms and vacation rentals available for many destinations in Saudi Arabia.",
-        "web": "https://www.airbnb.com/",
-        "android": "https://play.google.com/store/apps/details?id=com.airbnb.android",
-        "ios": "https://apps.apple.com/app/airbnb/id401626263",
-        "badges": [
-          "Stay",
-          "Rental",
-          "Saudi Arabia"
-        ],
-        "docs": [
-          "Check host reviews and house rules.",
-          "Confirm location before payment.",
-          "Message host before arrival."
-        ]
-      }
-    ],
-    "attractions": [
-      {
-        "name": "Tripadvisor",
-        "type": "Travel guide",
-        "description": "Attractions, tours, restaurants and traveler reviews for Saudi Arabia.",
-        "web": "https://www.tripadvisor.com/",
-        "android": "https://play.google.com/store/apps/details?id=com.tripadvisor.tripadvisor",
-        "ios": "https://apps.apple.com/app/tripadvisor-plan-book-trips/id284876795",
-        "badges": [
-          "Attractions",
-          "Reviews",
-          "Saudi Arabia"
-        ],
-        "docs": [
-          "Compare reviews from recent travelers.",
-          "Check tour inclusions before booking.",
-          "Save places to your trip list."
+          "Download offline maps if useful.",
+          "Check live traffic before travel.",
+          "Save hotel and airport locations."
         ]
       }
     ],
     "shopping": [
       {
-        "name": "Google Maps - Shopping Nearby",
-        "type": "Shopping places",
-        "description": "Find malls, markets, stores and shopping areas near your location in Saudi Arabia.",
-        "web": "https://www.google.com/maps/search/shopping/",
-        "android": "https://play.google.com/store/apps/details?id=com.google.android.apps.maps",
-        "ios": "https://apps.apple.com/app/google-maps/id585027354",
+        "name": "noon KSA",
+        "type": "Marketplace",
+        "description": "Online shopping platform for electronics, fashion, beauty, groceries and more in Saudi Arabia.",
+        "web": "https://www.noon.com/saudi-en/",
+        "android": "https://play.google.com/store/apps/details?id=com.noon.buyerapp",
+        "ios": "https://apps.apple.com/sa/app/noon-shopping-food-grocery/id1269038866",
         "badges": [
           "Shopping",
-          "Local",
-          "Tourist"
+          "Marketplace",
+          "KSA"
         ],
         "docs": [
-          "Search near your hotel or landmark.",
-          "Check store hours before going.",
-          "Read recent reviews for safety and quality."
+          "Check seller rating.",
+          "Compare delivery options.",
+          "Use secure payment methods."
+        ]
+      },
+      {
+        "name": "Amazon.sa",
+        "type": "Marketplace",
+        "description": "Amazon online shopping marketplace for Saudi Arabia.",
+        "web": "https://www.amazon.sa/-/en/",
+        "android": "https://play.google.com/store/search?q=Amazon%20Shopping&c=apps",
+        "ios": "https://apps.apple.com/search?term=Amazon%20Shopping",
+        "badges": [
+          "Shopping",
+          "Marketplace",
+          "KSA"
+        ],
+        "docs": [
+          "Check seller rating.",
+          "Compare delivery options.",
+          "Use secure payment methods."
+        ]
+      },
+      {
+        "name": "Nana",
+        "type": "Grocery delivery",
+        "description": "Saudi grocery delivery app for groceries and everyday essentials.",
+        "web": "https://nana.sa/english",
+        "android": "https://play.google.com/store/apps/details?id=com.exa.nanamarket",
+        "ios": "https://apps.apple.com/sa/app/nana-%D9%86%D8%B9%D9%86%D8%A7%D8%B9/id1055344588",
+        "badges": [
+          "Grocery",
+          "Delivery",
+          "KSA"
+        ],
+        "docs": [
+          "Confirm delivery address.",
+          "Check substitutions before checkout.",
+          "Review delivery slot and fees."
         ]
       }
     ],
     "food": [
       {
-        "name": "Google Maps - Restaurants Nearby",
-        "type": "Food discovery",
-        "description": "Find restaurants, cafes and local food places near you in Saudi Arabia.",
-        "web": "https://www.google.com/maps/search/restaurants/",
-        "android": "https://play.google.com/store/apps/details?id=com.google.android.apps.maps",
-        "ios": "https://apps.apple.com/app/google-maps/id585027354",
+        "name": "HungerStation",
+        "type": "Food delivery",
+        "description": "Food, grocery, pharmacy and shop delivery service across Saudi Arabia.",
+        "web": "https://hungerstation.com/sa-en",
+        "android": "https://play.google.com/store/apps/details?id=com.hungerstation.android.web",
+        "ios": "https://apps.apple.com/sa/app/hungerstation-food-delivery/id596011949",
         "badges": [
           "Food",
-          "Restaurants",
-          "Local"
+          "Delivery",
+          "KSA"
         ],
         "docs": [
-          "Check latest reviews and photos.",
-          "Confirm halal/veg/allergy options if needed.",
-          "Call ahead during busy hours."
+          "Check restaurant rating.",
+          "Confirm delivery address.",
+          "Review fees before payment."
+        ]
+      },
+      {
+        "name": "Jahez",
+        "type": "Food delivery",
+        "description": "Saudi food delivery app covering many cities across the Kingdom.",
+        "web": "https://www.jahez.net/index-en.html",
+        "android": "https://play.google.com/store/apps/details?id=net.jahez",
+        "ios": "https://apps.apple.com/sa/app/jahez-%D8%AC%D8%A7%D9%87%D8%B2/id1137352156",
+        "badges": [
+          "Food",
+          "Delivery",
+          "KSA"
+        ],
+        "docs": [
+          "Check restaurant rating.",
+          "Confirm delivery address.",
+          "Track order in the app."
+        ]
+      },
+      {
+        "name": "ToYou",
+        "type": "Super app delivery",
+        "description": "Saudi super app for food, groceries, gifts and more delivery.",
+        "web": "https://toyou.io/en/about-us/",
+        "android": "https://play.google.com/store/apps/details?id=com.arammeem.android.apps.toyou",
+        "ios": "https://apps.apple.com/sa/app/toyou-food-grocery-delivery/id1196302015",
+        "badges": [
+          "Food",
+          "Grocery",
+          "KSA"
+        ],
+        "docs": [
+          "Check merchant availability.",
+          "Confirm delivery address.",
+          "Review fees before payment."
         ]
       }
     ],
-    "translation": [
+    "hotel": [
       {
-        "name": "Google Translate",
-        "type": "Language tool",
-        "description": "Translation, camera translation and offline language help for travelers in Saudi Arabia.",
-        "web": "https://translate.google.com/",
-        "android": "https://play.google.com/store/apps/details?id=com.google.android.apps.translate",
-        "ios": "https://apps.apple.com/app/google-translate/id414706506",
+        "name": "Almosafer",
+        "type": "Travel booking",
+        "description": "Saudi travel app for flights, hotels, stays and activities.",
+        "web": "https://www.almosafer.com/en",
+        "android": "https://play.google.com/store/apps/details?id=com.travel.almosafer",
+        "ios": "https://apps.apple.com/sa/app/almosafer-flights-stays/id928866584",
         "badges": [
-          "Translate",
-          "Offline",
-          "Tourist"
+          "Hotel",
+          "Flights",
+          "KSA"
         ],
         "docs": [
-          "Download languages for offline use.",
-          "Use camera translation for signs and menus.",
-          "Keep important phrases saved."
-        ]
-      }
-    ],
-    "currency": [
-      {
-        "name": "XE Currency",
-        "type": "Currency converter",
-        "description": "Currency conversion and exchange-rate checking for travelers in Saudi Arabia.",
-        "web": "https://www.xe.com/",
-        "android": "https://play.google.com/store/apps/details?id=com.xe.currency",
-        "ios": "https://apps.apple.com/app/xe-currency-money-transfers/id315241195",
-        "badges": [
-          "Currency",
-          "Exchange",
-          "Travel"
-        ],
-        "docs": [
-          "Check live exchange rate before changing money.",
-          "Compare fees from banks or exchange counters.",
-          "Keep a small cash backup where needed."
+          "Check cancellation policy.",
+          "Compare taxes and fees.",
+          "Keep booking confirmation ready."
         ]
       }
     ],
     "emergency": [
       {
-        "name": "Saudi Arabia Emergency Helpline",
+        "name": "Kingdom Emergency (without SIM)",
         "type": "General emergency",
-        "description": "Call 911 for urgent emergency help in Saudi Arabia.",
-        "web": "tel:911",
+        "description": "Emergency number available without a SIM card in Saudi Arabia: 112.",
+        "web": "tel:112",
         "android": "",
         "ios": "",
         "badges": [
           "Emergency",
           "SOS",
-          "24/7"
+          "No SIM"
         ],
         "docs": [
           "Use only for real emergencies.",
-          "Share your location clearly.",
-          "Traffic police 993"
+          "Share your exact location clearly.",
+          "For no-SIM emergency calls."
         ]
       },
       {
@@ -40734,15 +40860,15 @@
           "Call"
         ],
         "docs": [
-          "Tap call from mobile.",
+          "Use only for police emergencies.",
           "Explain city and exact location.",
-          "Verify locally if number changes."
+          "Keep calm and speak clearly."
         ]
       },
       {
-        "name": "Saudi Arabia Ambulance / Medical Emergency",
+        "name": "Saudi Arabia Ambulance",
         "type": "Ambulance number",
-        "description": "Ambulance or medical emergency number in Saudi Arabia: 997.",
+        "description": "Ambulance emergency number in Saudi Arabia: 997.",
         "web": "tel:997",
         "android": "",
         "ios": "",
@@ -40752,27 +40878,45 @@
           "Emergency"
         ],
         "docs": [
-          "Use for medical emergency.",
-          "Keep passport/ID ready if travelling.",
-          "Verify locally if number changes."
+          "Use for medical emergencies.",
+          "Share location and symptoms clearly.",
+          "Keep ID ready if travelling."
         ]
       },
       {
-        "name": "Saudi Arabia Fire Emergency",
+        "name": "Saudi Arabia Civil Defense / Fire",
         "type": "Fire number",
-        "description": "Fire brigade emergency number in Saudi Arabia: 998.",
+        "description": "Civil Defense emergency number in Saudi Arabia: 998.",
         "web": "tel:998",
         "android": "",
         "ios": "",
         "badges": [
           "Fire",
-          "Emergency",
-          "Safety"
+          "Civil Defense",
+          "Emergency"
         ],
         "docs": [
           "Leave unsafe place first.",
-          "Call from safe location.",
-          "Verify locally if number changes."
+          "Call from a safe location.",
+          "Share exact location clearly."
+        ]
+      },
+      {
+        "name": "Saudi Arabia Traffic Accidents",
+        "type": "Traffic number",
+        "description": "Traffic accident emergency number in Saudi Arabia: 993.",
+        "web": "tel:993",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Traffic",
+          "Accident",
+          "Emergency"
+        ],
+        "docs": [
+          "Use for road accidents.",
+          "Share road and nearest landmark.",
+          "Move to safety if possible."
         ]
       }
     ]

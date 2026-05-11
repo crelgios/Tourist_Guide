@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import BlogSection from "@/components/BlogSection";
 import { siteConfig } from "@/lib/site";
 import { countryData, getCountryName } from "@/data/countries";
-import siteContent from "@/data/site-content.json";
+import { getPublishedFaqs } from "@/lib/content";
 
 export const metadata = {
   title: "Discover Travel Apps Used Around the World | Aliwvide",
@@ -135,25 +135,6 @@ const topCountrySections = homepageTopCountrySlugs
   .map((slug) => buildTopAppsForCountry(slug, countryData[slug]))
   .filter((country) => country.apps.length > 0);
 
-const faqs = (siteContent.faqs || []).map((faq) => ({
-  q: faq.question,
-  a: faq.answer,
-  category: faq.category || "General"
-}));
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a
-    }
-  }))
-};
-
 const listedCountries = Object.keys(countryData).length;
 const listedCategories = new Set(
   Object.values(countryData).flatMap((data) => Object.keys(data || {}))
@@ -169,7 +150,28 @@ const stats = [
   [String(listedApps), "Listed Services"]
 ];
 
-export default function Home() {
+export const revalidate = 3600;
+
+export default async function Home() {
+  const faqs = (await getPublishedFaqs()).map((faq) => ({
+    q: faq.question,
+    a: faq.answer,
+    category: faq.category || "General"
+  }));
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a
+      }
+    }))
+  };
+
   return (
     <>
       <script

@@ -156,7 +156,7 @@ export default function AdminPage() {
       <div className="mx-auto max-w-6xl">
         <h1 className="text-5xl font-black tracking-[-0.07em] md:text-6xl">Aliwvide Secure Data Manager</h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-600">
-          Manage country app data, upload blog JSON files, and update FAQs from one private admin area.
+          Manage country app data, publish live blogs, upload blog JSON files, and update FAQs from one private admin area.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -262,7 +262,7 @@ export default function AdminPage() {
             <div className="mt-8 rounded-[2rem] bg-blue-50 p-8 text-blue-950">
               <h3 className="text-2xl font-black">Important</h3>
               <p className="mt-3">
-                This is still a no-backend project. Export JSON works in your browser, but live website data updates after you replace the data file and redeploy.
+                Country app data still exports as JSON. Blogs and FAQs now support live Supabase publishing from the Blogs & FAQs tab.
               </p>
             </div>
           </>

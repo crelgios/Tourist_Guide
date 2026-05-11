@@ -1,8 +1,10 @@
 import { countries } from "@/data/countries";
-import siteContent from "@/data/site-content.json";
+import { getBlogSitemapEntries } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
 
-export default function sitemap() {
+export const revalidate = 3600;
+
+export default async function sitemap() {
   const now = new Date();
 
   const staticRoutes = ["", "/category", "/explore", "/blog", "/faq", "/contact", "/terms", "/india/taxi-apps"].map((route) => ({
@@ -19,9 +21,10 @@ export default function sitemap() {
     priority: 0.8
   }));
 
-  const blogRoutes = (siteContent.blogs || []).map((blog) => ({
+  const blogEntries = await getBlogSitemapEntries();
+  const blogRoutes = blogEntries.map((blog) => ({
     url: `${siteConfig.url}/blog/${blog.slug}`,
-    lastModified: blog.date ? new Date(blog.date) : now,
+    lastModified: new Date(blog.lastModified),
     changeFrequency: "monthly",
     priority: 0.75
   }));

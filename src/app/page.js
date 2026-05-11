@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import BlogSection from "@/components/BlogSection";
 import { siteConfig } from "@/lib/site";
 import { countryData, getCountryName } from "@/data/countries";
+import siteContent from "@/data/site-content.json";
 
 export const metadata = {
   title: "Discover Travel Apps Used Around the World | Aliwvide",
@@ -133,63 +135,11 @@ const topCountrySections = homepageTopCountrySlugs
   .map((slug) => buildTopAppsForCountry(slug, countryData[slug]))
   .filter((country) => country.apps.length > 0);
 
-const faqs = [
-  {
-    q: "Which taxi apps are useful in India?",
-    a: "Uber, Ola, Rapido and city-based ride services are commonly used for taxis, cabs and bike rides in India. Availability can change by city, so compare options before booking.",
-    category: "Taxi & Transport"
-  },
-  {
-    q: "Which app is used for train booking in India?",
-    a: "IRCTC Rail Connect is the official app for Indian Railways ticket booking. Travellers can also use railway enquiry and live train status apps for trip planning.",
-    category: "Train"
-  },
-  {
-    q: "Which metro apps should I use in India?",
-    a: "Metro apps depend on the city. Delhi Metro, Mumbai Metro, Bengaluru Metro and other local metro apps help with route maps, fare information and station guidance.",
-    category: "Metro"
-  },
-  {
-    q: "Which food delivery apps are popular in India?",
-    a: "Swiggy and Zomato are popular food delivery apps in many Indian cities. Travellers should check address accuracy, delivery range and payment options before ordering.",
-    category: "Food"
-  },
-  {
-    q: "What is the best grocery app in Delhi India?",
-    a: "Blinkit, Zepto and Swiggy Instamart are among the best grocery apps in Delhi India for fast grocery delivery, snacks, beverages, daily essentials and travel needs.",
-    category: "Grocery Delivery"
-  },
-  {
-    q: "Which apps provide fast grocery delivery in India?",
-    a: "Blinkit, Zepto and Swiggy Instamart are popular instant grocery delivery apps in India. Delivery speed depends on the city, area, store availability and time of day.",
-    category: "Grocery Delivery"
-  },
-  {
-    q: "Can tourists use Blinkit, Zepto and Instamart in India?",
-    a: "Yes, tourists can use Blinkit, Zepto and Swiggy Instamart in supported Indian cities to order groceries, packaged food, water bottles, snacks, hygiene items and travel essentials.",
-    category: "Grocery Delivery"
-  },
-  {
-    q: "Which apps are best for food delivery and grocery fast delivery?",
-    a: "For food delivery, Swiggy and Zomato are widely used. For grocery fast delivery, Blinkit, Zepto and Swiggy Instamart are useful in many Indian cities including Delhi.",
-    category: "Food & Grocery"
-  },
-  {
-    q: "Which maps and navigation apps work well for travellers?",
-    a: "Google Maps is widely used in many countries for navigation, public transport routes and nearby places. Travellers should also check local transit apps for each country.",
-    category: "Maps & Navigation"
-  },
-  {
-    q: "What is the SOS or emergency helpline number in India?",
-    a: "In India, 112 is the national emergency helpline number. Travellers may also use police, ambulance and local emergency apps where available. Always verify emergency contacts for the city or state you are visiting.",
-    category: "SOS & Emergency"
-  },
-  {
-    q: "Where can I find all travel app categories on Aliwvide?",
-    a: "Open the category page to choose taxi, emergency, train, metro, bus, flights, maps, navigation, food, shopping and hotel apps by country.",
-    category: "All Categories"
-  }
-];
+const faqs = (siteContent.faqs || []).map((faq) => ({
+  q: faq.question,
+  a: faq.answer,
+  category: faq.category || "General"
+}));
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -204,11 +154,19 @@ const faqSchema = {
   }))
 };
 
+const listedCountries = Object.keys(countryData).length;
+const listedCategories = new Set(
+  Object.values(countryData).flatMap((data) => Object.keys(data || {}))
+).size;
+const listedApps = Object.values(countryData).reduce(
+  (total, data) => total + Object.values(data || {}).reduce((sum, apps) => sum + (apps?.length || 0), 0),
+  0
+);
+
 const stats = [
-  ["100+", "Countries"],
-  ["50+", "Categories"],
-  ["1000+", "Apps"],
-  ["1M+", "Happy Travellers"]
+  [String(listedCountries), "Countries"],
+  [String(listedCategories), "App Types"],
+  [String(listedApps), "Listed Services"]
 ];
 
 export default function Home() {
@@ -239,6 +197,7 @@ export default function Home() {
               <Link href="/">Home</Link>
               <Link href="/category">Categories</Link>
               <Link href="/explore">Explore</Link>
+              <Link href="/blog">Blog</Link>
               <Link href="/faq">FAQ</Link>
               <Link href="/contact">Contact</Link>
             </div>
@@ -269,7 +228,7 @@ export default function Home() {
         </section>
 
         <section className="bg-[#030712] px-6 py-8 text-white">
-          <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {stats.map(([value, label]) => (
               <div key={label} className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur">
                 <p className="text-3xl font-black">{value}</p>
@@ -347,14 +306,16 @@ export default function Home() {
               </p>
             </div>
             <div className="rounded-[2.5rem] bg-slate-100 p-8 md:p-10">
-              <p className="font-black uppercase tracking-[.2em] text-violet-500">SEO content</p>
-              <h2 className="mt-4 text-4xl font-black">Country-specific SEO pages</h2>
+              <p className="font-black uppercase tracking-[.2em] text-violet-500">Trip planning</p>
+              <h2 className="mt-4 text-4xl font-black">Plan before you land</h2>
               <p className="mt-5 leading-8 text-slate-600">
-                The homepage focuses on worldwide travel app discovery, while country pages can target specific searches like best taxi apps in India, food delivery apps India, and best grocery app in Delhi India.
+                Compare the apps travellers often need before a trip: local rides, maps, train booking, food delivery, shopping and emergency contacts. Open a country guide and save the tools that match your route.
               </p>
             </div>
           </div>
         </section>
+
+        <BlogSection />
 
         <section id="faq" className="bg-slate-50 px-6 py-20">
           <div className="mx-auto max-w-7xl">

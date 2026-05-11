@@ -6,7 +6,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: []
+        disallow: ["/secure-aliwvide-control-9xq2m"]
       }
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`

@@ -1,10 +1,11 @@
 import { countries } from "@/data/countries";
+import siteContent from "@/data/site-content.json";
 import { siteConfig } from "@/lib/site";
 
 export default function sitemap() {
   const now = new Date();
 
-  const staticRoutes = ["", "/category", "/explore", "/faq", "/contact", "/terms", "/india/taxi-apps"].map((route) => ({
+  const staticRoutes = ["", "/category", "/explore", "/blog", "/faq", "/contact", "/terms", "/india/taxi-apps"].map((route) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: now,
     changeFrequency: route === "" ? "weekly" : "monthly",
@@ -15,8 +16,15 @@ export default function sitemap() {
     url: `${siteConfig.url}/country/${country.slug}`,
     lastModified: now,
     changeFrequency: "weekly",
-    priority: 0.85
+    priority: 0.8
   }));
 
-  return [...staticRoutes, ...countryRoutes];
+  const blogRoutes = (siteContent.blogs || []).map((blog) => ({
+    url: `${siteConfig.url}/blog/${blog.slug}`,
+    lastModified: blog.date ? new Date(blog.date) : now,
+    changeFrequency: "monthly",
+    priority: 0.75
+  }));
+
+  return [...staticRoutes, ...countryRoutes, ...blogRoutes];
 }

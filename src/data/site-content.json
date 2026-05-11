@@ -1,0 +1,108 @@
+{
+  "blogs": [
+    {
+      "id": "best-taxi-apps-india-tourists",
+      "title": "Best Taxi Apps in India for Tourists",
+      "slug": "best-taxi-apps-in-india-for-tourists",
+      "description": "A practical guide to taxi and ride-booking apps tourists can use in India, including where each option is most useful.",
+      "date": "2026-05-11",
+      "content": "Taxi apps are one of the easiest ways for tourists to move around Indian cities. Uber and Ola are commonly used for car rides in many major cities, while Rapido is useful in supported areas for quick bike-taxi rides and local trips.\n\nBefore booking, compare the estimated fare, confirm the pickup point, check the vehicle number, and make sure the driver details match the app. At airports and busy railway stations, selecting the exact pickup zone can save time and confusion.\n\nFor longer travel days, keep a backup option ready. Availability can vary by city, time of day, and local rules, so having more than one app installed is helpful for visitors."
+    },
+    {
+      "id": "apps-before-visiting-india",
+      "title": "10 Useful Apps to Download Before Visiting India",
+      "slug": "useful-apps-to-download-before-visiting-india",
+      "description": "A simple checklist of transport, maps, train, metro, food delivery, grocery, and safety apps that can help tourists in India.",
+      "date": "2026-05-11",
+      "content": "A small set of useful apps can make a first trip to India much easier. Start with a maps app for navigation, a taxi app for local rides, the official railway booking app for trains, and city-specific metro apps when you plan to use urban transit.\n\nFood delivery apps can help after a long travel day, while grocery delivery apps are useful for water, snacks, and daily essentials in supported cities. It is also smart to save emergency numbers and hotel details before you begin travelling.\n\nThe best setup is not the largest number of apps. It is a simple mix that covers the places you will actually visit: transport, maps, food, bookings, and emergency help."
+    },
+    {
+      "id": "delhi-metro-apps-tourists",
+      "title": "How Tourists Can Use Metro Apps in Delhi",
+      "slug": "how-tourists-can-use-metro-apps-in-delhi",
+      "description": "Learn how metro apps can help tourists check routes, stations, and fares while travelling around Delhi.",
+      "date": "2026-05-11",
+      "content": "Delhi has a large metro network, so route planning matters. A metro app can help tourists check stations, interchange points, route options, and fare guidance before leaving the hotel.\n\nWhen using a metro app, look at the full route first, note the interchange station if one is required, and keep the destination station name ready. This is especially helpful during busy travel hours when stations can be crowded.\n\nMetro apps work best together with a maps app. Use the metro app for the train route and the maps app for walking directions before and after the journey."
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-emergency-india",
+      "category": "SOS & Emergency",
+      "question": "What is the SOS or emergency helpline number in India?",
+      "answer": "112 is India’s national emergency helpline. Travellers should also verify local police, ambulance and state-specific emergency contacts before travelling."
+    },
+    {
+      "id": "faq-taxi-india",
+      "category": "Taxi & Transport",
+      "question": "Which taxi apps are useful in India?",
+      "answer": "Uber, Ola and Rapido are commonly used in many Indian cities. Availability, pricing and ride types can vary by location."
+    },
+    {
+      "id": "faq-train-india",
+      "category": "Train",
+      "question": "Which app is used for train booking in India?",
+      "answer": "IRCTC Rail Connect is the official Indian Railways ticket booking app. Live train status apps can also help with tracking and platform information."
+    },
+    {
+      "id": "faq-metro-india",
+      "category": "Metro",
+      "question": "Which metro app should I install?",
+      "answer": "Install the metro app for the city you are visiting, such as Delhi Metro, Mumbai Metro or Bengaluru Metro where available."
+    },
+    {
+      "id": "faq-bus-india",
+      "category": "Bus",
+      "question": "Are bus apps useful for tourists in India?",
+      "answer": "Yes. City bus and intercity bus apps can help with routes, booking and timing, especially for local travel."
+    },
+    {
+      "id": "faq-navigation-india",
+      "category": "Maps & Navigation",
+      "question": "Which navigation app works well in India?",
+      "answer": "Google Maps is widely used for routes, traffic and public transport. Offline maps can help when internet coverage is weak."
+    },
+    {
+      "id": "faq-flights-india",
+      "category": "Flights",
+      "question": "Which flight apps are useful for India travel?",
+      "answer": "Airline apps and flight booking platforms help compare fares, check flight status and manage bookings."
+    },
+    {
+      "id": "faq-food-india",
+      "category": "Food",
+      "question": "Which food delivery apps are popular in India?",
+      "answer": "Swiggy and Zomato are popular in many cities. Always check delivery address, restaurant rating and payment options."
+    },
+    {
+      "id": "faq-grocery-delhi",
+      "category": "Grocery Delivery",
+      "question": "What is the best grocery app in Delhi India?",
+      "answer": "Blinkit, Zepto and Swiggy Instamart are among the useful grocery apps in Delhi for fast grocery delivery, snacks, beverages, daily essentials and travel needs."
+    },
+    {
+      "id": "faq-fast-grocery-india",
+      "category": "Grocery Delivery",
+      "question": "Which apps provide fast grocery delivery in India?",
+      "answer": "Blinkit, Zepto and Swiggy Instamart are popular instant grocery delivery apps in India. Delivery speed depends on the city, area, store availability and time of day."
+    },
+    {
+      "id": "faq-tourist-grocery-india",
+      "category": "Grocery Delivery",
+      "question": "Can tourists use Blinkit, Zepto and Instamart in India?",
+      "answer": "Yes, tourists can use Blinkit, Zepto and Swiggy Instamart in supported Indian cities to order groceries, packaged food, water bottles, snacks, hygiene items and travel essentials."
+    },
+    {
+      "id": "faq-food-grocery-india",
+      "category": "Food & Grocery",
+      "question": "Which apps are useful for food delivery and fast grocery delivery?",
+      "answer": "For food delivery, Swiggy and Zomato are widely used. For grocery delivery, Blinkit, Zepto and Swiggy Instamart are useful in many Indian cities including Delhi."
+    },
+    {
+      "id": "faq-shopping-india",
+      "category": "Shopping",
+      "question": "Which shopping apps help travellers?",
+      "answer": "Amazon India, Flipkart and local delivery platforms can help travellers buy essentials during travel."
+    }
+  ]
+}

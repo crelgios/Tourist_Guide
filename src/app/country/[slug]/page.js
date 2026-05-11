@@ -20,25 +20,45 @@ const categoryLabels = {
 };
 
 function AppCard({ app, emergency = false }) {
+  const links = [
+    { href: app.web, label: app.web?.startsWith("tel:") ? "Call Now" : "Website" },
+    { href: app.android, label: "Android" },
+    { href: app.ios, label: "iPhone" }
+  ].filter((link) => link.href);
+
   return (
     <article className={`rounded-3xl p-5 ${emergency ? "bg-red-50" : "bg-gray-50"}`}>
       <h3 className="text-xl font-black">{app.name}</h3>
+      {app.type && <p className="mt-1 text-sm font-bold text-gray-400">{app.type}</p>}
       <p className="mt-2 text-gray-600">{app.description}</p>
-      {app.web?.startsWith("tel:") && (
-        <a
-          href={app.web}
-          className="mt-4 inline-flex rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700"
-        >
-          Call Now
-        </a>
+
+      {links.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {links.map((link) => (
+            <a
+              key={`${app.name}-${link.label}`}
+              href={link.href}
+              target={link.href.startsWith("tel:") ? undefined : "_blank"}
+              rel={link.href.startsWith("tel:") ? undefined : "noopener noreferrer"}
+              className={`rounded-full px-4 py-2 text-sm font-bold ${
+                link.href.startsWith("tel:") ? "bg-red-600 text-white hover:bg-red-700" : "bg-white text-gray-950 ring-1 ring-gray-200 hover:bg-gray-100"
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       )}
-      <div className="mt-4 flex flex-wrap gap-2">
-        {(app.badges || []).map((badge) => (
-          <span key={badge} className="rounded-full bg-white px-3 py-1 text-xs font-bold">
-            {badge}
-          </span>
-        ))}
-      </div>
+
+      {(app.badges || []).length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {(app.badges || []).map((badge) => (
+            <span key={badge} className="rounded-full bg-white px-3 py-1 text-xs font-bold">
+              {badge}
+            </span>
+          ))}
+        </div>
+      )}
     </article>
   );
 }
@@ -71,7 +91,9 @@ export function generateMetadata({ params }) {
 export default function CountryPage({ params }) {
   const countryName = getCountryName(params.slug);
   const data = getCountryData(params.slug);
-  const mainCategories = categories.filter((category) => category.key !== "emergency");
+  const mainCategories = categories.filter(
+    (category) => category.key !== "emergency" && (data[category.key] || []).length > 0
+  );
   const emergencyCategory = categories.find((category) => category.key === "emergency");
   const emergencyApps = data.emergency || [];
 
@@ -106,7 +128,6 @@ export default function CountryPage({ params }) {
                     {apps.map((app) => (
                       <AppCard key={app.name} app={app} />
                     ))}
-                    {apps.length === 0 && <p className="text-gray-500">More trusted apps will be added soon.</p>}
                   </div>
                 </div>
               );

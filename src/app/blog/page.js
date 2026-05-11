@@ -24,7 +24,8 @@ export default async function BlogPage() {
         </h1>
 
         <p className="mt-4 max-w-2xl text-slate-600">
-          Simple guides for tourists to discover useful apps for transport, maps, trains, metro, food delivery and shopping.
+          Simple guides for tourists to discover useful apps for transport, maps,
+          trains, metro, food delivery and shopping.
         </p>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -33,9 +34,7 @@ export default async function BlogPage() {
               key={blog.id}
               className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
             >
-              {blog.date && <p className="text-sm text-slate-500">{blog.date}</p>}
-
-              <h2 className="mt-3 text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-bold text-slate-900">
                 {blog.title}
               </h2>
 

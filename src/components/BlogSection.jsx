@@ -30,9 +30,7 @@ export default async function BlogSection() {
             key={blog.id}
             className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
           >
-            {blog.date && <p className="text-sm text-slate-500">{blog.date}</p>}
-
-            <h3 className="mt-3 text-xl font-bold text-slate-900">
+            <h3 className="text-xl font-bold text-slate-900">
               {blog.title}
             </h3>
 

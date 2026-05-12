@@ -275,7 +275,6 @@ export default function Home() {
                       })}
                     </div>
                   </div>
-                  <p className="mt-3 text-xs font-bold text-slate-400">Auto sliding preview — swipe anytime →</p>
                 </article>
               ))}
             </div>

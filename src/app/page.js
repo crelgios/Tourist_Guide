@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import BlogSection from "@/components/BlogSection";
-import LogoHeroMedia from "@/components/LogoHeroMedia";
 import { siteConfig } from "@/lib/site";
 import { countryData, getCountryName } from "@/data/countries";
 import siteContent from "@/data/site-content.json";
@@ -207,8 +206,17 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block" aria-label="Aliwvide brand logo">
-              <LogoHeroMedia />
+            <div className="relative hidden lg:block" aria-hidden="true">
+              <div className="absolute -inset-6 rounded-[3rem] bg-white/5 blur-2xl" />
+              <img
+                src="/hero/aliwvide-travel-apps-hero.svg"
+                alt=""
+                width="760"
+                height="620"
+                loading="eager"
+                fetchPriority="high"
+                className="relative h-auto w-full select-none drop-shadow-2xl"
+              />
             </div>
           </div>
         </section>

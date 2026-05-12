@@ -1,5 +1,7 @@
 import { siteConfig } from "@/lib/site";
 
+const baseUrl = siteConfig.url.replace(/\/$/, "");
+
 export default function robots() {
   return {
     rules: [
@@ -9,6 +11,6 @@ export default function robots() {
         disallow: ["/secure-aliwvide-control-9xq2m", "/api/admin", "/api/n8n"]
       }
     ],
-    sitemap: `${siteConfig.url}/sitemap.xml`
+    sitemap: `${baseUrl}/sitemap.xml`
   };
 }

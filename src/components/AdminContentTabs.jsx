@@ -34,6 +34,25 @@ async function readJson(response) {
   return data;
 }
 
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com").replace(/\/$/, "");
+
+function getPublicBlogUrl(slug) {
+  return `${siteUrl}/blog/${encodeURIComponent(String(slug || ""))}`;
+}
+
+function getShareLinks(blog) {
+  const url = getPublicBlogUrl(blog.slug);
+  const title = blog.title || "Aliwvide travel guide";
+  const text = `${title} - ${url}`;
+
+  return {
+    url,
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(text)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`
+  };
+}
+
 export default function AdminContentTabs() {
   const [authState, setAuthState] = useState("checking");
   const [username, setUsername] = useState("");
@@ -118,6 +137,7 @@ export default function AdminContentTabs() {
     setFaqs([]);
     setAuthState("logged-out");
     setStatus("Logged out.");
+    window.dispatchEvent(new Event("aliwvide-admin-logout"));
   }
 
   async function loadContent() {
@@ -410,22 +430,81 @@ export default function AdminContentTabs() {
 
           <div className="mt-8 space-y-4">
             <h3 className="text-xl font-black">Current Blogs</h3>
-            {blogs.map((blog) => (
-              <article key={blog.id} className="rounded-[1.5rem] border border-gray-200 p-5">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.18em] text-gray-400">{blog.status || "published"}</p>
-                    <h4 className="mt-2 text-xl font-black">{blog.title}</h4>
-                    <p className="mt-1 text-sm text-gray-500">/blog/{blog.slug}</p>
+            {blogs.map((blog) => {
+              const shareLinks = getShareLinks(blog);
+
+              return (
+                <article key={blog.id} className="rounded-[1.5rem] border border-gray-200 p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-gray-400">{blog.status || "published"}</p>
+                      <h4 className="mt-2 text-xl font-black">{blog.title}</h4>
+                      <a
+                        href={shareLinks.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 inline-block text-sm font-semibold text-emerald-700 hover:text-emerald-900"
+                      >
+                        /blog/{blog.slug}
+                      </a>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href={shareLinks.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-full bg-emerald-50 px-4 py-2 text-sm font-bold text-emerald-700"
+                      >
+                        View
+                      </a>
+                      <button type="button" onClick={() => editBlog(blog)} className="rounded-full bg-gray-100 px-4 py-2 text-sm font-bold text-gray-950">Edit</button>
+                      <button type="button" onClick={() => deleteBlog(blog)} className="rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white">Delete</button>
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <button type="button" onClick={() => editBlog(blog)} className="rounded-full bg-gray-100 px-4 py-2 text-sm font-bold text-gray-950">Edit</button>
-                    <button type="button" onClick={() => deleteBlog(blog)} className="rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white">Delete</button>
+                  <p className="mt-3 text-gray-600">{blog.description}</p>
+
+                  <div className="mt-4 rounded-2xl bg-gray-50 p-4">
+                    <p className="text-xs font-black uppercase tracking-[0.18em] text-gray-400">Share public blog link</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <a
+                        href={shareLinks.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-full bg-green-600 px-4 py-2 text-sm font-bold text-white"
+                      >
+                        WhatsApp
+                      </a>
+                      <a
+                        href={shareLinks.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-full bg-blue-600 px-4 py-2 text-sm font-bold text-white"
+                      >
+                        Facebook
+                      </a>
+                      <a
+                        href={shareLinks.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-full bg-gray-950 px-4 py-2 text-sm font-bold text-white"
+                      >
+                        Twitter / X
+                      </a>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          await navigator.clipboard.writeText(shareLinks.url);
+                          setStatus(`Copied public blog link: ${shareLinks.url}`);
+                        }}
+                        className="rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-950 ring-1 ring-gray-200"
+                      >
+                        Copy Link
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <p className="mt-3 text-gray-600">{blog.description}</p>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       )}

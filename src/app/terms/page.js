@@ -2,7 +2,9 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Terms & Conditions",
-  description: "Aliwvide provides informational recommendations only. We do not own or operate third-party services shown on this site."
+  description:
+    "Aliwvide provides informational recommendations only. We do not own or operate third-party services shown on this site.",
+  alternates: { canonical: "/terms" }
 };
 
 export default function Page() {

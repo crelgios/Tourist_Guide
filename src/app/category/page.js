@@ -3,7 +3,9 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Travel App Categories",
-  description: "Choose a travel category and find trusted taxi, train, metro, maps, food, shopping and tourist apps by country."
+  description:
+    "Choose a travel category and find trusted taxi, train, metro, maps, food, shopping and tourist apps by country.",
+  alternates: { canonical: "/category" }
 };
 
 export default function CategoryPage() {

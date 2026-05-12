@@ -79,3 +79,16 @@ If the same `slug` is sent again, the n8n route updates the existing blog instea
 npm install
 npm run build
 ```
+
+## Aliwvide brand assets added
+
+Logo files are in `public/brand/`.
+
+Used in the project:
+- Navbar logo: `src/components/SiteLogo.jsx`
+- Footer logo: `src/components/Footer.jsx`
+- Homepage hero brand card: `src/components/LogoHeroMedia.jsx`
+- Browser/favicon icons: `public/favicon.ico`, `public/icon.png`, `public/apple-touch-icon.png`
+- Social preview image: `public/brand/aliwvide-og-image.jpg`
+
+The animation files are included in `public/brand/` but are not loaded in the navbar to keep mobile performance fast.

@@ -17,27 +17,6 @@ body {
   backdrop-filter: blur(18px);
   border: 1px solid rgba(229, 231, 235, 0.85);
 }
-
-.page-glass-wipe {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background:
-    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.34) 34%, rgba(255, 255, 255, 0.12) 64%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(229, 231, 235, 0.28));
-  backdrop-filter: blur(26px) saturate(180%);
-  -webkit-backdrop-filter: blur(26px) saturate(180%);
-  box-shadow: inset 0 0 120px rgba(255, 255, 255, 0.55);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .page-glass-wipe {
-    display: none;
-  }
-}
-
-
 .aliwvide-app-marquee {
   animation: aliwvide-marquee 26s linear infinite;
 }
@@ -66,3 +45,72 @@ body {
     animation: none;
   }
 }
+
+
+.aliwvide-page-transition {
+  animation: aliwvideRouteFade 240ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+.aliwvide-page-transition::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 45;
+  height: 3px;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, #10b981, #38bdf8, #db2777);
+  animation: aliwvideRouteBar 650ms ease-out both;
+}
+
+@keyframes aliwvideRouteFade {
+  from {
+    opacity: 0.86;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes aliwvideRouteBar {
+  0% {
+    opacity: 0.9;
+    transform: scaleX(0);
+  }
+  70% {
+    opacity: 0.75;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .aliwvide-page-transition {
+    animation-duration: 180ms;
+  }
+
+  .aliwvide-page-transition::before {
+    height: 2px;
+    animation-duration: 520ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aliwvide-page-transition {
+    animation: none;
+    will-change: auto;
+  }
+
+  .aliwvide-page-transition::before {
+    display: none;
+  }
+}
+

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import BlogSection from "@/components/BlogSection";
+import LogoHeroMedia from "@/components/LogoHeroMedia";
 import { siteConfig } from "@/lib/site";
 import { countryData, getCountryName } from "@/data/countries";
 import siteContent from "@/data/site-content.json";
@@ -37,7 +38,19 @@ export const metadata = {
       "Explore trusted travel, transport, navigation, taxi, train, metro, food delivery and tourist apps used worldwide.",
     url: siteConfig.url,
     siteName: "Aliwvide",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "/brand/aliwvide-og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Aliwvide travel apps by country logo"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/brand/aliwvide-og-image.jpg"]
   }
 };
 
@@ -185,7 +198,7 @@ export default function Home() {
                 Explore trusted travel, transport, navigation, taxi, train, metro, food delivery and grocery apps used by locals and tourists worldwide.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Link href="/category" className="rounded-full bg-gradient-to-r from-sky-400 to-violet-500 px-7 py-4 font-black text-white shadow-2xl transition hover:-translate-y-1">
+                <Link href="/explore" className="rounded-full bg-gradient-to-r from-sky-400 to-violet-500 px-7 py-4 font-black text-white shadow-2xl transition hover:-translate-y-1">
                   Explore Countries
                 </Link>
                 <Link href="#faq" className="rounded-full border border-white/25 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur transition hover:bg-white/20">
@@ -194,17 +207,8 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block" aria-hidden="true">
-              <div className="absolute -inset-6 rounded-[3rem] bg-white/5 blur-2xl" />
-              <img
-                src="/hero/aliwvide-travel-apps-hero.svg"
-                alt=""
-                width="760"
-                height="620"
-                loading="eager"
-                fetchPriority="high"
-                className="relative h-auto w-full select-none drop-shadow-2xl"
-              />
+            <div className="relative hidden lg:block" aria-label="Aliwvide brand logo">
+              <LogoHeroMedia />
             </div>
           </div>
         </section>
@@ -296,6 +300,20 @@ export default function Home() {
               <p className="mt-5 leading-8 text-slate-600">
                 Compare the apps travellers often need before a trip: local rides, maps, train booking, food delivery, shopping and emergency contacts. Open a country guide and save the tools that match your route.
               </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white px-6 py-16">
+          <div className="mx-auto max-w-7xl rounded-[2rem] border border-slate-200 bg-slate-50 p-7 md:p-10">
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">Popular country guides</p>
+            <h2 className="mt-3 text-3xl font-black tracking-[-0.04em] text-slate-950">Start with the most searched travel app guides</h2>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/country/india" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">India travel apps</Link>
+              <Link href="/india/taxi-apps" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Best taxi apps in India</Link>
+              <Link href="/country/japan" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Japan travel apps</Link>
+              <Link href="/country/saudiarabia" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Saudi Arabia travel apps</Link>
+              <Link href="/category" className="rounded-full bg-slate-950 px-5 py-3 font-bold text-white hover:bg-slate-800">Browse categories</Link>
             </div>
           </div>
         </section>

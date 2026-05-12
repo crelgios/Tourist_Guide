@@ -1,23 +1,34 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
-import { categories, getCountryData, getCountryName } from "@/data/countries";
+import { categories, countries, countryData, getCountryData, getCountryName } from "@/data/countries";
 import { siteConfig } from "@/lib/site";
 
-export const dynamicParams = true;
+export const dynamicParams = false;
+export const revalidate = 3600;
 
 const categoryLabels = {
-  transport: "Local Transport",
-  train: "Train",
-  metro: "Metro",
-  bus: "Bus",
-  flights: "Flights",
+  transport: "Local Transport & Taxi Apps",
+  train: "Train Apps",
+  metro: "Metro Apps",
+  bus: "Bus Apps",
+  flights: "Flight Apps",
   maps: "Maps",
   navigation: "Navigation",
-  shopping: "Shopping",
-  food: "Food Delivery",
-  hotel: "Hotels",
+  shopping: "Shopping Apps",
+  food: "Food Delivery Apps",
+  hotel: "Hotel & Stay Apps",
   emergency: "SOS & Emergency Helplines"
 };
+
+const importantCountries = [
+  { slug: "india", name: "India" },
+  { slug: "japan", name: "Japan" },
+  { slug: "saudiarabia", name: "Saudi Arabia" },
+  { slug: "unitedarabemirates", name: "United Arab Emirates" },
+  { slug: "thailand", name: "Thailand" },
+  { slug: "unitedstates", name: "United States" }
+];
 
 function AppCard({ app, emergency = false }) {
   const links = [
@@ -41,7 +52,9 @@ function AppCard({ app, emergency = false }) {
               target={link.href.startsWith("tel:") ? undefined : "_blank"}
               rel={link.href.startsWith("tel:") ? undefined : "noopener noreferrer"}
               className={`rounded-full px-4 py-2 text-sm font-bold ${
-                link.href.startsWith("tel:") ? "bg-red-600 text-white hover:bg-red-700" : "bg-white text-gray-950 ring-1 ring-gray-200 hover:bg-gray-100"
+                link.href.startsWith("tel:")
+                  ? "bg-red-600 text-white hover:bg-red-700"
+                  : "bg-white text-gray-950 ring-1 ring-gray-200 hover:bg-gray-100"
               }`}
             >
               {link.label}
@@ -63,10 +76,22 @@ function AppCard({ app, emergency = false }) {
   );
 }
 
+export function generateStaticParams() {
+  return countries.map((country) => ({ slug: country.slug }));
+}
+
 export function generateMetadata({ params }) {
+  if (!countryData[params.slug]) {
+    return {
+      title: "Country Guide Not Found",
+      robots: { index: false, follow: false }
+    };
+  }
+
   const countryName = getCountryName(params.slug);
-  const title = `Best Travel Apps in ${countryName}`;
-  const description = `Discover trusted taxi, train, metro, bus, flight, maps, navigation, shopping, food delivery and emergency helpline apps for ${countryName}.`;
+  const title = `Best Travel Apps in ${countryName} - Taxi, Train, Food & Maps`;
+  const description = `Find trusted taxi apps, train apps, metro apps, bus apps, flight apps, maps, shopping apps, food delivery apps and emergency helplines used in ${countryName}.`;
+  const canonical = `/country/${params.slug}`;
 
   return {
     title,
@@ -75,20 +100,31 @@ export function generateMetadata({ params }) {
       `best travel apps in ${countryName}`,
       `best taxi app in ${countryName}`,
       `best train app in ${countryName}`,
+      `food delivery apps in ${countryName}`,
       `${countryName} transport apps`,
-      `${countryName} tourist guide`
+      `${countryName} tourist guide`,
+      `${countryName} emergency numbers`
     ],
-    alternates: { canonical: `/country/${params.slug}` },
+    alternates: { canonical },
     openGraph: {
       title,
       description,
-      url: `${siteConfig.url}/country/${params.slug}`,
+      url: `${siteConfig.url.replace(/\/$/, "")}${canonical}`,
       type: "article"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description
     }
   };
 }
 
 export default function CountryPage({ params }) {
+  if (!countryData[params.slug]) {
+    notFound();
+  }
+
   const countryName = getCountryName(params.slug);
   const data = getCountryData(params.slug);
   const mainCategories = categories.filter(
@@ -96,16 +132,21 @@ export default function CountryPage({ params }) {
   );
   const emergencyCategory = categories.find((category) => category.key === "emergency");
   const emergencyApps = data.emergency || [];
+  const relatedCountries = importantCountries.filter((country) => country.slug !== params.slug).slice(0, 5);
 
   return (
     <>
       <main className="min-h-screen bg-white px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <Link href="/explore" className="rounded-full bg-gray-100 px-5 py-3 font-bold text-gray-900">
-            ← Explore
-          </Link>
+          <nav className="flex flex-wrap items-center gap-2 text-sm font-bold text-gray-500" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-emerald-700">Home</Link>
+            <span>/</span>
+            <Link href="/explore" className="hover:text-emerald-700">Explore countries</Link>
+            <span>/</span>
+            <span className="text-gray-950">{countryName}</span>
+          </nav>
 
-          <section className="mt-12 rounded-[2.5rem] bg-gradient-to-br from-gray-50 to-indigo-50 p-8 md:p-12">
+          <section className="mt-8 rounded-[2.5rem] bg-gradient-to-br from-gray-50 to-indigo-50 p-8 md:p-12">
             <p className="font-bold text-blue-600">Aliwvide country guide</p>
             <h1 className="mt-4 text-5xl font-black tracking-[-0.06em] md:text-7xl">
               Best travel apps in {countryName}
@@ -113,6 +154,19 @@ export default function CountryPage({ params }) {
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600">
               Find trusted websites and mobile apps for local transport, taxi, maps, trains, metro, buses, flights, shopping and food delivery in {countryName}. Emergency helplines are listed near the bottom for quick reference.
             </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/category" className="rounded-full bg-gray-950 px-5 py-3 font-bold text-white hover:bg-gray-800">
+                Browse by category
+              </Link>
+              <Link href="/blog" className="rounded-full bg-white px-5 py-3 font-bold text-gray-950 ring-1 ring-gray-200 hover:bg-gray-50">
+                Read travel guides
+              </Link>
+              {params.slug === "india" && (
+                <Link href="/india/taxi-apps" className="rounded-full bg-emerald-600 px-5 py-3 font-bold text-white hover:bg-emerald-700">
+                  India taxi app guide
+                </Link>
+              )}
+            </div>
           </section>
 
           <section className="mt-12 grid gap-6 md:grid-cols-2">
@@ -123,10 +177,10 @@ export default function CountryPage({ params }) {
               return (
                 <div key={category.key} className="rounded-[2rem] border border-gray-200 bg-white p-7 shadow-soft">
                   <div className="text-4xl">{category.icon}</div>
-                  <h2 className="mt-4 text-2xl font-black">{label}</h2>
+                  <h2 className="mt-4 text-2xl font-black">{label} in {countryName}</h2>
                   <div className="mt-5 space-y-4">
                     {apps.map((app) => (
-                      <AppCard key={app.name} app={app} />
+                      <AppCard key={`${category.key}-${app.name}`} app={app} />
                     ))}
                   </div>
                 </div>
@@ -158,6 +212,21 @@ export default function CountryPage({ params }) {
               {emergencyApps.length > 1 && <p className="mt-3 text-xs font-bold text-red-400 md:hidden">Swipe left to see more emergency contacts →</p>}
             </section>
           )}
+
+          <section className="mt-12 rounded-[2rem] border border-gray-200 bg-gray-50 p-7">
+            <h2 className="text-2xl font-black">Explore more country travel app guides</h2>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {relatedCountries.map((country) => (
+                <Link
+                  key={country.slug}
+                  href={`/country/${country.slug}`}
+                  className="rounded-full bg-white px-5 py-3 font-bold text-gray-900 ring-1 ring-gray-200 hover:bg-emerald-50 hover:text-emerald-700"
+                >
+                  {country.name}
+                </Link>
+              ))}
+            </div>
+          </section>
         </div>
       </main>
       <Footer />

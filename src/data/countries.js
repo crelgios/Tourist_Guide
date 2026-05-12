@@ -213,9 +213,16 @@ export const categories = [
   { key: "emergency", icon: "🆘" }
 ];
 
+export function formatCountryNameFromSlug(slug) {
+  return slug
+    .replace(/-/g, " ")
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
 export const countries = Object.keys(countriesData).map((slug) => ({
   slug,
-  name: countryNames[slug] || slug.replace(/-/g, " ").replace(/\w/g, (letter) => letter.toUpperCase())
+  name: countryNames[slug] || formatCountryNameFromSlug(slug)
 }));
 
 export const defaultCountryData = {

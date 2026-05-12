@@ -1,19 +1,14 @@
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
+import { siteConfig } from "@/lib/site";
 
 export default function robots() {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: [
-        "/admin",
-        "/api",
-        "/api/",
-        "/_next/",
-        "/private/"
-      ]
-    },
-    sitemap: `${siteUrl}/sitemap.xml`,
-    host: siteUrl
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/secure-aliwvide-control-9xq2m", "/api/admin", "/api/n8n"]
+      }
+    ],
+    sitemap: `${siteConfig.url}/sitemap.xml`
   };
 }

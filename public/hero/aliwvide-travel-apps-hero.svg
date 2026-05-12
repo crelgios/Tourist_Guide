@@ -1,0 +1,100 @@
+<svg width="760" height="620" viewBox="0 0 760 620" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Aliwvide travel apps hero illustration</title>
+  <desc id="desc">A premium travel app dashboard with map pins, app cards and route lines.</desc>
+  <defs>
+    <linearGradient id="bg" x1="83" y1="50" x2="664" y2="582" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8" stop-opacity="0.34"/>
+      <stop offset="0.56" stop-color="#8B5CF6" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#10B981" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="238" y1="71" x2="550" y2="559" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EAF4FF"/>
+    </linearGradient>
+    <linearGradient id="card" x1="284" y1="180" x2="512" y2="415" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <filter id="shadow" x="88" y="34" width="608" height="556" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="22"/>
+      <feGaussianBlur stdDeviation="26"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.02 0 0 0 0 0.04 0 0 0 0 0.11 0 0 0 0.32 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect x="40" y="42" width="680" height="536" rx="64" fill="url(#bg)"/>
+  <path d="M135 421C213 335 278 358 349 266C411 185 496 137 637 145" stroke="white" stroke-opacity="0.24" stroke-width="4" stroke-dasharray="14 14"/>
+  <path d="M104 184C175 234 240 215 297 280C368 361 449 410 627 385" stroke="#67E8F9" stroke-opacity="0.22" stroke-width="4" stroke-dasharray="12 14"/>
+
+  <circle cx="122" cy="143" r="12" fill="#38BDF8"/>
+  <circle cx="631" cy="185" r="12" fill="#A78BFA"/>
+  <circle cx="592" cy="454" r="12" fill="#34D399"/>
+  <circle cx="178" cy="491" r="12" fill="#FBBF24"/>
+
+  <g filter="url(#shadow)">
+    <rect x="228" y="70" width="304" height="486" rx="44" fill="url(#phone)"/>
+    <rect x="246" y="92" width="268" height="442" rx="32" fill="#F8FAFC"/>
+    <rect x="331" y="84" width="98" height="10" rx="5" fill="#0F172A" fill-opacity="0.18"/>
+
+    <rect x="272" y="123" width="216" height="104" rx="26" fill="url(#card)"/>
+    <circle cx="314" cy="168" r="25" fill="#38BDF8" fill-opacity="0.18"/>
+    <path d="M314 142C299 142 287 154 287 169C287 190 314 205 314 205C314 205 341 190 341 169C341 154 329 142 314 142ZM314 178C309 178 305 174 305 169C305 164 309 160 314 160C319 160 323 164 323 169C323 174 319 178 314 178Z" fill="#38BDF8"/>
+    <rect x="357" y="146" width="98" height="12" rx="6" fill="white" fill-opacity="0.9"/>
+    <rect x="357" y="170" width="66" height="10" rx="5" fill="white" fill-opacity="0.42"/>
+    <rect x="357" y="193" width="88" height="12" rx="6" fill="#A78BFA" fill-opacity="0.75"/>
+
+    <rect x="272" y="251" width="98" height="88" rx="24" fill="white"/>
+    <rect x="390" y="251" width="98" height="88" rx="24" fill="white"/>
+    <rect x="272" y="358" width="98" height="88" rx="24" fill="white"/>
+    <rect x="390" y="358" width="98" height="88" rx="24" fill="white"/>
+
+    <circle cx="321" cy="286" r="20" fill="#0F172A"/>
+    <path d="M308 286C314 278 324 278 333 286C327 294 317 294 308 286Z" fill="#FFFFFF"/>
+    <rect x="299" y="318" width="44" height="8" rx="4" fill="#CBD5E1"/>
+
+    <circle cx="439" cy="286" r="20" fill="#10B981"/>
+    <path d="M427 288L437 298L453 274" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="417" y="318" width="44" height="8" rx="4" fill="#CBD5E1"/>
+
+    <circle cx="321" cy="393" r="20" fill="#EF4444"/>
+    <path d="M311 394H331M321 384V404" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <rect x="299" y="425" width="44" height="8" rx="4" fill="#CBD5E1"/>
+
+    <circle cx="439" cy="393" r="20" fill="#F59E0B"/>
+    <path d="M426 397C426 388 432 381 440 381C448 381 454 388 454 397" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <path d="M421 400H458" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <rect x="417" y="425" width="44" height="8" rx="4" fill="#CBD5E1"/>
+
+    <rect x="300" y="468" width="160" height="34" rx="17" fill="#0F172A"/>
+    <rect x="336" y="481" width="88" height="8" rx="4" fill="white" fill-opacity="0.78"/>
+  </g>
+
+  <g opacity="0.92">
+    <rect x="111" y="252" width="132" height="92" rx="24" fill="white" fill-opacity="0.93"/>
+    <circle cx="154" cy="294" r="22" fill="#0F172A"/>
+    <path d="M142 294C149 286 160 286 167 294C160 302 149 302 142 294Z" fill="white"/>
+    <rect x="186" y="276" width="35" height="9" rx="4.5" fill="#CBD5E1"/>
+    <rect x="186" y="296" width="26" height="9" rx="4.5" fill="#E2E8F0"/>
+  </g>
+
+  <g opacity="0.92">
+    <rect x="520" y="292" width="142" height="96" rx="26" fill="white" fill-opacity="0.93"/>
+    <circle cx="565" cy="337" r="23" fill="#10B981"/>
+    <path d="M552 339L563 349L580 324" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="600" y="316" width="38" height="10" rx="5" fill="#CBD5E1"/>
+    <rect x="600" y="339" width="27" height="10" rx="5" fill="#E2E8F0"/>
+  </g>
+
+  <g opacity="0.9">
+    <rect x="150" y="374" width="108" height="78" rx="22" fill="white" fill-opacity="0.9"/>
+    <circle cx="185" cy="412" r="19" fill="#A78BFA"/>
+    <path d="M177 412H193M185 404V420" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <rect x="213" y="397" width="24" height="8" rx="4" fill="#CBD5E1"/>
+    <rect x="213" y="416" width="20" height="8" rx="4" fill="#E2E8F0"/>
+  </g>
+</svg>

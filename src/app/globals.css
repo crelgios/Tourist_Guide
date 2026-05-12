@@ -60,3 +60,9 @@ body {
     animation: none;
   }
 }
+
+@media (max-width: 767px) {
+  .aliwvide-app-marquee {
+    animation: none;
+  }
+}

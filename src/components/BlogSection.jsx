@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getPublishedBlogs } from "@/lib/content";
+import siteContent from "@/data/site-content.json";
 
-export default async function BlogSection() {
-  const blogs = await getPublishedBlogs({ limit: 4 });
+export default function BlogSection() {
+  const blogs = (siteContent.blogs || []).slice(0, 3);
 
   if (!blogs.length) {
     return null;
@@ -24,10 +24,10 @@ export default async function BlogSection() {
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-3">
         {blogs.map((blog) => (
           <article
-            key={blog.id}
+            key={blog.id || blog.slug}
             className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
           >
             <h3 className="text-xl font-bold text-slate-900">

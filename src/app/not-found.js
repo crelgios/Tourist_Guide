@@ -37,10 +37,10 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="/country/india"
+            href="/category"
             className="rounded-full border border-slate-300 px-6 py-3 font-semibold text-slate-700 hover:bg-slate-100"
           >
-            Explore India Apps
+            Explore Countries
           </Link>
         </div>
       </div>

@@ -29,22 +29,39 @@ function buildHeaders(key, extraHeaders = {}) {
   };
 }
 
-export async function publicSupabaseRequest(path, { query = "", revalidate = 3600, tags = [] } = {}) {
+function createTimeoutSignal(timeoutMs = 3500) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  return {
+    signal: controller.signal,
+    clear: () => clearTimeout(timeout)
+  };
+}
+
+export async function publicSupabaseRequest(path, { query = "", revalidate = 3600, tags = [], timeoutMs = 3500 } = {}) {
   if (!hasPublicSupabaseConfig()) {
     throw new Error("Public Supabase environment variables are missing.");
   }
 
-  const response = await fetch(buildUrl(path, query), {
-    headers: buildHeaders(supabaseAnonKey),
-    next: { revalidate, tags }
-  });
+  const timeout = createTimeoutSignal(timeoutMs);
 
-  if (!response.ok) {
-    const message = await response.text();
-    throw new Error(`Supabase public request failed: ${response.status} ${message}`);
+  try {
+    const response = await fetch(buildUrl(path, query), {
+      headers: buildHeaders(supabaseAnonKey),
+      next: { revalidate, tags },
+      signal: timeout.signal
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(`Supabase public request failed: ${response.status} ${message}`);
+    }
+
+    return response.json();
+  } finally {
+    timeout.clear();
   }
-
-  return response.json();
 }
 
 export async function adminSupabaseRequest(

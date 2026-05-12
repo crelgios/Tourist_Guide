@@ -3,7 +3,8 @@ import Footer from "@/components/Footer";
 import BlogSection from "@/components/BlogSection";
 import { siteConfig } from "@/lib/site";
 import { countryData, getCountryName } from "@/data/countries";
-import { getPublishedFaqs } from "@/lib/content";
+import siteContent from "@/data/site-content.json";
+import { getHomepageAppIcon } from "@/data/homepage-app-icons";
 
 export const metadata = {
   title: "Discover Travel Apps Used Around the World | Aliwvide",
@@ -91,20 +92,6 @@ function getFallbackIcon(app) {
   return "📱";
 }
 
-function getAppIconUrl(app) {
-  const url = app?.web || app?.android || app?.ios || "";
-
-  if (!url || url.startsWith("tel:")) {
-    return null;
-  }
-
-  try {
-    const domain = new URL(url).hostname.replace(/^www\./, "");
-    return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-  } catch {
-    return null;
-  }
-}
 
 function buildTopAppsForCountry(slug, data) {
   const apps = [];
@@ -152,8 +139,8 @@ const stats = [
 
 export const revalidate = 3600;
 
-export default async function Home() {
-  const faqs = (await getPublishedFaqs()).map((faq) => ({
+export default function Home() {
+  const faqs = (siteContent.faqs || []).slice(0, 8).map((faq) => ({
     q: faq.question,
     a: faq.answer,
     category: faq.category || "General"
@@ -180,32 +167,13 @@ export default async function Home() {
       />
 
       <main className="overflow-hidden bg-white text-slate-950">
-        <section className="relative min-h-screen overflow-hidden bg-[#020817] text-white">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, rgba(2,8,23,.96) 0%, rgba(2,8,23,.74) 36%, rgba(2,8,23,.16) 100%), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=85')"
-            }}
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(96,165,250,.36),transparent_30%),radial-gradient(circle_at_20%_82%,rgba(168,85,247,.24),transparent_34%)]" />
+        <section className="relative min-h-[82svh] overflow-hidden bg-[#020817] text-white">
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,#020817_0%,#0f172a_48%,#312e81_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_20%,rgba(56,189,248,.38),transparent_30%),radial-gradient(circle_at_18%_78%,rgba(168,85,247,.30),transparent_34%)]" />
+          <div className="absolute right-[-120px] top-24 h-72 w-72 rounded-full bg-sky-400/20 blur-3xl md:h-[34rem] md:w-[34rem]" />
+          <div className="absolute bottom-[-120px] left-[-100px] h-72 w-72 rounded-full bg-violet-500/20 blur-3xl md:h-[30rem] md:w-[30rem]" />
 
-          <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-            <Link href="/" className="flex items-center gap-3 text-2xl font-black">
-              <span className="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur">🌐</span>
-              Aliwvide
-            </Link>
-            <div className="hidden items-center gap-8 text-sm font-semibold text-white/90 md:flex">
-              <Link href="/">Home</Link>
-              <Link href="/category">Categories</Link>
-              <Link href="/explore">Explore</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/faq">FAQ</Link>
-              <Link href="/contact">Contact</Link>
-            </div>
-          </nav>
-
-          <div className="relative z-10 mx-auto grid min-h-[calc(100vh-92px)] max-w-7xl items-center px-6 py-12">
+          <div className="relative z-10 mx-auto grid min-h-[82svh] max-w-7xl items-center gap-10 px-6 py-12 lg:grid-cols-[1.02fr_.98fr]">
             <div className="max-w-3xl">
               <p className="mb-6 inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-blue-100 backdrop-blur">
                 Travel apps by country
@@ -226,6 +194,18 @@ export default async function Home() {
               </div>
             </div>
 
+            <div className="relative hidden lg:block" aria-hidden="true">
+              <div className="absolute -inset-6 rounded-[3rem] bg-white/5 blur-2xl" />
+              <img
+                src="/hero/aliwvide-travel-apps-hero.svg"
+                alt=""
+                width="760"
+                height="620"
+                loading="eager"
+                fetchPriority="high"
+                className="relative h-auto w-full select-none drop-shadow-2xl"
+              />
+            </div>
           </div>
         </section>
 
@@ -265,30 +245,34 @@ export default async function Home() {
 
                   <div className="mt-6 overflow-hidden rounded-[1.8rem] bg-slate-50/70 p-2">
                     <div className="aliwvide-app-marquee flex w-max gap-3">
-                      {[...country.apps, ...country.apps].map((app, index) => (
-                        <Link
-                          href={`/country/${country.slug}`}
-                          key={`${country.slug}-${app.name}-${index}`}
-                          className="w-[150px] shrink-0 rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:shadow-md"
-                        >
-                          <div className="grid h-14 w-14 place-items-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
-                            {getAppIconUrl(app) ? (
-                              <img
-                                src={getAppIconUrl(app)}
-                                alt={`${app.name} app icon`}
-                                className="h-10 w-10 rounded-xl object-contain"
-                                loading="lazy"
-                              />
-                            ) : (
-                              <span className={`grid h-14 w-14 place-items-center text-2xl ${appLogoThemes[index % appLogoThemes.length]}`}>
-                                {getFallbackIcon(app)}
-                              </span>
-                            )}
-                          </div>
-                          <h4 className="mt-3 line-clamp-2 min-h-[40px] text-sm font-black leading-5">{app.name}</h4>
-                          <p className="mt-1 line-clamp-1 text-xs capitalize text-slate-500">{app.label}</p>
-                        </Link>
-                      ))}
+                      {[...country.apps, ...country.apps].map((app, index) => {
+                        const iconSrc = getHomepageAppIcon(app.name);
+
+                        return (
+                          <Link
+                            href={`/country/${country.slug}`}
+                            key={`${country.slug}-${app.name}-${index}`}
+                            className="w-[150px] shrink-0 rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:shadow-md"
+                          >
+                            <div className={`grid h-14 w-14 place-items-center rounded-2xl text-2xl shadow-sm ring-1 ring-slate-200 ${iconSrc ? "bg-white" : appLogoThemes[index % appLogoThemes.length]}`}>
+                              {iconSrc ? (
+                                <img
+                                  src={iconSrc}
+                                  alt={`${app.name} icon`}
+                                  width="44"
+                                  height="44"
+                                  loading="lazy"
+                                  className="h-11 w-11 rounded-xl object-contain"
+                                />
+                              ) : (
+                                getFallbackIcon(app)
+                              )}
+                            </div>
+                            <h4 className="mt-3 line-clamp-2 min-h-[40px] text-sm font-black leading-5">{app.name}</h4>
+                            <p className="mt-1 line-clamp-1 text-xs capitalize text-slate-500">{app.label}</p>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                   <p className="mt-3 text-xs font-bold text-slate-400">Auto sliding preview — swipe anytime →</p>

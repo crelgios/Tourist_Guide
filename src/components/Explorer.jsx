@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import { Globe2, Smartphone, Apple, PhoneCall } from "lucide-react";
 import { categories, countries, getCountryData, getCountryName } from "@/data/countries";
 import { getTranslation, languages } from "@/data/translations";
 import PageTransition from "@/components/PageTransition";
+
+function AnimatePresence({ children }) {
+  return <>{children}</>;
+}
 
 export default function Explorer({ initialStep = "country" }) {
   const safeInitialStep = ["country", "language", "category", "results"].includes(initialStep) ? initialStep : "country";

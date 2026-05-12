@@ -7,7 +7,6 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const blogs = await getPublishedBlogs();
-
   return blogs.map((blog) => ({
     slug: blog.slug
   }));
@@ -55,9 +54,7 @@ export default async function SingleBlogPage({ params }) {
           {blog.title}
         </h1>
 
-        <p className="mt-6 text-xl text-slate-600">
-          {blog.description}
-        </p>
+        <p className="mt-6 text-xl text-slate-600">{blog.description}</p>
 
         <article className="mt-10 whitespace-pre-line text-lg leading-8 text-slate-700">
           {blog.content}

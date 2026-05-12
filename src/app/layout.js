@@ -1,5 +1,6 @@
 import "./globals.css";
 import Script from "next/script";
+import SiteShell from "@/components/SiteShell";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
 
@@ -49,18 +50,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        {/* Google AdSense */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6039065775977708"
-          crossOrigin="anonymous"
-          strategy="beforeInteractive"
-        />
-      </head>
-
       <body>
-        {/* Google Analytics */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-2QF326WF22"
@@ -77,7 +67,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        {children}
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );

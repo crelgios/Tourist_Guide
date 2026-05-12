@@ -28,11 +28,11 @@ export default function SiteLogo({
       {!compact && (
         <span className="min-w-0 leading-tight">
           <span
-            className={`block text-lg font-black tracking-[0.08em] sm:text-xl ${
+            className={`block text-lg font-black tracking-[-0.03em] sm:text-xl ${
               dark ? "text-slate-950" : "text-white"
             }`}
           >
-            ALIWVIDE
+            Aliwvide
           </span>
           <span
             className={`hidden text-xs font-semibold sm:block ${

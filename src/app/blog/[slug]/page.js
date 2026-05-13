@@ -55,25 +55,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-function formatDate(value) {
-  if (!value) return "Travel Guide";
-
-  try {
-    return new Intl.DateTimeFormat("en", {
-      month: "long",
-      day: "numeric",
-      year: "numeric"
-    }).format(new Date(value));
-  } catch {
-    return "Travel Guide";
-  }
-}
-
-function getReadingTime(content) {
-  const words = String(content || "").trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(words / 220));
-}
-
 export default async function SingleBlogPage({ params }) {
   const blog = await getPublishedBlogBySlug(params.slug);
 
@@ -85,8 +66,6 @@ export default async function SingleBlogPage({ params }) {
   const encodedUrl = encodeURIComponent(blogUrl);
   const encodedTitle = encodeURIComponent(blog.title);
   const coverImage = blog.cover_image || "/brand/aliwvide-og-image.jpg";
-  const publishedDate = formatDate(blog.published_at || blog.date || blog.created_at);
-  const readingTime = getReadingTime(blog.content);
 
   return (
     <>
@@ -97,9 +76,6 @@ export default async function SingleBlogPage({ params }) {
               <span className="rounded-full bg-emerald-100 px-4 py-2 text-emerald-700">
                 Travel Guide
               </span>
-              <span>{publishedDate}</span>
-              <span aria-hidden="true">•</span>
-              <span>{readingTime} min read</span>
             </div>
 
             <h1 className="mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl sm:leading-tight">

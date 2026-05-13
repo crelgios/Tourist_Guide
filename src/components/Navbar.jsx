@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import SiteLogo from "@/components/SiteLogo";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -26,7 +25,26 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-emerald-900/20 bg-slate-950/95 shadow-lg shadow-slate-950/10 backdrop-blur">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <SiteLogo onClick={() => setOpen(false)} />
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          className="flex items-center gap-3"
+          aria-label="Aliwvide homepage"
+        >
+          <span className="relative flex h-11 w-11 shrink-0 items-center justify-center">
+            <img
+              src="/icons/aliwvide-icon.svg"
+              alt=""
+              className="h-11 w-11 rounded-2xl shadow-md shadow-emerald-900/30"
+              aria-hidden="true"
+            />
+          </span>
+
+          <span className="leading-tight">
+            <span className="block text-lg font-black tracking-tight text-white">Aliwvide</span>
+            <span className="hidden text-xs font-medium text-emerald-200 sm:block">Travel apps by country</span>
+          </span>
+        </Link>
 
         <div className="hidden items-center gap-2 md:flex">
           {navLinks.map((link) => (

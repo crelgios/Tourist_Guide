@@ -4,9 +4,14 @@ import SiteShell from "@/components/SiteShell";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
 
+export const viewport = {
+  themeColor: "#064e3b"
+};
+
 export const metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Aliwvide",
+  manifest: "/manifest.webmanifest",
   title: {
     default: "Discover Travel Apps Used Around the World | Aliwvide",
     template: "%s | Aliwvide"
@@ -25,36 +30,39 @@ export const metadata = {
     "Delhi metro apps",
     "Aliwvide"
   ],
-  alternates: {
-    canonical: "/"
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png"
-  },
   openGraph: {
     type: "website",
     siteName: "Aliwvide",
     title: "Discover Travel Apps Used Around the World",
     description:
       "Compare transport, taxi, train, metro, maps, shopping, food delivery and grocery fast delivery apps used by tourists in India.",
-    url: siteUrl,
-    images: [
-      {
-        url: "/brand/aliwvide-og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Aliwvide travel apps by country logo"
-      }
-    ]
+    url: siteUrl
   },
   twitter: {
     card: "summary_large_image",
     title: "Discover Travel Apps Used Around the World",
     description:
-      "Discover trusted transport and travel apps for India and worldwide travel.",
-    images: ["/brand/aliwvide-og-image.jpg"]
+      "Discover trusted transport and travel apps for India and worldwide travel."
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" }
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+    ]
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Aliwvide",
+    statusBarStyle: "black-translucent"
+  },
+  formatDetection: {
+    telephone: false
   },
   robots: {
     index: true,

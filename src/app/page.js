@@ -37,19 +37,7 @@ export const metadata = {
       "Explore trusted travel, transport, navigation, taxi, train, metro, food delivery and tourist apps used worldwide.",
     url: siteConfig.url,
     siteName: "Aliwvide",
-    type: "website",
-    images: [
-      {
-        url: "/brand/aliwvide-og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Aliwvide travel apps by country logo"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: ["/brand/aliwvide-og-image.jpg"]
+    type: "website"
   }
 };
 

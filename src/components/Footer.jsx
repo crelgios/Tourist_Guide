@@ -3,10 +3,6 @@ import SiteLogo from "@/components/SiteLogo";
 
 const footerLinks = [
   { href: "/", label: "Home" },
-  { href: "/explore", label: "Explore Countries" },
-  { href: "/category", label: "Categories" },
-  { href: "/country/india", label: "India Apps" },
-  { href: "/india/taxi-apps", label: "India Taxi Apps" },
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact Us" },

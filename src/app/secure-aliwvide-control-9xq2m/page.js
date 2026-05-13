@@ -1,8 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import AdminContentTabs from "@/components/AdminContentTabs";
+
+async function readJson(response) {
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || "Request failed.");
+  }
+  return data;
+}
 
 function normalizeKey(value) {
   return String(value || "")
@@ -76,12 +84,86 @@ function buildJsonFromWorkbook(workbook) {
 }
 
 export default function AdminPage() {
+  const [authState, setAuthState] = useState("checking");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [authStatus, setAuthStatus] = useState("Checking admin session...");
+  const [authLoading, setAuthLoading] = useState(false);
   const [activeSection, setActiveSection] = useState("country-data");
   const [fileName, setFileName] = useState("");
   const [rows, setRows] = useState([]);
   const [sheetNames, setSheetNames] = useState([]);
   const [jsonData, setJsonData] = useState(null);
   const [status, setStatus] = useState("Upload your Excel file to preview and export JSON.");
+
+  useEffect(() => {
+    checkSession();
+
+    function handleChildLogout() {
+      setAuthState("logged-out");
+      setAuthStatus("Logged out.");
+      setActiveSection("country-data");
+    }
+
+    window.addEventListener("aliwvide-admin-logout", handleChildLogout);
+    return () => window.removeEventListener("aliwvide-admin-logout", handleChildLogout);
+  }, []);
+
+  async function checkSession() {
+    try {
+      const response = await fetch("/api/admin/me", { cache: "no-store" });
+
+      if (response.ok) {
+        setAuthState("authenticated");
+        setAuthStatus("Admin session active.");
+        return;
+      }
+
+      const data = await response.json().catch(() => ({}));
+      if (response.status === 503) {
+        setAuthState("not-configured");
+        setAuthStatus(data.error || "Admin login is not configured yet.");
+        return;
+      }
+
+      setAuthState("logged-out");
+      setAuthStatus("Log in to manage country data, blogs and FAQs.");
+    } catch {
+      setAuthState("logged-out");
+      setAuthStatus("Could not check admin session.");
+    }
+  }
+
+  async function login(event) {
+    event.preventDefault();
+    setAuthLoading(true);
+    setAuthStatus("Logging in...");
+
+    try {
+      await readJson(
+        await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        })
+      );
+
+      setPassword("");
+      setAuthState("authenticated");
+      setAuthStatus("Logged in. Country data, blogs and FAQs are now protected.");
+    } catch (error) {
+      setAuthStatus(error.message);
+    } finally {
+      setAuthLoading(false);
+    }
+  }
+
+  async function logout() {
+    await fetch("/api/admin/logout", { method: "POST" });
+    setAuthState("logged-out");
+    setAuthStatus("Logged out.");
+    setActiveSection("country-data");
+  }
 
   async function handleFile(event) {
     const file = event.target.files?.[0];
@@ -151,13 +233,74 @@ export default function AdminPage() {
     setStatus("JSON copied to clipboard.");
   }
 
+  if (authState === "checking") {
+    return (
+      <main className="min-h-screen bg-white px-6 py-12">
+        <div className="mx-auto max-w-3xl rounded-[2rem] border border-gray-200 bg-white p-8 shadow-soft">
+          <p className="text-gray-700">Checking admin session...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (authState === "not-configured") {
+    return (
+      <main className="min-h-screen bg-white px-6 py-12">
+        <div className="mx-auto max-w-3xl rounded-[2rem] border border-amber-200 bg-amber-50 p-8 text-amber-900 shadow-soft">
+          <h1 className="text-3xl font-black">Admin login is not configured yet</h1>
+          <p className="mt-3">Add ADMIN_USERNAME, ADMIN_PASSWORD and ADMIN_SESSION_SECRET in Vercel Environment Variables, then redeploy.</p>
+          <p className="mt-5 rounded-2xl bg-white/70 p-4">{authStatus}</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (authState !== "authenticated") {
+    return (
+      <main className="min-h-screen bg-white px-6 py-12">
+        <div className="mx-auto max-w-3xl rounded-[2rem] border border-gray-200 bg-white p-8 shadow-soft">
+          <h1 className="text-4xl font-black tracking-[-0.05em]">Aliwvide Admin Login</h1>
+          <p className="mt-3 text-gray-600">Log in to manage country data, blogs and FAQs.</p>
+          <form onSubmit={login} className="mt-6 grid gap-4">
+            <input
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              placeholder="Username"
+              autoComplete="username"
+              className="rounded-2xl border border-gray-300 px-4 py-3"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Password"
+              autoComplete="current-password"
+              className="rounded-2xl border border-gray-300 px-4 py-3"
+            />
+            <button disabled={authLoading} className="rounded-2xl bg-gray-950 px-5 py-3 font-bold text-white disabled:opacity-60">
+              {authLoading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+          <p className="mt-5 rounded-2xl bg-gray-50 p-4 text-gray-700">{authStatus}</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-white px-6 py-12">
       <div className="mx-auto max-w-6xl">
-        <h1 className="text-5xl font-black tracking-[-0.07em] md:text-6xl">Aliwvide Secure Data Manager</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-600">
-          Manage country app data, publish live blogs, upload blog JSON files, and update FAQs from one private admin area.
-        </p>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="text-5xl font-black tracking-[-0.07em] md:text-6xl">Aliwvide Secure Data Manager</h1>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-600">
+              Manage country app data, publish live blogs, upload blog JSON files, and update FAQs from one private password-protected admin area.
+            </p>
+          </div>
+          <button type="button" onClick={logout} className="rounded-full bg-gray-950 px-6 py-3 font-bold text-white">
+            Logout
+          </button>
+        </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <button

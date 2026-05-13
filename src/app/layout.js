@@ -5,13 +5,14 @@ import SiteShell from "@/components/SiteShell";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
 
 export const viewport = {
-  themeColor: "#064e3b"
+  themeColor: "#020617",
+  width: "device-width",
+  initialScale: 1
 };
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Aliwvide",
-  manifest: "/manifest.webmanifest",
   title: {
     default: "Discover Travel Apps Used Around the World | Aliwvide",
     template: "%s | Aliwvide"
@@ -30,19 +31,14 @@ export const metadata = {
     "Delhi metro apps",
     "Aliwvide"
   ],
-  openGraph: {
-    type: "website",
-    siteName: "Aliwvide",
-    title: "Discover Travel Apps Used Around the World",
-    description:
-      "Compare transport, taxi, train, metro, maps, shopping, food delivery and grocery fast delivery apps used by tourists in India.",
-    url: siteUrl
+  alternates: {
+    canonical: "/"
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Discover Travel Apps Used Around the World",
-    description:
-      "Discover trusted transport and travel apps for India and worldwide travel."
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "Aliwvide",
+    statusBarStyle: "black-translucent"
   },
   icons: {
     icon: [
@@ -52,17 +48,33 @@ export const metadata = {
       { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
       { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" }
     ],
+    shortcut: "/favicon.ico",
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
     ]
   },
-  appleWebApp: {
-    capable: true,
-    title: "Aliwvide",
-    statusBarStyle: "black-translucent"
+  openGraph: {
+    type: "website",
+    siteName: "Aliwvide",
+    title: "Discover Travel Apps Used Around the World",
+    description:
+      "Compare transport, taxi, train, metro, maps, shopping, food delivery and grocery fast delivery apps used by tourists in India.",
+    url: siteUrl,
+    images: [
+      {
+        url: "/brand/aliwvide-og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Aliwvide travel apps by country logo"
+      }
+    ]
   },
-  formatDetection: {
-    telephone: false
+  twitter: {
+    card: "summary_large_image",
+    title: "Discover Travel Apps Used Around the World",
+    description:
+      "Discover trusted transport and travel apps for India and worldwide travel.",
+    images: ["/brand/aliwvide-og-image.jpg"]
   },
   robots: {
     index: true,

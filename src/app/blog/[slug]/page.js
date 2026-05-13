@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import BlogArticleContent from "@/components/BlogArticleContent";
+import SocialShareButtons from "@/components/SocialShareButtons";
 import { getPublishedBlogBySlug, getPublishedBlogs } from "@/lib/content";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
@@ -62,9 +63,8 @@ export default async function SingleBlogPage({ params }) {
     notFound();
   }
 
-  const blogUrl = `${siteUrl}/blog/${blog.slug}`;
-  const encodedUrl = encodeURIComponent(blogUrl);
-  const encodedTitle = encodeURIComponent(blog.title);
+  const cleanSiteUrl = siteUrl.replace(/\/$/, "");
+  const blogUrl = `${cleanSiteUrl}/blog/${blog.slug}`;
   const coverImage = blog.cover_image || "/brand/aliwvide-og-image.jpg";
 
   return (
@@ -86,31 +86,12 @@ export default async function SingleBlogPage({ params }) {
               {blog.description}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-700"
-              >
-                Share WhatsApp
-              </a>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700"
-              >
-                Share Facebook
-              </a>
-              <a
-                href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700"
-              >
-                Share X
-              </a>
+            <div className="mt-8">
+              <SocialShareButtons
+                url={blogUrl}
+                title={blog.title}
+                description={blog.description}
+              />
             </div>
 
             <div className="mt-10 overflow-hidden rounded-[1.7rem] border border-slate-100 bg-slate-50 shadow-sm">

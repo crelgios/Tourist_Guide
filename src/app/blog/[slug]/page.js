@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import BlogArticleContent from "@/components/BlogArticleContent";
-import SocialShareButtons from "@/components/SocialShareButtons";
 import { getPublishedBlogBySlug, getPublishedBlogs } from "@/lib/content";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com";
@@ -56,6 +55,25 @@ export async function generateMetadata({ params }) {
   };
 }
 
+function formatDate(value) {
+  if (!value) return "Travel Guide";
+
+  try {
+    return new Intl.DateTimeFormat("en", {
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    }).format(new Date(value));
+  } catch {
+    return "Travel Guide";
+  }
+}
+
+function getReadingTime(content) {
+  const words = String(content || "").trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 220));
+}
+
 export default async function SingleBlogPage({ params }) {
   const blog = await getPublishedBlogBySlug(params.slug);
 
@@ -63,9 +81,12 @@ export default async function SingleBlogPage({ params }) {
     notFound();
   }
 
-  const cleanSiteUrl = siteUrl.replace(/\/$/, "");
-  const blogUrl = `${cleanSiteUrl}/blog/${blog.slug}`;
+  const blogUrl = `${siteUrl}/blog/${blog.slug}`;
+  const encodedUrl = encodeURIComponent(blogUrl);
+  const encodedTitle = encodeURIComponent(blog.title);
   const coverImage = blog.cover_image || "/brand/aliwvide-og-image.jpg";
+  const publishedDate = formatDate(blog.published_at || blog.date || blog.created_at);
+  const readingTime = getReadingTime(blog.content);
 
   return (
     <>
@@ -76,6 +97,9 @@ export default async function SingleBlogPage({ params }) {
               <span className="rounded-full bg-emerald-100 px-4 py-2 text-emerald-700">
                 Travel Guide
               </span>
+              <span>{publishedDate}</span>
+              <span aria-hidden="true">•</span>
+              <span>{readingTime} min read</span>
             </div>
 
             <h1 className="mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl sm:leading-tight">
@@ -86,12 +110,31 @@ export default async function SingleBlogPage({ params }) {
               {blog.description}
             </p>
 
-            <div className="mt-8">
-              <SocialShareButtons
-                url={blogUrl}
-                title={blog.title}
-                description={blog.description}
-              />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-700"
+              >
+                Share WhatsApp
+              </a>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700"
+              >
+                Share Facebook
+              </a>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:text-emerald-700"
+              >
+                Share X
+              </a>
             </div>
 
             <div className="mt-10 overflow-hidden rounded-[1.7rem] border border-slate-100 bg-slate-50 shadow-sm">

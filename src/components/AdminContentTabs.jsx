@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { createShareLinks } from "@/components/SocialShareButtons";
 
 const emptyBlogForm = {
   title: "",
@@ -35,32 +34,23 @@ async function readJson(response) {
   return data;
 }
 
-const fallbackSiteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com").replace(/\/$/, "");
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.aliwvide.com").replace(/\/$/, "");
 
 function getPublicBlogUrl(slug) {
-  const baseUrl = typeof window !== "undefined" ? window.location.origin : fallbackSiteUrl;
-  return `${baseUrl.replace(/\/$/, "")}/blog/${encodeURIComponent(String(slug || ""))}`;
+  return `${siteUrl}/blog/${encodeURIComponent(String(slug || ""))}`;
 }
 
 function getShareLinks(blog) {
-  return createShareLinks({
-    url: getPublicBlogUrl(blog.slug),
-    title: blog.title || "Aliwvide travel guide",
-    description: blog.description || "Discover useful travel apps by country on Aliwvide."
-  });
-}
+  const url = getPublicBlogUrl(blog.slug);
+  const title = blog.title || "Aliwvide travel guide";
+  const text = `${title} - ${url}`;
 
-function openSharePopup(url, name) {
-  const width = 680;
-  const height = 620;
-  const left = window.screenX + Math.max(0, (window.outerWidth - width) / 2);
-  const top = window.screenY + Math.max(0, (window.outerHeight - height) / 2);
-
-  window.open(
+  return {
     url,
-    name,
-    `noopener,noreferrer,width=${width},height=${height},left=${left},top=${top}`
-  );
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(text)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`
+  };
 }
 
 export default function AdminContentTabs() {
@@ -476,27 +466,30 @@ export default function AdminContentTabs() {
                   <div className="mt-4 rounded-2xl bg-gray-50 p-4">
                     <p className="text-xs font-black uppercase tracking-[0.18em] text-gray-400">Share public blog link</p>
                     <div className="mt-3 flex flex-wrap gap-2">
-                      <button
-                        type="button"
-                        onClick={() => openSharePopup(shareLinks.whatsapp, "share-whatsapp")}
+                      <a
+                        href={shareLinks.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="rounded-full bg-green-600 px-4 py-2 text-sm font-bold text-white"
                       >
                         WhatsApp
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => openSharePopup(shareLinks.facebook, "share-facebook")}
+                      </a>
+                      <a
+                        href={shareLinks.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="rounded-full bg-blue-600 px-4 py-2 text-sm font-bold text-white"
                       >
                         Facebook
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => openSharePopup(shareLinks.twitter, "share-twitter")}
+                      </a>
+                      <a
+                        href={shareLinks.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="rounded-full bg-gray-950 px-4 py-2 text-sm font-bold text-white"
                       >
                         Twitter / X
-                      </button>
+                      </a>
                       <button
                         type="button"
                         onClick={async () => {

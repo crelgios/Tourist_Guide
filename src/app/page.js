@@ -25,8 +25,6 @@ export const metadata = {
     "Swiggy Instamart fast delivery",
     "best taxi apps in India",
     "India travel apps",
-    "SOS helpline India tourists",
-    "emergency apps India",
     "IRCTC Rail Connect",
     "Delhi metro apps"
   ],
@@ -62,8 +60,7 @@ const topAppCategoryPriority = [
   "metro",
   "flights",
   "shopping",
-  "hotel",
-  "emergency"
+  "hotel"
 ];
 
 const appLogoThemes = [
@@ -136,10 +133,15 @@ const topCountrySections = homepageTopCountrySlugs
 
 const listedCountries = Object.keys(countryData).length;
 const listedCategories = new Set(
-  Object.values(countryData).flatMap((data) => Object.keys(data || {}))
+  Object.values(countryData).flatMap((data) =>
+    Object.keys(data || {}).filter((category) => category !== "emergency")
+  )
 ).size;
 const listedApps = Object.values(countryData).reduce(
-  (total, data) => total + Object.values(data || {}).reduce((sum, apps) => sum + (apps?.length || 0), 0),
+  (total, data) => total + Object.entries(data || {}).reduce(
+    (sum, [category, apps]) => category === "emergency" ? sum : sum + (apps?.length || 0),
+    0
+  ),
   0
 );
 
@@ -299,14 +301,14 @@ export default function Home() {
               <p className="font-black uppercase tracking-[.2em] text-sky-300">Tourist friendly</p>
               <h2 className="mt-4 text-4xl font-black">Why travellers use Aliwvide</h2>
               <p className="mt-5 leading-8 text-slate-300">
-                Travellers often struggle to know which local apps work in a new country. Aliwvide groups apps into useful categories like emergency, taxi, train, metro, maps, food, grocery, shopping and hotel booking.
+                Travellers often struggle to know which local apps work in a new country. Aliwvide groups apps into useful categories like taxi, train, metro, maps, food, grocery, shopping and hotel booking.
               </p>
             </div>
             <div className="rounded-[2.5rem] bg-slate-100 p-8 md:p-10">
               <p className="font-black uppercase tracking-[.2em] text-violet-500">Trip planning</p>
               <h2 className="mt-4 text-4xl font-black">Plan before you land</h2>
               <p className="mt-5 leading-8 text-slate-600">
-                Compare the apps travellers often need before a trip: local rides, maps, train booking, food delivery, shopping and emergency contacts. Open a country guide and save the tools that match your route.
+                Compare the apps travellers often need before a trip: local rides, maps, train booking, food delivery and shopping. Open a country guide and save the tools that match your route.
               </p>
             </div>
           </div>
@@ -334,7 +336,7 @@ export default function Home() {
               <p className="font-black uppercase tracking-[.2em] text-violet-500">FAQ</p>
               <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] md:text-5xl">Frequently Asked Questions</h2>
               <p className="mt-4 leading-8 text-slate-600">
-                Quick answers for worldwide travel apps, India travel apps, SOS helplines, food delivery and grocery fast delivery categories.
+                Quick answers for worldwide travel apps, India travel apps, taxi apps, food delivery and grocery fast delivery categories.
               </p>
             </div>
 

@@ -199,7 +199,7 @@ export const countryNames = {
   "zimbabwe": "Zimbabwe"
 };
 
-export const categories = [
+const categoryDefinitions = [
   { key: "transport", icon: "🚖" },
   { key: "train", icon: "🚄" },
   { key: "metro", icon: "🚇" },
@@ -212,6 +212,13 @@ export const categories = [
   { key: "hotel", icon: "🏨" },
   { key: "emergency", icon: "🆘" }
 ];
+
+// Keep emergency/SOS data in countries-data.json as backup, but hide it from the public category UI.
+const hiddenCategoryKeys = new Set(["emergency"]);
+
+export const categories = categoryDefinitions.filter(
+  (category) => !hiddenCategoryKeys.has(category.key)
+);
 
 export function formatCountryNameFromSlug(slug) {
   return slug

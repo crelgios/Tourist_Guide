@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 export const metadata = {
   title: "Explore Travel Apps by Country",
   description:
-    "Select a country and language to find trusted apps for transport, maps, trains, flights, shopping, food delivery and emergency help.",
+    "Select a country and language to find trusted apps for transport, maps, trains, flights, shopping and food delivery.",
   alternates: { canonical: "/explore" }
 };
 

@@ -79,9 +79,6 @@ export const metadata = {
   robots: {
     index: true,
     follow: true
-  },
-  other: {
-    "google-adsense-account": "ca-pub-6039065775977708"
   }
 };
 
@@ -89,12 +86,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6039065775977708"
-          crossOrigin="anonymous"
-          strategy="beforeInteractive"
-        />
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-2QF326WF22"

@@ -36,10 +36,36 @@ function looksLikeSentence(line) {
   return /[.!?]$/.test(line.trim());
 }
 
+function getNextNonEmptyLine(lines, startIndex) {
+  for (let index = startIndex; index < lines.length; index += 1) {
+    const line = lines[index].trim();
+    if (line) {
+      return { line, index };
+    }
+  }
+  return null;
+}
+
+function isPlainSectionHeading(line, nextLine) {
+  const trimmed = cleanText(line);
+  const words = trimmed.split(/\s+/).filter(Boolean);
+
+  if (!nextLine) return false;
+  if (trimmed.length < 4 || trimmed.length > 90) return false;
+  if (words.length > 13) return false;
+  if (looksLikeSentence(trimmed)) return false;
+  if (/https?:\/\//i.test(trimmed)) return false;
+  if (isHeading(trimmed) || listMatch(trimmed) || labelMatch(trimmed)) return false;
+  if (/[,;]/.test(trimmed)) return false;
+
+  return /^[A-Z0-9]/.test(trimmed);
+}
+
 function parseContent(content) {
   const lines = String(content || "").replace(/\r\n/g, "\n").split("\n");
   const blocks = [];
   let i = 0;
+  let autoNumber = 1;
 
   while (i < lines.length) {
     const rawLine = lines[i];
@@ -61,8 +87,29 @@ function parseContent(content) {
       continue;
     }
 
+    const nextNonEmpty = getNextNonEmptyLine(lines, i + 1);
+    if (isPlainSectionHeading(line, nextNonEmpty?.line)) {
+      blocks.push({ type: "heading", level: blocks.length === 0 ? 2 : 3, text: line });
+      i += 1;
+      continue;
+    }
+
     const list = listMatch(line);
     if (list) {
+      const nextLineIsImmediatelyList = Boolean(lines[i + 1] && listMatch(lines[i + 1]));
+      const looksLikeAppHeading =
+        list.type === "ol" &&
+        !nextLineIsImmediatelyList &&
+        list.text.length <= 70 &&
+        nextNonEmpty?.index !== i + 1;
+
+      if (looksLikeAppHeading) {
+        blocks.push({ type: "appHeading", number: autoNumber, text: list.text });
+        autoNumber += 1;
+        i += 1;
+        continue;
+      }
+
       const items = [];
       const listType = list.type;
       while (i < lines.length) {
@@ -81,7 +128,8 @@ function parseContent(content) {
       i += 1;
       while (i < lines.length) {
         const next = lines[i].trim();
-        if (!next || isHeading(next) || listMatch(next) || labelMatch(next)) break;
+        const upcoming = getNextNonEmptyLine(lines, i + 1);
+        if (!next || isHeading(next) || listMatch(next) || labelMatch(next) || isPlainSectionHeading(next, upcoming?.line)) break;
         items.push(next);
         i += 1;
       }
@@ -101,7 +149,8 @@ function parseContent(content) {
     i += 1;
     while (i < lines.length) {
       const next = lines[i].trim();
-      if (!next || isHeading(next) || listMatch(next) || labelMatch(next)) break;
+      const upcoming = getNextNonEmptyLine(lines, i + 1);
+      if (!next || isHeading(next) || listMatch(next) || labelMatch(next) || isPlainSectionHeading(next, upcoming?.line)) break;
       paragraphLines.push(next);
       i += 1;
     }
@@ -157,101 +206,124 @@ export default function BlogArticleContent({ content }) {
 
   return (
     <div className="mt-10">
-      {tableOfContents.length >= 3 ? (
-        <nav className="mb-10 rounded-3xl border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
-          <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-emerald-700">
+      {tableOfContents.length >= 2 ? (
+        <nav className="mb-8 rounded-[2rem] border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50 p-5 shadow-sm sm:p-6">
+          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-blue-700">
             In this guide
           </p>
-          <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            {tableOfContents.slice(0, 12).map((item) => (
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {tableOfContents.slice(0, 12).map((item, index) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="rounded-2xl bg-white/80 px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:text-emerald-800 hover:shadow"
+                className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-white/90 px-4 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-800 hover:shadow-md"
               >
-                {item.text}
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-extrabold text-white">
+                  {index + 1}
+                </span>
+                <span>{item.text}</span>
               </a>
             ))}
           </div>
         </nav>
       ) : null}
 
-      <article className="space-y-7 text-slate-700">
-        {renderedBlocks.map((block, index) => {
-          if (block.type === "heading") {
-            const levelClass = block.level <= 2
-              ? "mt-12 border-b border-slate-200 pb-3 text-3xl font-extrabold tracking-tight text-slate-950"
-              : "mt-9 text-2xl font-bold text-slate-950";
+      <article className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-8 lg:p-10">
+        <div className="space-y-7 text-slate-700">
+          {renderedBlocks.map((block, index) => {
+            if (block.type === "heading") {
+              const levelClass = block.level <= 2
+                ? "mt-6 border-b border-slate-200 pb-4 text-3xl font-extrabold tracking-tight text-slate-950 first:mt-0"
+                : "mt-10 text-2xl font-extrabold tracking-tight text-slate-950";
 
-            const HeadingTag = block.level <= 2 ? "h2" : "h3";
-            return (
-              <HeadingTag key={`${block.id}-${index}`} id={block.id} className={`scroll-mt-24 ${levelClass}`}>
-                {block.text}
-              </HeadingTag>
-            );
-          }
+              const HeadingTag = block.level <= 2 ? "h2" : "h3";
+              return (
+                <HeadingTag key={`${block.id}-${index}`} id={block.id} className={`scroll-mt-24 ${levelClass}`}>
+                  {block.text}
+                </HeadingTag>
+              );
+            }
 
-          if (block.type === "paragraph") {
-            return (
-              <p key={`p-${index}`} className="text-lg leading-9 text-slate-700">
-                <InlineText text={block.text} />
-              </p>
-            );
-          }
+            if (block.type === "appHeading") {
+              return (
+                <div key={`app-heading-${index}`} className="mt-10 flex items-center gap-4 rounded-3xl border border-blue-100 bg-blue-50/70 p-4 shadow-sm">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-600 text-base font-extrabold text-white shadow-sm">
+                    {block.number}
+                  </span>
+                  <h3 className="text-2xl font-extrabold tracking-tight text-slate-950">
+                    {block.text}
+                  </h3>
+                </div>
+              );
+            }
 
-          if (block.type === "ul" || block.type === "ol") {
-            const ListTag = block.type;
-            return (
-              <ListTag
-                key={`list-${index}`}
-                className={`ml-5 space-y-3 text-lg leading-8 text-slate-700 ${block.type === "ul" ? "list-disc" : "list-decimal"}`}
-              >
-                {block.items.map((item, itemIndex) => (
-                  <li key={`${item}-${itemIndex}`} className="pl-2">
-                    <InlineText text={item} />
-                  </li>
-                ))}
-              </ListTag>
-            );
-          }
-
-          if (block.type === "callout") {
-            const isTip = /tip|important|safety|recommendation|note/i.test(block.label);
-            return (
-              <div
-                key={`callout-${index}`}
-                className={`rounded-3xl border p-5 shadow-sm ${isTip ? "border-amber-200 bg-amber-50" : "border-emerald-100 bg-emerald-50/70"}`}
-              >
-                <p className={`text-sm font-extrabold uppercase tracking-[0.2em] ${isTip ? "text-amber-700" : "text-emerald-700"}`}>
-                  {block.label}
+            if (block.type === "paragraph") {
+              return (
+                <p key={`p-${index}`} className="text-lg leading-9 text-slate-700">
+                  <InlineText text={block.text} />
                 </p>
+              );
+            }
 
-                {block.compactList ? (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {block.items.map((item, itemIndex) => (
-                      <span
-                        key={`${item}-${itemIndex}`}
-                        className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm"
-                      >
-                        {item}
+            if (block.type === "ul" || block.type === "ol") {
+              const ListTag = block.type;
+              return (
+                <ListTag
+                  key={`list-${index}`}
+                  className={`grid gap-3 text-lg leading-8 text-slate-700 ${block.type === "ul" ? "" : "list-none"}`}
+                >
+                  {block.items.map((item, itemIndex) => (
+                    <li key={`${item}-${itemIndex}`} className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
+                      <span className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-extrabold text-white ${block.type === "ul" ? "bg-emerald-600" : "bg-blue-600"}`}>
+                        {block.type === "ul" ? "✓" : itemIndex + 1}
                       </span>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="mt-4 space-y-3 text-lg leading-8 text-slate-700">
-                    {block.items.map((item, itemIndex) => (
-                      <p key={`${item}-${itemIndex}`}>
+                      <span>
                         <InlineText text={item} />
-                      </p>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          }
+                      </span>
+                    </li>
+                  ))}
+                </ListTag>
+              );
+            }
 
-          return null;
-        })}
+            if (block.type === "callout") {
+              const isTip = /tip|important|safety|recommendation|note|warning/i.test(block.label);
+              return (
+                <div
+                  key={`callout-${index}`}
+                  className={`rounded-3xl border p-5 shadow-sm ${isTip ? "border-amber-200 bg-amber-50" : "border-emerald-100 bg-emerald-50/70"}`}
+                >
+                  <p className={`text-sm font-extrabold uppercase tracking-[0.2em] ${isTip ? "text-amber-700" : "text-emerald-700"}`}>
+                    {block.label}
+                  </p>
+
+                  {block.compactList ? (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {block.items.map((item, itemIndex) => (
+                        <span
+                          key={`${item}-${itemIndex}`}
+                          className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="mt-4 space-y-3 text-lg leading-8 text-slate-700">
+                      {block.items.map((item, itemIndex) => (
+                        <p key={`${item}-${itemIndex}`}>
+                          <InlineText text={item} />
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return null;
+          })}
+        </div>
       </article>
     </div>
   );

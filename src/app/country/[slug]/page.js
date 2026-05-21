@@ -17,8 +17,7 @@ const categoryLabels = {
   navigation: "Navigation",
   shopping: "Shopping Apps",
   food: "Food Delivery Apps",
-  hotel: "Hotel & Stay Apps",
-  emergency: "SOS & Emergency Helplines"
+  hotel: "Hotel & Stay Apps"
 };
 
 const importantCountries = [
@@ -90,7 +89,7 @@ export function generateMetadata({ params }) {
 
   const countryName = getCountryName(params.slug);
   const title = `Best Travel Apps in ${countryName} - Taxi, Train, Food & Maps`;
-  const description = `Find trusted taxi apps, train apps, metro apps, bus apps, flight apps, maps, shopping apps, food delivery apps and emergency helplines used in ${countryName}.`;
+  const description = `Find trusted taxi apps, train apps, metro apps, bus apps, flight apps, maps, shopping apps and food delivery apps used in ${countryName}.`;
   const canonical = `/country/${params.slug}`;
 
   return {
@@ -102,8 +101,7 @@ export function generateMetadata({ params }) {
       `best train app in ${countryName}`,
       `food delivery apps in ${countryName}`,
       `${countryName} transport apps`,
-      `${countryName} tourist guide`,
-      `${countryName} emergency numbers`
+      `${countryName} tourist guide`
     ],
     alternates: { canonical },
     openGraph: {
@@ -127,11 +125,7 @@ export default function CountryPage({ params }) {
 
   const countryName = getCountryName(params.slug);
   const data = getCountryData(params.slug);
-  const mainCategories = categories.filter(
-    (category) => category.key !== "emergency" && (data[category.key] || []).length > 0
-  );
-  const emergencyCategory = categories.find((category) => category.key === "emergency");
-  const emergencyApps = data.emergency || [];
+  const mainCategories = categories.filter((category) => (data[category.key] || []).length > 0);
   const relatedCountries = importantCountries.filter((country) => country.slug !== params.slug).slice(0, 5);
 
   return (
@@ -152,7 +146,7 @@ export default function CountryPage({ params }) {
               Best travel apps in {countryName}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600">
-              Find trusted websites and mobile apps for local transport, taxi, maps, trains, metro, buses, flights, shopping and food delivery in {countryName}. Emergency helplines are listed near the bottom for quick reference.
+              Find trusted websites and mobile apps for local transport, taxi, maps, trains, metro, buses, flights, shopping and food delivery in {countryName}.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/category" className="rounded-full bg-gray-950 px-5 py-3 font-bold text-white hover:bg-gray-800">
@@ -188,30 +182,6 @@ export default function CountryPage({ params }) {
             })}
           </section>
 
-          {emergencyCategory && emergencyApps.length > 0 && (
-            <section className="mt-12 rounded-[2.5rem] border border-red-100 bg-red-50 p-8 md:p-10">
-              <div className="flex items-center gap-4">
-                <div className="text-4xl">{emergencyCategory.icon}</div>
-                <div>
-                  <p className="text-sm font-black uppercase tracking-[0.2em] text-red-600">Safety information</p>
-                  <h2 className="mt-2 text-3xl font-black tracking-[-0.04em] text-gray-950">
-                    SOS & emergency helplines in {countryName}
-                  </h2>
-                </div>
-              </div>
-              <p className="mt-4 max-w-3xl text-gray-600">
-                Use these only when needed. Always verify local emergency numbers and share your exact location clearly with emergency services.
-              </p>
-              <div className="mt-6 flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-visible md:pb-0">
-                {emergencyApps.map((app) => (
-                  <div key={app.name} className="min-w-[82%] snap-start sm:min-w-[48%] md:min-w-0">
-                    <AppCard app={app} emergency />
-                  </div>
-                ))}
-              </div>
-              {emergencyApps.length > 1 && <p className="mt-3 text-xs font-bold text-red-400 md:hidden">Swipe left to see more emergency contacts →</p>}
-            </section>
-          )}
 
           <section className="mt-12 rounded-[2rem] border border-gray-200 bg-gray-50 p-7">
             <h2 className="text-2xl font-black">Explore more country travel app guides</h2>

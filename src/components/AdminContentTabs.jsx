@@ -419,6 +419,10 @@ export default function AdminContentTabs() {
 
           <form onSubmit={submitBlog} className="mt-8 grid gap-4">
             <h3 className="text-xl font-black">{editingBlogId ? "Edit blog" : "Add blog manually"}</h3>
+            <div className="rounded-[1.5rem] border border-blue-100 bg-blue-50 p-5 text-blue-950">
+              <p className="font-black">Better blog formatting is automatic now</p>
+              <p className="mt-2 text-sm leading-6">Write short section titles on separate lines, then write paragraphs below them. Lines like “1. Google Maps” will become numbered app sections on the public blog page.</p>
+            </div>
             <input value={blogForm.title} onChange={(event) => setBlogForm({ ...blogForm, title: event.target.value })} placeholder="Blog title" className="rounded-2xl border border-gray-300 px-4 py-3" />
             <input value={blogForm.slug} onChange={(event) => setBlogForm({ ...blogForm, slug: event.target.value })} placeholder="Optional slug, for example best-taxi-apps-india" className="rounded-2xl border border-gray-300 px-4 py-3" />
             <input value={blogForm.description} onChange={(event) => setBlogForm({ ...blogForm, description: event.target.value })} placeholder="Short description" className="rounded-2xl border border-gray-300 px-4 py-3" />

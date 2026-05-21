@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 text-center">
           <SiteLogo dark />
           <p className="max-w-2xl text-sm leading-6 text-slate-500">
-            Aliwvide helps tourists discover travel, taxi, maps, train, food delivery, shopping and emergency apps used by country.
+            Aliwvide helps tourists discover travel, taxi, maps, train, food delivery and shopping apps used by country.
           </p>
         </div>
 

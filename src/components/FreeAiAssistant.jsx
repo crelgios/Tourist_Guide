@@ -230,7 +230,7 @@ export default function FreeAiAssistant() {
   const [messages, setMessages] = useState([
     {
       type: "bot",
-      title: "Hi, I am Aliwvide Assistant.",
+      title: "Hi, I am Aliwvide AI Guide.",
       text: "I can suggest travel, taxi, train, food delivery, shopping, hotel, map, and public transport apps by country."
     }
   ]);
@@ -256,9 +256,16 @@ export default function FreeAiAssistant() {
         <div className="mb-3 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-3xl border border-emerald-100 bg-white shadow-2xl shadow-emerald-950/20">
           <div className="bg-gradient-to-br from-emerald-600 via-teal-600 to-slate-900 p-4 text-white">
             <div className="flex items-start justify-between gap-3">
-              <div>
-                <h2 className="text-lg font-bold">Ask Aliwvide</h2>
-                <p className="mt-1 text-sm text-emerald-50">Find useful travel apps by country and category.</p>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/brand/chatbot-avatar.png"
+                  alt="Aliwvide AI Guide"
+                  className="h-12 w-12 rounded-full border-2 border-white/80 bg-white object-cover shadow-lg"
+                />
+                <div>
+                  <h2 className="text-lg font-bold">Ask Aliwvide</h2>
+                  <p className="mt-1 text-sm text-emerald-50">Find useful travel apps by country and category.</p>
+                </div>
               </div>
               <button
                 type="button"
@@ -364,7 +371,7 @@ export default function FreeAiAssistant() {
                 Send
               </button>
             </div>
-            <p className="mt-2 text-center text-[11px] text-slate-400">Free smart search • {categoryCount} public categories • No API key</p>
+            <p className="mt-2 text-center text-[11px] text-slate-400">Smart travel app search • {categoryCount} public categories</p>
           </div>
         </div>
       )}
@@ -375,7 +382,11 @@ export default function FreeAiAssistant() {
         className="flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-2xl shadow-emerald-950/30 ring-1 ring-white/30 transition hover:-translate-y-0.5 hover:bg-emerald-700"
         aria-label="Open Aliwvide assistant"
       >
-        <span className="grid h-7 w-7 place-items-center rounded-full bg-white/15">AI</span>
+        <img
+          src="/brand/chatbot-avatar.png"
+          alt="Aliwvide AI Guide"
+          className="h-8 w-8 rounded-full border border-white/70 bg-white object-cover"
+        />
         <span>Ask Aliwvide</span>
       </button>
     </div>

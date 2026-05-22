@@ -231,7 +231,7 @@ export default function FreeAiAssistant() {
     {
       type: "bot",
       title: "Hi, I am Aliwvide Assistant.",
-      text: "I can suggest travel, taxi, train, food delivery, shopping, hotel, map, and public transport apps by country. I work without any paid AI API."
+      text: "I can suggest travel, taxi, train, food delivery, shopping, hotel, map, and public transport apps by country."
     }
   ]);
   const inputRef = useRef(null);
@@ -257,9 +257,8 @@ export default function FreeAiAssistant() {
           <div className="bg-gradient-to-br from-emerald-600 via-teal-600 to-slate-900 p-4 text-white">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100">Free website assistant</p>
-                <h2 className="mt-1 text-lg font-bold">Ask Aliwvide</h2>
-                <p className="mt-1 text-sm text-emerald-50">No paid API. Uses your website app data.</p>
+                <h2 className="text-lg font-bold">Ask Aliwvide</h2>
+                <p className="mt-1 text-sm text-emerald-50">Find useful travel apps by country and category.</p>
               </div>
               <button
                 type="button"

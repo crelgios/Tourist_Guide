@@ -440,60 +440,6 @@
         ]
       },
       {
-        "name": "Japan Travel by NAVITIME",
-        "type": "Public transport",
-        "description": "Japan trip planning, route search, transit and rail navigation for tourists.",
-        "web": "https://japantravel.navitime.com/en/",
-        "android": "https://play.google.com/store/search?q=Japan%20Travel%20by%20NAVITIME&c=apps",
-        "ios": "https://apps.apple.com/search?term=Japan%20Travel%20by%20NAVITIME",
-        "badges": [
-          "Transit",
-          "Tourist",
-          "Japan"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "Moovit",
-        "type": "Public transport",
-        "description": "Public transit app for bus, train, metro and route planning.",
-        "web": "https://moovitapp.com/",
-        "android": "https://play.google.com/store/search?q=Moovit&c=apps",
-        "ios": "https://apps.apple.com/search?term=Moovit",
-        "badges": [
-          "Transit",
-          "Routes",
-          "Global"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "S.RIDE",
-        "type": "Taxi app",
-        "description": "Taxi booking app for Tokyo and supported urban areas in Japan.",
-        "web": "https://www.sride.jp/en/",
-        "android": "https://play.google.com/store/search?q=S.RIDE&c=apps",
-        "ios": "https://apps.apple.com/search?term=S.RIDE",
-        "badges": [
-          "Taxi",
-          "Tokyo",
-          "Limited"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
         "name": "Uber Japan",
         "type": "Ride hailing",
         "description": "Taxi and ride booking in supported Japanese cities",
@@ -632,12 +578,12 @@
     ],
     "shopping": [
       {
-        "name": "Amazon Japan",
+        "name": "Rakuten Ichiba",
         "type": "Marketplace",
-        "description": "Amazon online shopping for Japan",
-        "web": "https://www.amazon.co.jp/",
-        "android": "https://play.google.com/store/search?q=Amazon%20Japan&c=apps",
-        "ios": "https://apps.apple.com/search?term=Amazon%20Japan",
+        "description": "Major Japanese online shopping marketplace",
+        "web": "https://www.rakuten.co.jp/",
+        "android": "https://play.google.com/store/search?q=Rakuten%20Ichiba&c=apps",
+        "ios": "https://apps.apple.com/search?term=Rakuten%20Ichiba",
         "badges": [
           "Shopping",
           "Marketplace",
@@ -650,12 +596,12 @@
         ]
       },
       {
-        "name": "Rakuten Ichiba",
+        "name": "Amazon Japan",
         "type": "Marketplace",
-        "description": "Major Japanese online shopping marketplace",
-        "web": "https://www.rakuten.co.jp/",
-        "android": "https://play.google.com/store/search?q=Rakuten%20Ichiba&c=apps",
-        "ios": "https://apps.apple.com/search?term=Rakuten%20Ichiba",
+        "description": "Amazon online shopping for Japan",
+        "web": "https://www.amazon.co.jp/",
+        "android": "https://play.google.com/store/search?q=Amazon%20Japan&c=apps",
+        "ios": "https://apps.apple.com/search?term=Amazon%20Japan",
         "badges": [
           "Shopping",
           "Marketplace",
@@ -688,45 +634,9 @@
     ],
     "food": [
       {
-        "name": "Demae-can",
-        "type": "Food delivery",
-        "description": "Japanese food delivery service for restaurants and meals.",
-        "web": "https://demae-can.com/",
-        "android": "https://play.google.com/store/search?q=Demae-can&c=apps",
-        "ios": "https://apps.apple.com/search?term=Demae-can",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Japan"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Rocket Now",
-        "type": "Food delivery",
-        "description": "Food delivery app in Japan with supported restaurant delivery options.",
-        "web": "https://www.rocketnow.co.jp/",
-        "android": "https://play.google.com/store/search?q=Rocket%20Now&c=apps",
-        "ios": "https://apps.apple.com/search?term=Rocket%20Now",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Japan"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
         "name": "Uber Eats Japan",
         "type": "Food delivery",
-        "description": "Food delivery in supported Japanese cities.",
+        "description": "Food delivery in supported Japanese cities",
         "web": "https://www.ubereats.com/jp-en",
         "android": "https://play.google.com/store/search?q=Uber%20Eats%20Japan&c=apps",
         "ios": "https://apps.apple.com/search?term=Uber%20Eats%20Japan",
@@ -736,43 +646,25 @@
           "Japan"
         ],
         "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
       },
       {
-        "name": "Wolt Japan",
+        "name": "Demae-can",
         "type": "Food delivery",
-        "description": "Restaurant and store delivery in supported Japanese cities.",
-        "web": "https://wolt.com/en/jpn",
-        "android": "https://play.google.com/store/search?q=Wolt%20Japan&c=apps",
-        "ios": "https://apps.apple.com/search?term=Wolt%20Japan",
+        "description": "Japanese food delivery service",
+        "web": "https://demae-can.com/",
+        "android": "https://play.google.com/store/search?q=Demae-can&c=apps",
+        "ios": "https://apps.apple.com/search?term=Demae-can",
         "badges": [
           "Food",
           "Delivery",
           "Japan"
         ],
         "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "menu",
-        "type": "Food delivery",
-        "description": "Food delivery app for ordering meals from restaurants in Japan.",
-        "web": "https://app.menu.jp/",
-        "android": "https://play.google.com/store/search?q=menu&c=apps",
-        "ios": "https://apps.apple.com/search?term=menu",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Japan"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
@@ -820,24 +712,6 @@
     ],
     "emergency": [
       {
-        "name": "Japan Ambulance / Medical Emergency",
-        "type": "Ambulance number",
-        "description": "Ambulance or medical emergency number in Japan: 119.",
-        "web": "tel:119",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Medical",
-          "Ambulance",
-          "Emergency"
-        ],
-        "docs": [
-          "Use for medical emergency.",
-          "Keep passport/ID ready if travelling.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "Japan Emergency Helpline",
         "type": "General emergency",
         "description": "Call 119 / 110 for urgent emergency help in Japan.",
@@ -856,24 +730,6 @@
         ]
       },
       {
-        "name": "Japan Fire Emergency",
-        "type": "Fire number",
-        "description": "Fire brigade emergency number in Japan: 119.",
-        "web": "tel:119",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Fire",
-          "Emergency",
-          "Safety"
-        ],
-        "docs": [
-          "Leave unsafe place first.",
-          "Call from safe location.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "Japan Police Emergency",
         "type": "Police number",
         "description": "Police emergency number in Japan: 110.",
@@ -888,6 +744,42 @@
         "docs": [
           "Tap call from mobile.",
           "Explain city and exact location.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Japan Ambulance / Medical Emergency",
+        "type": "Ambulance number",
+        "description": "Ambulance or medical emergency number in Japan: 119.",
+        "web": "tel:119",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Medical",
+          "Ambulance",
+          "Emergency"
+        ],
+        "docs": [
+          "Use for medical emergency.",
+          "Keep passport/ID ready if travelling.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Japan Fire Emergency",
+        "type": "Fire number",
+        "description": "Fire brigade emergency number in Japan: 119.",
+        "web": "tel:119",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Fire",
+          "Emergency",
+          "Safety"
+        ],
+        "docs": [
+          "Leave unsafe place first.",
+          "Call from safe location.",
           "Verify locally if number changes."
         ]
       }
@@ -1608,21 +1500,21 @@
   "unitedstates": {
     "transport": [
       {
-        "name": "Citymapper",
-        "type": "Public transport",
-        "description": "City transit route planning for major US cities and other global cities.",
-        "web": "https://citymapper.com/",
-        "android": "https://play.google.com/store/search?q=Citymapper&c=apps",
-        "ios": "https://apps.apple.com/search?term=Citymapper",
+        "name": "Uber",
+        "type": "Ride hailing",
+        "description": "Ride booking, airport rides and car service in the USA",
+        "web": "https://www.uber.com/us/en/",
+        "android": "https://play.google.com/store/apps/details?id=com.ubercab",
+        "ios": "https://apps.apple.com/app/uber-request-a-ride/id368677368",
         "badges": [
-          "Transit",
-          "Routes",
-          "Global"
+          "Taxi",
+          "Premium",
+          "USA"
         ],
         "docs": [
           "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
+          "Check fare and pickup point.",
+          "Verify driver and vehicle details."
         ]
       },
       {
@@ -1635,60 +1527,6 @@
         "badges": [
           "Taxi",
           "Rideshare",
-          "USA"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check fare and pickup point.",
-          "Verify driver and vehicle details."
-        ]
-      },
-      {
-        "name": "Moovit",
-        "type": "Public transport",
-        "description": "Public transit app for bus, train, metro and route planning.",
-        "web": "https://moovitapp.com/",
-        "android": "https://play.google.com/store/search?q=Moovit&c=apps",
-        "ios": "https://apps.apple.com/search?term=Moovit",
-        "badges": [
-          "Transit",
-          "Routes",
-          "Global"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "Transit",
-        "type": "Public transport",
-        "description": "Public transit trip planning for buses, trains, subway and shared mobility in US cities.",
-        "web": "https://transitapp.com/",
-        "android": "https://play.google.com/store/search?q=Transit&c=apps",
-        "ios": "https://apps.apple.com/search?term=Transit",
-        "badges": [
-          "Transit",
-          "Routes",
-          "USA"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "Uber",
-        "type": "Ride hailing",
-        "description": "Ride booking, airport rides and car service in the USA",
-        "web": "https://www.uber.com/us/en/",
-        "android": "https://play.google.com/store/apps/details?id=com.ubercab",
-        "ios": "https://apps.apple.com/app/uber-request-a-ride/id368677368",
-        "badges": [
-          "Taxi",
-          "Premium",
           "USA"
         ],
         "docs": [
@@ -1836,24 +1674,6 @@
         ]
       },
       {
-        "name": "Target",
-        "type": "Retail shopping",
-        "description": "US retail and online shopping platform",
-        "web": "https://www.target.com/",
-        "android": "https://play.google.com/store/search?q=Target&c=apps",
-        "ios": "https://apps.apple.com/search?term=Target",
-        "badges": [
-          "Shopping",
-          "Retail",
-          "USA"
-        ],
-        "docs": [
-          "Check seller rating.",
-          "Compare delivery options.",
-          "Use secure payment methods."
-        ]
-      },
-      {
         "name": "Walmart",
         "type": "Retail shopping",
         "description": "Retail, grocery and pickup delivery platform",
@@ -1870,13 +1690,31 @@
           "Compare delivery options.",
           "Use secure payment methods."
         ]
+      },
+      {
+        "name": "Target",
+        "type": "Retail shopping",
+        "description": "US retail and online shopping platform",
+        "web": "https://www.target.com/",
+        "android": "https://play.google.com/store/search?q=Target&c=apps",
+        "ios": "https://apps.apple.com/search?term=Target",
+        "badges": [
+          "Shopping",
+          "Retail",
+          "USA"
+        ],
+        "docs": [
+          "Check seller rating.",
+          "Compare delivery options.",
+          "Use secure payment methods."
+        ]
       }
     ],
     "food": [
       {
         "name": "DoorDash",
         "type": "Food delivery",
-        "description": "Restaurant, grocery and local store delivery in the USA.",
+        "description": "Restaurant and grocery delivery in the USA",
         "web": "https://www.doordash.com/",
         "android": "https://play.google.com/store/search?q=DoorDash&c=apps",
         "ios": "https://apps.apple.com/search?term=DoorDash",
@@ -1886,61 +1724,7 @@
           "USA"
         ],
         "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Grubhub",
-        "type": "Food delivery",
-        "description": "Restaurant delivery and pickup ordering in the USA.",
-        "web": "https://www.grubhub.com/",
-        "android": "https://play.google.com/store/search?q=Grubhub&c=apps",
-        "ios": "https://apps.apple.com/search?term=Grubhub",
-        "badges": [
-          "Food",
-          "Pickup",
-          "USA"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Instacart",
-        "type": "Grocery delivery",
-        "description": "Grocery, essentials and store delivery in the USA.",
-        "web": "https://www.instacart.com/",
-        "android": "https://play.google.com/store/search?q=Instacart&c=apps",
-        "ios": "https://apps.apple.com/search?term=Instacart",
-        "badges": [
-          "Grocery",
-          "Delivery",
-          "USA"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Postmates",
-        "type": "Food delivery",
-        "description": "Food, drinks and local delivery service in supported US areas.",
-        "web": "https://postmates.com/",
-        "android": "https://play.google.com/store/search?q=Postmates&c=apps",
-        "ios": "https://apps.apple.com/search?term=Postmates",
-        "badges": [
-          "Food",
-          "Delivery",
-          "USA"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
@@ -1948,7 +1732,7 @@
       {
         "name": "Uber Eats",
         "type": "Food delivery",
-        "description": "Restaurant food and grocery delivery in supported US cities.",
+        "description": "Food delivery in US cities",
         "web": "https://www.ubereats.com/",
         "android": "https://play.google.com/store/search?q=Uber%20Eats&c=apps",
         "ios": "https://apps.apple.com/search?term=Uber%20Eats",
@@ -1958,7 +1742,7 @@
           "USA"
         ],
         "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
@@ -2006,24 +1790,6 @@
     ],
     "emergency": [
       {
-        "name": "United States Ambulance / Medical Emergency",
-        "type": "Ambulance number",
-        "description": "Ambulance or medical emergency number in United States: 911.",
-        "web": "tel:911",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Medical",
-          "Ambulance",
-          "Emergency"
-        ],
-        "docs": [
-          "Use for medical emergency.",
-          "Keep passport/ID ready if travelling.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "United States Emergency Helpline",
         "type": "General emergency",
         "description": "Call 911 for urgent emergency help in United States.",
@@ -2042,24 +1808,6 @@
         ]
       },
       {
-        "name": "United States Fire Emergency",
-        "type": "Fire number",
-        "description": "Fire brigade emergency number in United States: 911.",
-        "web": "tel:911",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Fire",
-          "Emergency",
-          "Safety"
-        ],
-        "docs": [
-          "Leave unsafe place first.",
-          "Call from safe location.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "United States Police Emergency",
         "type": "Police number",
         "description": "Police emergency number in United States: 911.",
@@ -2074,6 +1822,42 @@
         "docs": [
           "Tap call from mobile.",
           "Explain city and exact location.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "United States Ambulance / Medical Emergency",
+        "type": "Ambulance number",
+        "description": "Ambulance or medical emergency number in United States: 911.",
+        "web": "tel:911",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Medical",
+          "Ambulance",
+          "Emergency"
+        ],
+        "docs": [
+          "Use for medical emergency.",
+          "Keep passport/ID ready if travelling.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "United States Fire Emergency",
+        "type": "Fire number",
+        "description": "Fire brigade emergency number in United States: 911.",
+        "web": "tel:911",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Fire",
+          "Emergency",
+          "Safety"
+        ],
+        "docs": [
+          "Leave unsafe place first.",
+          "Call from safe location.",
           "Verify locally if number changes."
         ]
       }
@@ -2466,24 +2250,6 @@
         ]
       },
       {
-        "name": "Moovit",
-        "type": "Public transport",
-        "description": "Public transit app for bus, train, metro and route planning.",
-        "web": "https://moovitapp.com/",
-        "android": "https://play.google.com/store/search?q=Moovit&c=apps",
-        "ios": "https://apps.apple.com/search?term=Moovit",
-        "badges": [
-          "Transit",
-          "Routes",
-          "Global"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
         "name": "Uber Germany",
         "type": "Ride hailing",
         "description": "Ride booking in supported German cities",
@@ -2499,24 +2265,6 @@
           "Enable GPS before booking.",
           "Check fare and pickup point.",
           "Verify driver and vehicle details."
-        ]
-      },
-      {
-        "name": "VBB",
-        "type": "Public transport",
-        "description": "Berlin-Brandenburg public transport route planning and ticket information.",
-        "web": "https://www.vbb.de/en/",
-        "android": "https://play.google.com/store/search?q=VBB&c=apps",
-        "ios": "https://apps.apple.com/search?term=VBB",
-        "badges": [
-          "Transit",
-          "Berlin",
-          "Official"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
         ]
       }
     ],
@@ -2640,24 +2388,6 @@
         ]
       },
       {
-        "name": "OTTO",
-        "type": "Marketplace",
-        "description": "German online shopping and retail platform",
-        "web": "https://www.otto.de/",
-        "android": "https://play.google.com/store/search?q=OTTO&c=apps",
-        "ios": "https://apps.apple.com/search?term=OTTO",
-        "badges": [
-          "Shopping",
-          "Retail",
-          "Germany"
-        ],
-        "docs": [
-          "Check seller rating.",
-          "Compare delivery options.",
-          "Use secure payment methods."
-        ]
-      },
-      {
         "name": "Zalando",
         "type": "Fashion shopping",
         "description": "Fashion and shoes shopping platform",
@@ -2674,31 +2404,31 @@
           "Compare delivery options.",
           "Use secure payment methods."
         ]
+      },
+      {
+        "name": "OTTO",
+        "type": "Marketplace",
+        "description": "German online shopping and retail platform",
+        "web": "https://www.otto.de/",
+        "android": "https://play.google.com/store/search?q=OTTO&c=apps",
+        "ios": "https://apps.apple.com/search?term=OTTO",
+        "badges": [
+          "Shopping",
+          "Retail",
+          "Germany"
+        ],
+        "docs": [
+          "Check seller rating.",
+          "Compare delivery options.",
+          "Use secure payment methods."
+        ]
       }
     ],
     "food": [
       {
-        "name": "Flink",
-        "type": "Grocery delivery",
-        "description": "Fast grocery delivery service in supported German cities.",
-        "web": "https://www.goflink.com/",
-        "android": "https://play.google.com/store/search?q=Flink&c=apps",
-        "ios": "https://apps.apple.com/search?term=Flink",
-        "badges": [
-          "Grocery",
-          "Delivery",
-          "Germany"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
         "name": "Lieferando",
         "type": "Food delivery",
-        "description": "Food delivery and takeaway ordering in Germany.",
+        "description": "Food delivery and takeaway ordering in Germany",
         "web": "https://www.lieferando.de/en",
         "android": "https://play.google.com/store/search?q=Lieferando&c=apps",
         "ios": "https://apps.apple.com/search?term=Lieferando",
@@ -2708,43 +2438,7 @@
           "Germany"
         ],
         "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Too Good To Go",
-        "type": "Food rescue app",
-        "description": "Surplus food pickup from restaurants, bakeries and stores in Germany.",
-        "web": "https://www.toogoodtogo.com/",
-        "android": "https://play.google.com/store/search?q=Too%20Good%20To%20Go&c=apps",
-        "ios": "https://apps.apple.com/search?term=Too%20Good%20To%20Go",
-        "badges": [
-          "Food",
-          "Deals",
-          "Germany"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Uber Eats Germany",
-        "type": "Food delivery",
-        "description": "Restaurant delivery in supported German locations.",
-        "web": "https://www.ubereats.com/de",
-        "android": "https://play.google.com/store/search?q=Uber%20Eats%20Germany&c=apps",
-        "ios": "https://apps.apple.com/search?term=Uber%20Eats%20Germany",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Germany"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
@@ -2752,7 +2446,7 @@
       {
         "name": "Wolt Germany",
         "type": "Food delivery",
-        "description": "Restaurant, grocery and local delivery in supported German cities.",
+        "description": "Restaurant and grocery delivery in Germany",
         "web": "https://wolt.com/en/deu",
         "android": "https://play.google.com/store/search?q=Wolt%20Germany&c=apps",
         "ios": "https://apps.apple.com/search?term=Wolt%20Germany",
@@ -2762,7 +2456,7 @@
           "Germany"
         ],
         "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
@@ -2810,24 +2504,6 @@
     ],
     "emergency": [
       {
-        "name": "Germany Ambulance / Medical Emergency",
-        "type": "Ambulance number",
-        "description": "Ambulance or medical emergency number in Germany: 112.",
-        "web": "tel:112",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Medical",
-          "Ambulance",
-          "Emergency"
-        ],
-        "docs": [
-          "Use for medical emergency.",
-          "Keep passport/ID ready if travelling.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "Germany Emergency Helpline",
         "type": "General emergency",
         "description": "Call 112 / 110 for urgent emergency help in Germany.",
@@ -2846,24 +2522,6 @@
         ]
       },
       {
-        "name": "Germany Fire Emergency",
-        "type": "Fire number",
-        "description": "Fire brigade emergency number in Germany: 112.",
-        "web": "tel:112",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Fire",
-          "Emergency",
-          "Safety"
-        ],
-        "docs": [
-          "Leave unsafe place first.",
-          "Call from safe location.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "Germany Police Emergency",
         "type": "Police number",
         "description": "Police emergency number in Germany: 110.",
@@ -2878,6 +2536,42 @@
         "docs": [
           "Tap call from mobile.",
           "Explain city and exact location.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Germany Ambulance / Medical Emergency",
+        "type": "Ambulance number",
+        "description": "Ambulance or medical emergency number in Germany: 112.",
+        "web": "tel:112",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Medical",
+          "Ambulance",
+          "Emergency"
+        ],
+        "docs": [
+          "Use for medical emergency.",
+          "Keep passport/ID ready if travelling.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Germany Fire Emergency",
+        "type": "Fire number",
+        "description": "Fire brigade emergency number in Germany: 112.",
+        "web": "tel:112",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Fire",
+          "Emergency",
+          "Safety"
+        ],
+        "docs": [
+          "Leave unsafe place first.",
+          "Call from safe location.",
           "Verify locally if number changes."
         ]
       }
@@ -3234,24 +2928,6 @@
   "china": {
     "transport": [
       {
-        "name": "Alipay Transport",
-        "type": "Public transport payment",
-        "description": "Transport access and payment options for metro, bus, bike and mobility services inside Alipay.",
-        "web": "https://intl.alipay.com/",
-        "android": "https://play.google.com/store/search?q=Alipay%20Transport&c=apps",
-        "ios": "https://apps.apple.com/search?term=Alipay%20Transport",
-        "badges": [
-          "Payment",
-          "Transport",
-          "China"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
         "name": "DiDi",
         "type": "Ride hailing",
         "description": "Ride hailing and taxi booking platform in China",
@@ -3352,24 +3028,6 @@
     ],
     "maps": [
       {
-        "name": "Amap",
-        "type": "Navigation",
-        "description": "Chinese map and navigation service by AutoNavi",
-        "web": "https://www.amap.com/",
-        "android": "https://play.google.com/store/search?q=Amap&c=apps",
-        "ios": "https://apps.apple.com/search?term=Amap",
-        "badges": [
-          "Maps",
-          "Navigation",
-          "China"
-        ],
-        "docs": [
-          "Download offline map if possible.",
-          "Check live traffic before travel.",
-          "Save hotel and airport location."
-        ]
-      },
-      {
         "name": "Baidu Maps",
         "type": "Navigation",
         "description": "Chinese maps and navigation platform",
@@ -3386,27 +3044,27 @@
           "Check live traffic before travel.",
           "Save hotel and airport location."
         ]
-      }
-    ],
-    "shopping": [
+      },
       {
-        "name": "JD.com",
-        "type": "Marketplace",
-        "description": "Chinese online retail and electronics marketplace",
-        "web": "https://www.jd.com/",
-        "android": "https://play.google.com/store/search?q=JD.com&c=apps",
-        "ios": "https://apps.apple.com/search?term=JD.com",
+        "name": "Amap",
+        "type": "Navigation",
+        "description": "Chinese map and navigation service by AutoNavi",
+        "web": "https://www.amap.com/",
+        "android": "https://play.google.com/store/search?q=Amap&c=apps",
+        "ios": "https://apps.apple.com/search?term=Amap",
         "badges": [
-          "Shopping",
-          "Electronics",
+          "Maps",
+          "Navigation",
           "China"
         ],
         "docs": [
-          "Check seller rating.",
-          "Compare delivery options.",
-          "Use secure payment methods."
+          "Download offline map if possible.",
+          "Check live traffic before travel.",
+          "Save hotel and airport location."
         ]
-      },
+      }
+    ],
+    "shopping": [
       {
         "name": "Taobao",
         "type": "Marketplace",
@@ -3442,67 +3100,31 @@
           "Compare delivery options.",
           "Use secure payment methods."
         ]
+      },
+      {
+        "name": "JD.com",
+        "type": "Marketplace",
+        "description": "Chinese online retail and electronics marketplace",
+        "web": "https://www.jd.com/",
+        "android": "https://play.google.com/store/search?q=JD.com&c=apps",
+        "ios": "https://apps.apple.com/search?term=JD.com",
+        "badges": [
+          "Shopping",
+          "Electronics",
+          "China"
+        ],
+        "docs": [
+          "Check seller rating.",
+          "Compare delivery options.",
+          "Use secure payment methods."
+        ]
       }
     ],
     "food": [
       {
-        "name": "Dianping",
-        "type": "Restaurant discovery",
-        "description": "Restaurant discovery, reviews and food place search in China.",
-        "web": "https://www.dianping.com/",
-        "android": "https://play.google.com/store/search?q=Dianping&c=apps",
-        "ios": "https://apps.apple.com/search?term=Dianping",
-        "badges": [
-          "Food",
-          "Reviews",
-          "China"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Ele.me",
-        "type": "Food delivery",
-        "description": "Food delivery platform in China.",
-        "web": "https://www.ele.me/",
-        "android": "https://play.google.com/store/search?q=Ele.me&c=apps",
-        "ios": "https://apps.apple.com/search?term=Ele.me",
-        "badges": [
-          "Food",
-          "Delivery",
-          "China"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "JD Daojia",
-        "type": "Grocery delivery",
-        "description": "Grocery and local store delivery service connected with JD in China.",
-        "web": "https://daojia.jd.com/",
-        "android": "https://play.google.com/store/search?q=JD%20Daojia&c=apps",
-        "ios": "https://apps.apple.com/search?term=JD%20Daojia",
-        "badges": [
-          "Grocery",
-          "Delivery",
-          "China"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
         "name": "Meituan",
         "type": "Food delivery",
-        "description": "Food delivery and local services platform in China.",
+        "description": "Food delivery and local services in China",
         "web": "https://www.meituan.com/",
         "android": "https://play.google.com/store/search?q=Meituan&c=apps",
         "ios": "https://apps.apple.com/search?term=Meituan",
@@ -3512,25 +3134,25 @@
           "China"
         ],
         "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
       },
       {
-        "name": "Taobao Shangou",
-        "type": "Food and grocery delivery",
-        "description": "Fast local retail and grocery delivery service through Taobao ecosystem.",
-        "web": "https://www.taobao.com/",
-        "android": "https://play.google.com/store/search?q=Taobao%20Shangou&c=apps",
-        "ios": "https://apps.apple.com/search?term=Taobao%20Shangou",
+        "name": "Ele.me",
+        "type": "Food delivery",
+        "description": "Food delivery platform in China",
+        "web": "https://www.ele.me/",
+        "android": "https://play.google.com/store/search?q=Ele.me&c=apps",
+        "ios": "https://apps.apple.com/search?term=Ele.me",
         "badges": [
-          "Grocery",
+          "Food",
           "Delivery",
           "China"
         ],
         "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
@@ -3596,24 +3218,6 @@
     ],
     "emergency": [
       {
-        "name": "China Ambulance / Medical Emergency",
-        "type": "Ambulance number",
-        "description": "Ambulance or medical emergency number in China: 120.",
-        "web": "tel:120",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Medical",
-          "Ambulance",
-          "Emergency"
-        ],
-        "docs": [
-          "Use for medical emergency.",
-          "Keep passport/ID ready if travelling.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "China Emergency Helpline",
         "type": "General emergency",
         "description": "Call 110 / 120 / 119 for urgent emergency help in China.",
@@ -3629,24 +3233,6 @@
           "Use only for real emergencies.",
           "Share your location clearly.",
           "Traffic accidents 122"
-        ]
-      },
-      {
-        "name": "China Fire Emergency",
-        "type": "Fire number",
-        "description": "Fire brigade emergency number in China: 119.",
-        "web": "tel:119",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Fire",
-          "Emergency",
-          "Safety"
-        ],
-        "docs": [
-          "Leave unsafe place first.",
-          "Call from safe location.",
-          "Verify locally if number changes."
         ]
       },
       {
@@ -3666,45 +3252,63 @@
           "Explain city and exact location.",
           "Verify locally if number changes."
         ]
+      },
+      {
+        "name": "China Ambulance / Medical Emergency",
+        "type": "Ambulance number",
+        "description": "Ambulance or medical emergency number in China: 120.",
+        "web": "tel:120",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Medical",
+          "Ambulance",
+          "Emergency"
+        ],
+        "docs": [
+          "Use for medical emergency.",
+          "Keep passport/ID ready if travelling.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "China Fire Emergency",
+        "type": "Fire number",
+        "description": "Fire brigade emergency number in China: 119.",
+        "web": "tel:119",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Fire",
+          "Emergency",
+          "Safety"
+        ],
+        "docs": [
+          "Leave unsafe place first.",
+          "Call from safe location.",
+          "Verify locally if number changes."
+        ]
       }
     ]
   },
   "australia": {
     "transport": [
       {
-        "name": "13cabs",
-        "type": "Taxi app",
-        "description": "Taxi booking app and phone booking service across Australia.",
-        "web": "https://www.13cabs.com.au/",
-        "android": "https://play.google.com/store/search?q=13cabs&c=apps",
-        "ios": "https://apps.apple.com/search?term=13cabs",
+        "name": "Uber Australia",
+        "type": "Ride hailing",
+        "description": "Ride booking in Australian cities",
+        "web": "https://www.uber.com/au/en/",
+        "android": "https://play.google.com/store/search?q=Uber%20Australia&c=apps",
+        "ios": "https://apps.apple.com/search?term=Uber%20Australia",
         "badges": [
           "Taxi",
-          "Australia",
-          "Local"
+          "Premium",
+          "Australia"
         ],
         "docs": [
           "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "Citymapper",
-        "type": "Public transport",
-        "description": "City transit route planning in supported Australian cities.",
-        "web": "https://citymapper.com/",
-        "android": "https://play.google.com/store/search?q=Citymapper&c=apps",
-        "ios": "https://apps.apple.com/search?term=Citymapper",
-        "badges": [
-          "Transit",
-          "Routes",
-          "Global"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
+          "Check fare and pickup point.",
+          "Verify driver and vehicle details."
         ]
       },
       {
@@ -3717,42 +3321,6 @@
         "badges": [
           "Taxi",
           "Budget",
-          "Australia"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check fare and pickup point.",
-          "Verify driver and vehicle details."
-        ]
-      },
-      {
-        "name": "Moovit",
-        "type": "Public transport",
-        "description": "Public transit app for bus, train, metro and route planning.",
-        "web": "https://moovitapp.com/",
-        "android": "https://play.google.com/store/search?q=Moovit&c=apps",
-        "ios": "https://apps.apple.com/search?term=Moovit",
-        "badges": [
-          "Transit",
-          "Routes",
-          "Global"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "Uber Australia",
-        "type": "Ride hailing",
-        "description": "Ride booking in Australian cities",
-        "web": "https://www.uber.com/au/en/",
-        "android": "https://play.google.com/store/search?q=Uber%20Australia&c=apps",
-        "ios": "https://apps.apple.com/search?term=Uber%20Australia",
-        "badges": [
-          "Taxi",
-          "Premium",
           "Australia"
         ],
         "docs": [
@@ -3920,81 +3488,9 @@
     ],
     "food": [
       {
-        "name": "Coles",
-        "type": "Grocery delivery",
-        "description": "Grocery and everyday food delivery or pickup in Australia.",
-        "web": "https://www.coles.com.au/",
-        "android": "https://play.google.com/store/search?q=Coles&c=apps",
-        "ios": "https://apps.apple.com/search?term=Coles",
-        "badges": [
-          "Grocery",
-          "Delivery",
-          "Australia"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "DoorDash Australia",
-        "type": "Food delivery",
-        "description": "Restaurant and grocery delivery in supported Australian areas.",
-        "web": "https://www.doordash.com/en-AU",
-        "android": "https://play.google.com/store/search?q=DoorDash%20Australia&c=apps",
-        "ios": "https://apps.apple.com/search?term=DoorDash%20Australia",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Australia"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "EASI",
-        "type": "Food delivery",
-        "description": "Food delivery app popular for Asian restaurants in Australia.",
-        "web": "https://www.easi.com.au/",
-        "android": "https://play.google.com/store/search?q=EASI&c=apps",
-        "ios": "https://apps.apple.com/search?term=EASI",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Australia"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "HungryPanda",
-        "type": "Food delivery",
-        "description": "Asian food delivery service available in supported Australian cities.",
-        "web": "https://www.hungrypanda.co/",
-        "android": "https://play.google.com/store/search?q=HungryPanda&c=apps",
-        "ios": "https://apps.apple.com/search?term=HungryPanda",
-        "badges": [
-          "Food",
-          "Asian Food",
-          "Australia"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
         "name": "Uber Eats Australia",
         "type": "Food delivery",
-        "description": "Restaurant food delivery in supported Australian cities.",
+        "description": "Food delivery in Australian cities",
         "web": "https://www.ubereats.com/au",
         "android": "https://play.google.com/store/search?q=Uber%20Eats%20Australia&c=apps",
         "ios": "https://apps.apple.com/search?term=Uber%20Eats%20Australia",
@@ -4004,7 +3500,25 @@
           "Australia"
         ],
         "docs": [
-          "Check restaurant or store availability.",
+          "Check restaurant rating.",
+          "Confirm delivery address.",
+          "Review fees before payment."
+        ]
+      },
+      {
+        "name": "Menulog",
+        "type": "Food delivery",
+        "description": "Food delivery and takeaway ordering in Australia",
+        "web": "https://www.menulog.com.au/",
+        "android": "https://play.google.com/store/search?q=Menulog&c=apps",
+        "ios": "https://apps.apple.com/search?term=Menulog",
+        "badges": [
+          "Food",
+          "Takeaway",
+          "Australia"
+        ],
+        "docs": [
+          "Check restaurant rating.",
           "Confirm delivery address.",
           "Review fees before payment."
         ]
@@ -4052,24 +3566,6 @@
     ],
     "emergency": [
       {
-        "name": "Australia Ambulance / Medical Emergency",
-        "type": "Ambulance number",
-        "description": "Ambulance or medical emergency number in Australia: 000.",
-        "web": "tel:000",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Medical",
-          "Ambulance",
-          "Emergency"
-        ],
-        "docs": [
-          "Use for medical emergency.",
-          "Keep passport/ID ready if travelling.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "Australia Emergency Helpline",
         "type": "General emergency",
         "description": "Call 000 for urgent emergency help in Australia.",
@@ -4088,24 +3584,6 @@
         ]
       },
       {
-        "name": "Australia Fire Emergency",
-        "type": "Fire number",
-        "description": "Fire brigade emergency number in Australia: 000.",
-        "web": "tel:000",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Fire",
-          "Emergency",
-          "Safety"
-        ],
-        "docs": [
-          "Leave unsafe place first.",
-          "Call from safe location.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "Australia Police Emergency",
         "type": "Police number",
         "description": "Police emergency number in Australia: 000.",
@@ -4120,6 +3598,42 @@
         "docs": [
           "Tap call from mobile.",
           "Explain city and exact location.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Australia Ambulance / Medical Emergency",
+        "type": "Ambulance number",
+        "description": "Ambulance or medical emergency number in Australia: 000.",
+        "web": "tel:000",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Medical",
+          "Ambulance",
+          "Emergency"
+        ],
+        "docs": [
+          "Use for medical emergency.",
+          "Keep passport/ID ready if travelling.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Australia Fire Emergency",
+        "type": "Fire number",
+        "description": "Fire brigade emergency number in Australia: 000.",
+        "web": "tel:000",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Fire",
+          "Emergency",
+          "Safety"
+        ],
+        "docs": [
+          "Leave unsafe place first.",
+          "Call from safe location.",
           "Verify locally if number changes."
         ]
       }
@@ -29572,98 +29086,6 @@
     ]
   },
   "morocco": {
-    "transport": [
-      {
-        "name": "Careem",
-        "type": "Ride hailing",
-        "description": "Ride-hailing app available in Morocco.",
-        "web": "https://www.careem.com/",
-        "android": "https://play.google.com/store/search?q=Careem&c=apps",
-        "ios": "https://apps.apple.com/search?term=Careem",
-        "badges": [
-          "Taxi",
-          "Regional",
-          "Morocco"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check fare and pickup point.",
-          "Verify driver and vehicle details."
-        ]
-      },
-      {
-        "name": "Heetch",
-        "type": "Ride hailing",
-        "description": "Ride-hailing app available in supported Moroccan areas.",
-        "web": "https://www.heetch.com/",
-        "android": "https://play.google.com/store/search?q=Heetch&c=apps",
-        "ios": "https://apps.apple.com/search?term=Heetch",
-        "badges": [
-          "Taxi",
-          "Ride",
-          "Limited"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "ONCF Voyages",
-        "type": "Train booking",
-        "description": "Morocco train booking and travel information app for ONCF routes.",
-        "web": "https://www.oncf-voyages.ma/",
-        "android": "https://play.google.com/store/search?q=ONCF%20Voyages&c=apps",
-        "ios": "https://apps.apple.com/search?term=ONCF%20Voyages",
-        "badges": [
-          "Train",
-          "Official",
-          "Morocco"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "Roby Taxi",
-        "type": "Taxi app",
-        "description": "Taxi booking app for Marrakech, Casablanca, Agadir and supported cities.",
-        "web": "https://roby.taxi/",
-        "android": "https://play.google.com/store/search?q=Roby%20Taxi&c=apps",
-        "ios": "https://apps.apple.com/search?term=Roby%20Taxi",
-        "badges": [
-          "Taxi",
-          "Local",
-          "Morocco"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      },
-      {
-        "name": "inDrive Morocco",
-        "type": "Ride hailing",
-        "description": "Ride-hailing app available in supported Moroccan cities.",
-        "web": "https://indrive.com/en-ma/",
-        "android": "https://play.google.com/store/search?q=inDrive%20Morocco&c=apps",
-        "ios": "https://apps.apple.com/search?term=inDrive%20Morocco",
-        "badges": [
-          "Taxi",
-          "Ride",
-          "Morocco"
-        ],
-        "docs": [
-          "Enable GPS before booking.",
-          "Check route, fare or pickup point.",
-          "Verify timing and availability."
-        ]
-      }
-    ],
     "navigation": [
       {
         "name": "Google Maps",
@@ -29681,118 +29103,6 @@
           "Download offline maps before travel.",
           "Check public transport directions where available.",
           "Confirm opening hours before visiting."
-        ]
-      }
-    ],
-    "shopping": [
-      {
-        "name": "Google Maps - Shopping Nearby",
-        "type": "Shopping places",
-        "description": "Find malls, markets, stores and shopping areas near your location in Morocco.",
-        "web": "https://www.google.com/maps/search/shopping/",
-        "android": "https://play.google.com/store/apps/details?id=com.google.android.apps.maps",
-        "ios": "https://apps.apple.com/app/google-maps/id585027354",
-        "badges": [
-          "Shopping",
-          "Local",
-          "Tourist"
-        ],
-        "docs": [
-          "Search near your hotel or landmark.",
-          "Check store hours before going.",
-          "Read recent reviews for safety and quality."
-        ]
-      }
-    ],
-    "food": [
-      {
-        "name": "Glovo",
-        "type": "Food delivery",
-        "description": "Food, grocery and shop delivery app available in Morocco.",
-        "web": "https://glovoapp.com/en/ma",
-        "android": "https://play.google.com/store/search?q=Glovo&c=apps",
-        "ios": "https://apps.apple.com/search?term=Glovo",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Morocco"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Kooul",
-        "type": "Food delivery",
-        "description": "Moroccan food delivery app available in major Moroccan cities.",
-        "web": "https://play.google.com/store/apps/details?id=com.ora.customer",
-        "android": "https://play.google.com/store/search?q=Kooul&c=apps",
-        "ios": "https://apps.apple.com/search?term=Kooul",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Morocco"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Livry",
-        "type": "Food delivery",
-        "description": "Local food delivery app for supported Moroccan areas.",
-        "web": "https://apps.apple.com/ma/app/livry/id1552903717",
-        "android": "https://play.google.com/store/search?q=Livry&c=apps",
-        "ios": "https://apps.apple.com/search?term=Livry",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Limited"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Marjane",
-        "type": "Grocery delivery",
-        "description": "Online grocery shopping and daily food delivery options in Morocco.",
-        "web": "https://play.google.com/store/apps/details?id=com.marjane.app",
-        "android": "https://play.google.com/store/search?q=Marjane&c=apps",
-        "ios": "https://apps.apple.com/search?term=Marjane",
-        "badges": [
-          "Grocery",
-          "Delivery",
-          "Morocco"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
-        ]
-      },
-      {
-        "name": "Yassir Express",
-        "type": "Food delivery",
-        "description": "Food and grocery delivery through the Yassir app in supported locations.",
-        "web": "https://yassir.com/en/food-delivery",
-        "android": "https://play.google.com/store/search?q=Yassir%20Express&c=apps",
-        "ios": "https://apps.apple.com/search?term=Yassir%20Express",
-        "badges": [
-          "Food",
-          "Delivery",
-          "Limited"
-        ],
-        "docs": [
-          "Check restaurant or store availability.",
-          "Confirm delivery address.",
-          "Review fees before payment."
         ]
       }
     ],
@@ -29876,25 +29186,67 @@
         ]
       }
     ],
-    "emergency": [
+    "transport": [
       {
-        "name": "Morocco Ambulance / Medical Emergency",
-        "type": "Ambulance number",
-        "description": "Ambulance or medical emergency number in Morocco: 15.",
-        "web": "tel:15",
-        "android": "",
-        "ios": "",
+        "name": "Careem",
+        "type": "Ride hailing",
+        "description": "Ride-hailing app available in Morocco.",
+        "web": "https://www.careem.com/",
+        "android": "https://play.google.com/store/search?q=Careem&c=apps",
+        "ios": "https://apps.apple.com/search?term=Careem",
         "badges": [
-          "Medical",
-          "Ambulance",
-          "Emergency"
+          "Taxi",
+          "Regional",
+          "Morocco"
         ],
         "docs": [
-          "Use for medical emergency.",
-          "Keep passport/ID ready if travelling.",
-          "Verify locally if number changes."
+          "Enable GPS before booking.",
+          "Check fare and pickup point.",
+          "Verify driver and vehicle details."
         ]
-      },
+      }
+    ],
+    "shopping": [
+      {
+        "name": "Google Maps - Shopping Nearby",
+        "type": "Shopping places",
+        "description": "Find malls, markets, stores and shopping areas near your location in Morocco.",
+        "web": "https://www.google.com/maps/search/shopping/",
+        "android": "https://play.google.com/store/apps/details?id=com.google.android.apps.maps",
+        "ios": "https://apps.apple.com/app/google-maps/id585027354",
+        "badges": [
+          "Shopping",
+          "Local",
+          "Tourist"
+        ],
+        "docs": [
+          "Search near your hotel or landmark.",
+          "Check store hours before going.",
+          "Read recent reviews for safety and quality."
+        ]
+      }
+    ],
+    "food": [
+      {
+        "name": "Glovo",
+        "type": "Delivery app",
+        "description": "Food, grocery and shop delivery app available in Morocco.",
+        "web": "https://glovoapp.com/",
+        "android": "https://play.google.com/store/search?q=Glovo&c=apps",
+        "ios": "https://apps.apple.com/search?term=Glovo",
+        "badges": [
+          "Food",
+          "Delivery",
+          "Morocco"
+        ],
+        "docs": [
+          "Check restaurant or store availability.",
+          "Confirm delivery address.",
+          "Review fees before payment."
+        ]
+      }
+    ],
+    "emergency": [
       {
         "name": "Morocco Emergency Helpline",
         "type": "General emergency",
@@ -29914,24 +29266,6 @@
         ]
       },
       {
-        "name": "Morocco Fire Emergency",
-        "type": "Fire number",
-        "description": "Fire brigade emergency number in Morocco: 15.",
-        "web": "tel:15",
-        "android": "",
-        "ios": "",
-        "badges": [
-          "Fire",
-          "Emergency",
-          "Safety"
-        ],
-        "docs": [
-          "Leave unsafe place first.",
-          "Call from safe location.",
-          "Verify locally if number changes."
-        ]
-      },
-      {
         "name": "Morocco Police Emergency",
         "type": "Police number",
         "description": "Police emergency number in Morocco: 19.",
@@ -29946,6 +29280,42 @@
         "docs": [
           "Tap call from mobile.",
           "Explain city and exact location.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Morocco Ambulance / Medical Emergency",
+        "type": "Ambulance number",
+        "description": "Ambulance or medical emergency number in Morocco: 15.",
+        "web": "tel:15",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Medical",
+          "Ambulance",
+          "Emergency"
+        ],
+        "docs": [
+          "Use for medical emergency.",
+          "Keep passport/ID ready if travelling.",
+          "Verify locally if number changes."
+        ]
+      },
+      {
+        "name": "Morocco Fire Emergency",
+        "type": "Fire number",
+        "description": "Fire brigade emergency number in Morocco: 15.",
+        "web": "tel:15",
+        "android": "",
+        "ios": "",
+        "badges": [
+          "Fire",
+          "Emergency",
+          "Safety"
+        ],
+        "docs": [
+          "Leave unsafe place first.",
+          "Call from safe location.",
           "Verify locally if number changes."
         ]
       }

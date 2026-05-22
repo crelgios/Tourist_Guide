@@ -92,3 +92,13 @@ Used in the project:
 - Social preview image: `public/brand/aliwvide-og-image.jpg`
 
 The animation files are included in `public/brand/` but are not loaded in the navbar to keep mobile performance fast.
+
+## Free Aliwvide Assistant
+
+This version includes a free client-side Aliwvide Assistant. It does not use OpenAI, paid APIs, Supabase, or server calls. It searches the website country/app JSON data and gives app suggestions by country and category.
+
+Main files:
+- `src/components/FreeAiAssistant.jsx`
+- `src/components/SiteShell.jsx`
+
+SOS/Emergency remains hidden from the public assistant and public category UI.

@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import FreeAiAssistant from "@/components/FreeAiAssistant";
 
 const hiddenNavbarPrefixes = [
   "/admin",
@@ -19,6 +20,7 @@ export default function SiteShell({ children }) {
     <>
       {!hideNavbar && <Navbar />}
       {children}
+      {!hideNavbar && <FreeAiAssistant />}
     </>
   );
 }

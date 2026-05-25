@@ -1,8 +1,8 @@
 import Link from "next/link";
-import siteContent from "@/data/site-content.json";
+import { getPublishedBlogs } from "@/lib/content";
 
-export default function BlogSection() {
-  const blogs = (siteContent.blogs || []).slice(0, 3);
+export default async function BlogSection() {
+  const blogs = await getPublishedBlogs({ limit: 3 });
 
   if (!blogs.length) {
     return null;

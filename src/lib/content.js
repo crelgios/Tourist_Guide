@@ -87,7 +87,7 @@ export async function getPublishedBlogBySlug(slug) {
       tags: ["blogs", `blog:${slug}`]
     });
 
-    return rows[0] ? normalizeBlog(rows[0]) : null;
+    return rows[0] ? normalizeBlog(rows[0]) : fallbackBlogs().find((blog) => blog.slug === slug) || null;
   } catch (error) {
     console.error(error);
     return fallbackBlogs().find((blog) => blog.slug === slug) || null;

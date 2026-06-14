@@ -82,7 +82,7 @@ export default function ContactForm() {
               <div className="rounded-2xl border border-white/70 bg-white/55 p-4 backdrop-blur-xl">✅ Travel service suggestions</div>
               <div className="rounded-2xl border border-white/70 bg-white/55 p-4 backdrop-blur-xl">✅ Country data correction requests</div>
               <div className="rounded-2xl border border-white/70 bg-white/55 p-4 backdrop-blur-xl">✅ Partnership or business contact</div>
-              <div className="rounded-2xl border border-white/70 bg-white/55 p-4 backdrop-blur-xl">✅ Broken link or emergency number updates</div>
+              
             </div>
           </div>
 

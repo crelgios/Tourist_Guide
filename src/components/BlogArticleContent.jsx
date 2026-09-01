@@ -61,6 +61,22 @@ function isPlainSectionHeading(line, nextLine) {
   return /^[A-Z0-9]/.test(trimmed);
 }
 
+function parseProductBlock(text) {
+  const getValue = (key) => {
+    const match = text.match(new RegExp(`${key}\\s*=\\s*(.*)`, "i"));
+    return match ? cleanText(match[1]) : "";
+  };
+
+  return {
+    title: getValue("title"),
+    image: getValue("image"),
+    description: getValue("description"),
+    bestFor: getValue("best_for"),
+    button: getValue("button") || "Check Price",
+    url: getValue("url")
+  };
+}
+
 function parseContent(content) {
   const lines = String(content || "").replace(/\r\n/g, "\n").split("\n");
   const blocks = [];
@@ -73,6 +89,28 @@ function parseContent(content) {
 
     if (!line) {
       i += 1;
+      continue;
+    }
+
+    if (line === "[PRODUCT]") {
+      const productLines = [];
+      i += 1;
+
+      while (i < lines.length && lines[i].trim() !== "[/PRODUCT]") {
+        productLines.push(lines[i]);
+        i += 1;
+      }
+
+      if (i < lines.length && lines[i].trim() === "[/PRODUCT]") {
+        i += 1;
+      }
+
+      const product = parseProductBlock(productLines.join("\n"));
+
+      if (product.title && product.url) {
+        blocks.push({ type: "product", ...product });
+      }
+
       continue;
     }
 
@@ -150,7 +188,14 @@ function parseContent(content) {
     while (i < lines.length) {
       const next = lines[i].trim();
       const upcoming = getNextNonEmptyLine(lines, i + 1);
-      if (!next || isHeading(next) || listMatch(next) || labelMatch(next) || isPlainSectionHeading(next, upcoming?.line)) break;
+      if (
+        !next ||
+        next === "[PRODUCT]" ||
+        isHeading(next) ||
+        listMatch(next) ||
+        labelMatch(next) ||
+        isPlainSectionHeading(next, upcoming?.line)
+      ) break;
       paragraphLines.push(next);
       i += 1;
     }
@@ -168,17 +213,35 @@ function getHeadingId(text, usedIds) {
 }
 
 function InlineText({ text }) {
-  const parts = String(text || "").split(/(https?:\/\/[^\s]+|\*\*[^*]+\*\*)/g).filter(Boolean);
+  const parts = String(text || "")
+    .split(/(\[([^\]]+)\]\((https?:\/\/[^)]+)\)|https?:\/\/[^\s]+|\*\*[^*]+\*\*)/g)
+    .filter(Boolean);
 
   return parts.map((part, index) => {
+    const markdownLink = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+
+    if (markdownLink) {
+      return (
+        <a
+          key={`${part}-${index}`}
+          href={markdownLink[2]}
+          target="_blank"
+          rel="nofollow sponsored noopener noreferrer"
+          className="font-extrabold text-orange-600 underline decoration-orange-300 underline-offset-4 hover:text-orange-800"
+        >
+          {markdownLink[1]}
+        </a>
+      );
+    }
+
     if (/^https?:\/\//.test(part)) {
       return (
         <a
           key={`${part}-${index}`}
           href={part}
           target="_blank"
-          rel="noopener noreferrer"
-          className="font-semibold text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-900"
+          rel="nofollow sponsored noopener noreferrer"
+          className="font-extrabold text-orange-600 underline decoration-orange-300 underline-offset-4 hover:text-orange-800"
         >
           {part.replace(/^https?:\/\//, "")}
         </a>
@@ -186,11 +249,66 @@ function InlineText({ text }) {
     }
 
     if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={`${part}-${index}`} className="font-bold text-slate-950">{part.slice(2, -2)}</strong>;
+      return (
+        <strong key={`${part}-${index}`} className="font-bold text-slate-950">
+          {part.slice(2, -2)}
+        </strong>
+      );
     }
 
     return <span key={`${part}-${index}`}>{part}</span>;
   });
+}
+
+function ProductCard({ product }) {
+  return (
+    <div className="rounded-[2rem] border border-orange-100 bg-gradient-to-br from-white via-orange-50/40 to-emerald-50 p-4 shadow-sm sm:p-5">
+      <div className="grid gap-5 sm:grid-cols-[190px_1fr]">
+        <div className="flex h-48 items-center justify-center overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.title}
+              className="h-full w-full object-contain p-3"
+            />
+          ) : (
+            <span className="text-6xl">🎒</span>
+          )}
+        </div>
+
+        <div className="flex flex-col justify-center">
+          <span className="mb-3 w-fit rounded-full bg-orange-100 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-orange-700">
+            Recommended
+          </span>
+
+          <h3 className="text-2xl font-extrabold tracking-tight text-slate-950">
+            {product.title}
+          </h3>
+
+          {product.bestFor ? (
+            <p className="mt-2 text-sm font-bold text-emerald-700">
+              Best for: {product.bestFor}
+            </p>
+          ) : null}
+
+          {product.description ? (
+            <p className="mt-3 text-lg leading-8 text-slate-700">
+              {product.description}
+            </p>
+          ) : null}
+
+          <a
+            href={product.url}
+            target="_blank"
+            rel="nofollow sponsored noopener noreferrer"
+            className="mt-5 inline-flex w-fit items-center justify-center rounded-2xl bg-orange-500 px-6 py-3 text-base font-extrabold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-orange-600 hover:shadow-md"
+          >
+            {product.button}
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function BlogArticleContent({ content }) {
@@ -231,6 +349,10 @@ export default function BlogArticleContent({ content }) {
       <article className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-8 lg:p-10">
         <div className="space-y-7 text-slate-700">
           {renderedBlocks.map((block, index) => {
+            if (block.type === "product") {
+              return <ProductCard key={`product-${index}`} product={block} />;
+            }
+
             if (block.type === "heading") {
               const levelClass = block.level <= 2
                 ? "mt-6 border-b border-slate-200 pb-4 text-3xl font-extrabold tracking-tight text-slate-950 first:mt-0"

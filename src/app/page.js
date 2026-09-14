@@ -232,7 +232,7 @@ export default function Home() {
           <div className="absolute right-[-120px] top-24 h-72 w-72 rounded-full bg-sky-400/20 blur-3xl md:h-[34rem] md:w-[34rem]" />
           <div className="absolute bottom-[-120px] left-[-100px] h-72 w-72 rounded-full bg-violet-500/20 blur-3xl md:h-[30rem] md:w-[30rem]" />
 
-          <div className="relative z-10 mx-auto grid min-h-[82svh] max-w-7xl items-center gap-10 px-6 py-12 lg:grid-cols-[1.02fr_.98fr]">
+          <div className="relative z-10 mx-auto grid min-h-[82svh] max-w-7xl items-center gap-10 px-6 py-12 min-[900px]:grid-cols-[1.02fr_.98fr]">
             <div className="max-w-3xl">
               <p className="mb-6 inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-blue-100 backdrop-blur">
                 Travel Apps • Travel Tools • Travel Shop • Travel Guides
@@ -256,7 +256,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative hidden lg:block" aria-hidden="true">
+            <div className="relative hidden min-[900px]:flex min-h-[460px] items-center justify-center" aria-hidden="true">
               <div className="absolute -inset-6 rounded-[3rem] bg-white/5 blur-2xl" />
               <img
                 src="/hero/aliwvide-travel-apps-hero.svg"
@@ -265,7 +265,7 @@ export default function Home() {
                 height="620"
                 loading="eager"
                 fetchPriority="high"
-                className="relative h-auto w-full select-none drop-shadow-2xl"
+                className="relative h-auto w-full max-w-[620px] select-none object-contain drop-shadow-2xl"
               />
             </div>
           </div>

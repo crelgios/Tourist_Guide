@@ -7,32 +7,32 @@ import siteContent from "@/data/site-content.json";
 import { getHomepageAppIcon } from "@/data/homepage-app-icons";
 
 export const metadata = {
-  title: "Discover Travel Apps Used Around the World | Aliwvide",
+  title: "Aliwvide | Travel Apps, Travel Tools, Travel Shop & Guides",
   description:
-    "Find the best travel, transport, food delivery, grocery delivery, navigation, taxi, train, metro and tourist apps used in countries around the world.",
+    "Discover travel apps by country, free travel tools, curated travel products and practical travel guides on Aliwvide. Plan smarter with local app recommendations, useful tools and travel essentials.",
   keywords: [
+    "Aliwvide",
     "travel apps by country",
-    "Discover Travel Apps Used Around the World",
     "best travel apps worldwide",
-    "transport apps by country",
+    "travel tools",
+    "travel shop",
+    "travel accessories",
+    "travel essentials",
+    "travel guides",
     "taxi apps by country",
+    "transport apps by country",
     "food delivery apps by country",
-    "best grocery app in Delhi India",
-    "grocery fast delivery India",
-    "instant grocery delivery Delhi",
-    "Blinkit delivery app",
-    "Zepto grocery delivery",
-    "Swiggy Instamart fast delivery",
-    "best taxi apps in India",
-    "India travel apps",
-    "IRCTC Rail Connect",
-    "Delhi metro apps"
+    "train apps by country",
+    "tourist apps",
+    "Tasbih Counter",
+    "Daily Dhikr",
+    "Dua Counter"
   ],
   alternates: { canonical: siteConfig.url },
   openGraph: {
-    title: "Discover Travel Apps Used Around the World | Aliwvide",
+    title: "Aliwvide | Travel Apps, Tools, Shop & Guides",
     description:
-      "Explore trusted travel, transport, navigation, taxi, train, metro, food delivery and tourist apps used worldwide.",
+      "Explore travel apps by country, free travel tools, curated travel products and practical guides for smarter trips.",
     url: siteConfig.url,
     siteName: "Aliwvide",
     type: "website",
@@ -41,16 +41,18 @@ export const metadata = {
         url: "/brand/aliwvide-og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Aliwvide travel apps by country logo"
+        alt: "Aliwvide travel apps, tools, shop and guides"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
+    title: "Aliwvide | Travel Apps, Tools, Shop & Guides",
+    description:
+      "Travel apps by country, free tools, travel products and practical guides from Aliwvide.",
     images: ["/brand/aliwvide-og-image.jpg"]
   }
 };
-
 
 const topAppCategoryPriority = [
   "transport",
@@ -74,17 +76,6 @@ const appLogoThemes = [
   "bg-emerald-100 text-emerald-700"
 ];
 
-function getInitials(name = "App") {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
-}
-
-
 function getFallbackIcon(app) {
   const text = `${app?.name || ""} ${app?.category || ""} ${app?.label || ""}`.toLowerCase();
 
@@ -100,7 +91,6 @@ function getFallbackIcon(app) {
 
   return "📱";
 }
-
 
 function buildTopAppsForCountry(slug, data) {
   const apps = [];
@@ -151,6 +141,37 @@ const stats = [
   [String(listedApps), "Listed Services"]
 ];
 
+const ecosystemCards = [
+  {
+    eyebrow: "Travel Apps",
+    title: "Local apps by country",
+    description: "Find taxi, train, metro, maps, food delivery, shopping, hotel and other useful apps before you travel.",
+    href: "/explore",
+    cta: "Explore countries →"
+  },
+  {
+    eyebrow: "Travel Tools",
+    title: "Free tools for travellers",
+    description: "Open the Tasbih Counter, Daily Dhikr and Dua Counter directly from Aliwvide Travel Tools.",
+    href: "/tools",
+    cta: "Open travel tools →"
+  },
+  {
+    eyebrow: "Aliwvide Shop",
+    title: "Curated travel essentials",
+    description: "Browse luggage, organizers, gadgets, comfort items and other practical travel products in the Aliwvide Shop.",
+    href: "/shop",
+    cta: "Visit the shop →"
+  },
+  {
+    eyebrow: "Travel Guides",
+    title: "Helpful articles and ideas",
+    description: "Read practical travel articles, product guides and destination-focused content from the Aliwvide blog.",
+    href: "/blog",
+    cta: "Read travel guides →"
+  }
+];
+
 export const revalidate = 3600;
 
 export default function Home() {
@@ -173,11 +194,35 @@ export default function Home() {
     }))
   };
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Aliwvide",
+    url: siteConfig.url,
+    description:
+      "Aliwvide helps travellers discover local travel apps by country, free travel tools, curated travel products and practical travel guides.",
+    publisher: {
+      "@type": "Organization",
+      name: "Aliwvide",
+      url: siteConfig.url
+    },
+    hasPart: [
+      { "@type": "CollectionPage", name: "Travel Apps by Country", url: `${siteConfig.url}/explore` },
+      { "@type": "CollectionPage", name: "Aliwvide Travel Tools", url: `${siteConfig.url}/tools` },
+      { "@type": "CollectionPage", name: "Aliwvide Shop", url: `${siteConfig.url}/shop` },
+      { "@type": "Blog", name: "Aliwvide Travel Guides", url: `${siteConfig.url}/blog` }
+    ]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
 
       <main className="overflow-hidden bg-white text-slate-950">
@@ -190,20 +235,23 @@ export default function Home() {
           <div className="relative z-10 mx-auto grid min-h-[82svh] max-w-7xl items-center gap-10 px-6 py-12 lg:grid-cols-[1.02fr_.98fr]">
             <div className="max-w-3xl">
               <p className="mb-6 inline-flex rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-blue-100 backdrop-blur">
-                Travel apps by country
+                Travel Apps • Travel Tools • Travel Shop • Travel Guides
               </p>
               <h1 className="text-5xl font-black leading-[.94] tracking-[-0.06em] sm:text-6xl md:text-8xl">
-                Discover <span className="bg-gradient-to-r from-sky-300 to-violet-400 bg-clip-text text-transparent">Travel Apps</span> Used Around the World
+                Plan smarter with <span className="bg-gradient-to-r from-sky-300 to-violet-400 bg-clip-text text-transparent">Aliwvide</span>
               </h1>
               <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">
-                Explore trusted travel, transport, navigation, taxi, train, metro, food delivery and grocery apps used by locals and tourists worldwide.
+                Discover local travel apps by country, free travel tools, curated travel products and practical guides for every stage of your journey.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link href="/explore" className="rounded-full bg-gradient-to-r from-sky-400 to-violet-500 px-7 py-4 font-black text-white shadow-2xl transition hover:-translate-y-1">
                   Explore Countries
                 </Link>
-                <Link href="#faq" className="rounded-full border border-white/25 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur transition hover:bg-white/20">
-                  FAQ
+                <Link href="/shop" className="rounded-full border border-white/25 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur transition hover:bg-white/20">
+                  Visit Shop
+                </Link>
+                <Link href="/tools" className="rounded-full border border-white/25 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur transition hover:bg-white/20">
+                  Travel Tools
                 </Link>
               </div>
             </div>
@@ -234,13 +282,36 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl">
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">Everything in one travel hub</p>
+              <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] md:text-5xl">More than a travel app directory</h2>
+              <p className="mt-5 leading-8 text-slate-600">
+                Aliwvide brings together travel app discovery, free travel-friendly tools, curated travel shopping and practical guides so travellers can prepare before and during a trip.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {ecosystemCards.map((item) => (
+                <Link key={item.title} href={item.href} className="group rounded-[2rem] border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:border-emerald-300 hover:bg-white hover:shadow-xl">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-600">{item.eyebrow}</p>
+                  <h3 className="mt-3 text-2xl font-black tracking-[-0.03em]">{item.title}</h3>
+                  <p className="mt-3 leading-7 text-slate-600">{item.description}</p>
+                  <p className="mt-5 font-black text-slate-950 group-hover:text-emerald-700">{item.cta}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="bg-gradient-to-br from-slate-50 to-violet-50 px-6 py-20">
           <div className="mx-auto max-w-7xl">
             <div className="max-w-3xl">
               <p className="inline-flex rounded-full bg-white px-4 py-2 font-black shadow-sm">🌍 QUICK PREVIEW</p>
               <h2 className="mt-5 text-4xl font-black tracking-[-0.04em] md:text-5xl">Top Travel Apps by Country</h2>
               <p className="mt-5 leading-8 text-slate-600">
-                Preview useful travel, taxi, maps, train, food delivery and grocery apps for India, Japan and Saudi Arabia. Open the category page to explore all countries.
+                Preview useful travel, taxi, maps, train, food delivery and grocery apps for India, Japan and Saudi Arabia. Open the country page to explore more.
               </p>
             </div>
 
@@ -301,14 +372,14 @@ export default function Home() {
               <p className="font-black uppercase tracking-[.2em] text-sky-300">Tourist friendly</p>
               <h2 className="mt-4 text-4xl font-black">Why travellers use Aliwvide</h2>
               <p className="mt-5 leading-8 text-slate-300">
-                Travellers often struggle to know which local apps work in a new country. Aliwvide groups apps into useful categories like taxi, train, metro, maps, food, grocery, shopping and hotel booking.
+                Travellers often struggle to know which local apps work in a new country. Aliwvide groups apps into useful categories like taxi, train, metro, maps, food, grocery, shopping and hotel booking, while also providing travel tools, product discovery and guides.
               </p>
             </div>
             <div className="rounded-[2.5rem] bg-slate-100 p-8 md:p-10">
               <p className="font-black uppercase tracking-[.2em] text-violet-500">Trip planning</p>
               <h2 className="mt-4 text-4xl font-black">Plan before you land</h2>
               <p className="mt-5 leading-8 text-slate-600">
-                Compare the apps travellers often need before a trip: local rides, maps, train booking, food delivery and shopping. Open a country guide and save the tools that match your route.
+                Compare local apps, browse travel essentials, open useful browser-based tools and read practical guides before your journey starts.
               </p>
             </div>
           </div>
@@ -317,12 +388,14 @@ export default function Home() {
         <section className="bg-white px-6 py-16">
           <div className="mx-auto max-w-7xl rounded-[2rem] border border-slate-200 bg-slate-50 p-7 md:p-10">
             <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-600">Popular country guides</p>
-            <h2 className="mt-3 text-3xl font-black tracking-[-0.04em] text-slate-950">Start with the most searched travel app guides</h2>
+            <h2 className="mt-3 text-3xl font-black tracking-[-0.04em] text-slate-950">Start with popular Aliwvide travel resources</h2>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/country/india" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">India travel apps</Link>
               <Link href="/india/taxi-apps" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Best taxi apps in India</Link>
               <Link href="/country/japan" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Japan travel apps</Link>
               <Link href="/country/saudiarabia" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Saudi Arabia travel apps</Link>
+              <Link href="/shop" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Travel Shop</Link>
+              <Link href="/tools" className="rounded-full bg-white px-5 py-3 font-bold text-slate-900 ring-1 ring-slate-200 hover:bg-emerald-50 hover:text-emerald-700">Travel Tools</Link>
               <Link href="/category" className="rounded-full bg-slate-950 px-5 py-3 font-bold text-white hover:bg-slate-800">Browse categories</Link>
             </div>
           </div>
@@ -336,7 +409,7 @@ export default function Home() {
               <p className="font-black uppercase tracking-[.2em] text-violet-500">FAQ</p>
               <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] md:text-5xl">Frequently Asked Questions</h2>
               <p className="mt-4 leading-8 text-slate-600">
-                Quick answers for worldwide travel apps, India travel apps, taxi apps, food delivery and grocery fast delivery categories.
+                Quick answers about Aliwvide travel apps, country guides, travel tools, the travel shop and other resources.
               </p>
             </div>
 

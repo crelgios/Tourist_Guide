@@ -9,7 +9,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Explore", href: "/explore" },
   { name: "Categories", href: "/category" },
-  { name: "Tasbih", href: "/tools/tasbih" },
+  { name: "Tasbih", href: "https://tasbii.vercel.app/", external: true },
   { name: "Blog", href: "/blog" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" }
@@ -19,7 +19,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  function isActive(href) {
+  function isActive(href, external) {
+    if (external) return false;
     if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(`${href}/`);
   }
@@ -30,19 +31,23 @@ export default function Navbar() {
         <SiteLogo onClick={() => setOpen(false)} />
 
         <div className="hidden items-center gap-2 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                isActive(link.href)
-                  ? "bg-emerald-500 text-white shadow-sm"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const className = `rounded-full px-4 py-2 text-sm font-semibold transition ${
+              isActive(link.href, link.external)
+                ? "bg-emerald-500 text-white shadow-sm"
+                : "text-slate-200 hover:bg-white/10 hover:text-white"
+            }`;
+
+            return link.external ? (
+              <a key={link.href} href={link.href} className={className}>
+                {link.name}
+              </a>
+            ) : (
+              <Link key={link.href} href={link.href} className={className}>
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
 
         <button
@@ -70,20 +75,23 @@ export default function Navbar() {
       {open && (
         <div className="border-t border-white/10 bg-slate-950 px-4 pb-4 md:hidden">
           <div className="mx-auto grid max-w-7xl gap-2 pt-3">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={`rounded-2xl px-4 py-3 text-base font-bold transition ${
-                  isActive(link.href)
-                    ? "bg-emerald-500 text-white"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const className = `rounded-2xl px-4 py-3 text-base font-bold transition ${
+                isActive(link.href, link.external)
+                  ? "bg-emerald-500 text-white"
+                  : "text-slate-200 hover:bg-white/10 hover:text-white"
+              }`;
+
+              return link.external ? (
+                <a key={link.href} href={link.href} onClick={() => setOpen(false)} className={className}>
+                  {link.name}
+                </a>
+              ) : (
+                <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className={className}>
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}

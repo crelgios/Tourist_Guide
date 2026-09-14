@@ -33,3 +33,19 @@ values
   20
 )
 on conflict do nothing;
+
+insert into public.shop_products (name, affiliate_url, active, sort_order)
+select product_name, 'https://www.amazon.in/dp/B0CXM9Q1SW?tag=aliwvidetrave-21', true, product_order
+from (values
+  ('Cabin Trolley Bag', 1), ('Travel Backpack 45L', 2), ('Packing Cubes Set', 3),
+  ('Universal Travel Adapter', 4), ('Digital Luggage Scale', 5), ('Memory Foam Neck Pillow', 6),
+  ('RFID Passport Wallet', 7), ('Hanging Toiletry Bag', 8), ('20,000mAh Power Bank', 9),
+  ('Foldable Travel Bottle', 10), ('Cable Organizer Pouch', 11), ('Luggage Strap', 12),
+  ('Luggage Tags', 13), ('Travel Shoe Bags', 14), ('Compression Socks', 15), ('Sleep Mask', 16),
+  ('Travel Umbrella', 17), ('Foldable Daypack', 18), ('Waterproof Phone Pouch', 19),
+  ('Travel First Aid Pouch', 20), ('TSA Combination Lock', 21), ('Travel Laundry Bag', 22),
+  ('Phone Tripod', 23), ('Car Phone Holder', 24), ('Travel Sling Bag', 25), ('Foldable Duffel Bag', 26),
+  ('Travel Towel', 27), ('Portable Mini Fan', 28), ('Backpack Rain Cover', 29),
+  ('Travel Document Organizer', 30)
+) as products(product_name, product_order)
+on conflict (name) do nothing;

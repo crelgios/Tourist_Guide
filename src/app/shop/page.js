@@ -1,7 +1,10 @@
 import TravelShop from "@/components/TravelShop";
+import { hasPublicSupabaseConfig, publicSupabaseRequest } from "@/lib/supabase-rest";
 
 const pageUrl = "https://www.aliwvide.com/shop";
 const socialImage = "https://www.aliwvide.com/brand/aliwvide-og-image.jpg";
+
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Best Travel Accessories & Travel Essentials in India | Aliwvide Shop",
@@ -81,9 +84,32 @@ const structuredData = {
   ]
 };
 
-export default function ShopPage() {
+async function getAffiliateLinks() {
+  if (!hasPublicSupabaseConfig()) return {};
+
+  try {
+    const rows = await publicSupabaseRequest("/shop_products", {
+      query: "select=name,affiliate_url&active=eq.true&order=sort_order.asc",
+      revalidate: 3600,
+      tags: ["shop-products"]
+    });
+
+    return Object.fromEntries(
+      (rows || [])
+        .filter((row) => row?.name && row?.affiliate_url)
+        .map((row) => [row.name, row.affiliate_url])
+    );
+  } catch (error) {
+    console.error("Could not load shop affiliate links from Supabase.", error);
+    return {};
+  }
+}
+
+export default async function ShopPage() {
+  const affiliateLinks = await getAffiliateLinks();
+
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-    <TravelShop />
+    <TravelShop affiliateLinks={affiliateLinks} />
   </>;
 }

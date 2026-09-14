@@ -17,6 +17,7 @@ body {
   backdrop-filter: blur(18px);
   border: 1px solid rgba(229, 231, 235, 0.85);
 }
+
 .aliwvide-app-marquee {
   animation: aliwvide-marquee 26s linear infinite;
 }
@@ -26,26 +27,79 @@ body {
 }
 
 @keyframes aliwvide-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .aliwvide-app-marquee {
-    animation: none;
-  }
+/* Ask Aliwvide: subtle premium motion without changing its name or layout. */
+button[aria-label="Open Aliwvide assistant"] {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  animation: aliwvideAssistantFloat 3.6s ease-in-out infinite;
 }
 
-@media (max-width: 767px) {
-  .aliwvide-app-marquee {
-    animation: none;
-  }
+button[aria-label="Open Aliwvide assistant"]::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -5px;
+  border-radius: 9999px;
+  background: linear-gradient(115deg, rgba(16,185,129,.72), rgba(56,189,248,.5), rgba(139,92,246,.52), rgba(16,185,129,.72));
+  background-size: 240% 240%;
+  filter: blur(8px);
+  opacity: .55;
+  animation: aliwvideAssistantAura 5s ease infinite;
+  pointer-events: none;
 }
 
+button[aria-label="Open Aliwvide assistant"]::after {
+  content: "✦";
+  position: absolute;
+  right: -4px;
+  top: -9px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #fff;
+  color: #059669;
+  font-size: 13px;
+  line-height: 1;
+  box-shadow: 0 6px 18px rgba(2, 8, 23, .2);
+  animation: aliwvideAssistantSparkle 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+button[aria-label="Open Aliwvide assistant"] img {
+  animation: aliwvideAssistantAvatar 4.5s ease-in-out infinite;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.16), 0 0 20px rgba(110,231,183,.42);
+}
+
+button[aria-label="Open Aliwvide assistant"]:hover {
+  transform: translateY(-3px) scale(1.025);
+}
+
+@keyframes aliwvideAssistantFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes aliwvideAssistantAura {
+  0%, 100% { background-position: 0% 50%; opacity: .42; transform: scale(.98); }
+  50% { background-position: 100% 50%; opacity: .7; transform: scale(1.04); }
+}
+
+@keyframes aliwvideAssistantSparkle {
+  0%, 100% { transform: rotate(-10deg) scale(.82); opacity: .72; }
+  50% { transform: rotate(18deg) scale(1.12); opacity: 1; }
+}
+
+@keyframes aliwvideAssistantAvatar {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(2deg) scale(1.06); }
+}
 
 .aliwvide-page-transition {
   animation: aliwvideRouteFade 240ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
@@ -67,50 +121,35 @@ body {
 }
 
 @keyframes aliwvideRouteFade {
-  from {
-    opacity: 0.86;
-    transform: translate3d(0, 8px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+  from { opacity: 0.86; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes aliwvideRouteBar {
-  0% {
-    opacity: 0.9;
-    transform: scaleX(0);
-  }
-  70% {
-    opacity: 0.75;
-    transform: scaleX(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scaleX(1);
-  }
+  0% { opacity: 0.9; transform: scaleX(0); }
+  70% { opacity: 0.75; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(1); }
 }
 
 @media (max-width: 640px) {
-  .aliwvide-page-transition {
-    animation-duration: 180ms;
-  }
-
-  .aliwvide-page-transition::before {
-    height: 2px;
-    animation-duration: 520ms;
-  }
+  .aliwvide-page-transition { animation-duration: 180ms; }
+  .aliwvide-page-transition::before { height: 2px; animation-duration: 520ms; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aliwvide-page-transition {
+  .aliwvide-app-marquee,
+  .aliwvide-page-transition,
+  button[aria-label="Open Aliwvide assistant"],
+  button[aria-label="Open Aliwvide assistant"]::before,
+  button[aria-label="Open Aliwvide assistant"]::after,
+  button[aria-label="Open Aliwvide assistant"] img {
     animation: none;
-    will-change: auto;
   }
 
-  .aliwvide-page-transition::before {
-    display: none;
-  }
+  .aliwvide-page-transition { will-change: auto; }
+  .aliwvide-page-transition::before { display: none; }
 }
 
+@media (max-width: 767px) {
+  .aliwvide-app-marquee { animation: none; }
+}

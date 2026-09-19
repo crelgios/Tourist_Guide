@@ -15,7 +15,7 @@ const photos = {
   travelcase: "https://markrydenus.com/cdn/shop/files/MR262G_5.webp?v=1753757742&width=1946",
   scale: "https://media.s-bol.com/g4jo3mBxABYl/RgMnzRE/550x551.jpg",
   umbrella: "https://nexso.ae/cdn/shop/files/61gWdg2C5hL._AC_SX569.jpg?v=1760108169&width=569",
-  pillow: "https://www.staples.ca/cdn/shop/files/e9b557b213345cf6b96cdb1bd750c14c95c8eb30_square3107145_1_1000x.jpg?v=1762996698",
+  pillow: "https://kindermarket.bg/thumbs/3/kikkaboo-3/media/catalog/product/t/r/travel_pillow_white.jpg",
   bottle: "https://cdn11.bigcommerce.com/s-4bpjsyet2q/images/stencil/1280x1280/products/2771/1370256/V-01549-H-999492__33098.1763473245.jpg?c=1",
   fan: "https://highcaliberline.com/cdn/shop/files/T802-00-front-blank-800px.jpg?v=1738358318&width=990",
   tripod: "https://img.fruugo.com/product/0/21/1778317210_max.jpg",

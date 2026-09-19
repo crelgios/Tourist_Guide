@@ -8,9 +8,9 @@ export default function ManagedTravelShop({ affiliateLinks = {} }) {
     const updateLinks = () => {
       document.querySelectorAll("#products article").forEach((card) => {
         const name = card.querySelector("h3")?.textContent?.trim();
-        const link = card.querySelector("a[target='_blank']");
+        const links = card.querySelectorAll("a[target='_blank']");
         const managedUrl = name ? affiliateLinks[name] : null;
-        if (link && managedUrl) link.href = managedUrl;
+        if (managedUrl) links.forEach((link) => { link.href = managedUrl; });
       });
     };
 

@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   Bot,
-  CalendarClock,
   Check,
   ClipboardList,
   Clock3,
@@ -21,12 +20,12 @@ const pageUrl = "https://www.aliwvide.com/aliwcall";
 export const metadata = {
   title: "AliwCall AI Receptionist for Businesses | Aliwvide",
   description:
-    "AliwCall is an AI receptionist for small businesses. Handle calls, capture caller replies, manage leads, review transcripts and call reports from one simple dashboard.",
+    "AliwCall is an inbound AI receptionist for small businesses. Answer customer calls, capture caller replies, manage leads, and review transcripts and call reports from one simple dashboard.",
   keywords: [
     "AI receptionist",
     "AI phone receptionist",
-    "AI calling for small business",
-    "automated business calls",
+    "inbound AI calls for small business",
+    "AI receptionist for inbound calls",
     "AI call assistant",
     "AliwCall",
   ],
@@ -38,7 +37,7 @@ export const metadata = {
     siteName: "Aliwvide",
     title: "AliwCall — AI Receptionist for Small Businesses",
     description:
-      "Manage AI calls, caller replies, leads, transcripts and reports from one business dashboard.",
+      "Answer inbound customer calls and manage caller replies, leads, transcripts and reports from one business dashboard.",
     images: [
       {
         url: "https://www.aliwvide.com/brand/aliwvide-og-image.jpg",
@@ -53,8 +52,8 @@ export const metadata = {
 const features = [
   {
     icon: PhoneCall,
-    title: "AI-powered business calls",
-    text: "Use an AI receptionist to handle business calling workflows without manually managing every conversation.",
+    title: "Answer inbound calls with AI",
+    text: "Let your AI receptionist answer incoming customer calls and handle common conversations when you cannot pick up.",
   },
   {
     icon: Users,
@@ -77,9 +76,9 @@ const features = [
     text: "Refresh the call list whenever you need the latest activity and responses.",
   },
   {
-    icon: CalendarClock,
-    title: "Built for scheduled workflows",
-    text: "AliwCall is being built around single, bulk and scheduled business calling workflows from one place.",
+    icon: Bot,
+    title: "Always-on receptionist workflow",
+    text: "Give callers a consistent first response and keep their information organized even when your team is busy.",
   },
 ];
 
@@ -96,8 +95,8 @@ const steps = [
   },
   {
     n: "03",
-    title: "Run your calling workflow",
-    text: "Use AliwCall for individual, bulk or scheduled calling as those workflows are enabled for your account.",
+    title: "Receive customer calls",
+    text: "Customers call your business number and the AI receptionist handles the inbound conversation.",
   },
   {
     n: "04",
@@ -109,7 +108,7 @@ const steps = [
 const plans = [
   {
     name: "Free",
-    price: "₹0",
+    price: "$0",
     period: "/month",
     badge: "Available now",
     description: "Try the AliwCall dashboard and AI receptionist workflow.",
@@ -126,13 +125,13 @@ const plans = [
   },
   {
     name: "Starter",
-    price: "₹999",
+    price: "$14.99",
     period: "/month",
     badge: "Draft pricing",
-    description: "For small businesses that need regular AI calling.",
+    description: "For small businesses receiving regular customer calls.",
     features: [
-      "Higher monthly usage",
-      "Single & scheduled calls",
+      "100 AI minutes per month",
+      "Inbound AI receptionist",
       "Call reports & transcripts",
       "Lead capture",
       "Dashboard history",
@@ -143,14 +142,14 @@ const plans = [
   },
   {
     name: "Business",
-    price: "₹2,499",
+    price: "$29.99",
     period: "/month",
     badge: "Draft pricing",
-    description: "For teams running larger or more frequent calling campaigns.",
+    description: "For growing businesses with higher inbound call volume.",
     features: [
       "Everything in Starter",
-      "Bulk calling workflows",
-      "Higher usage limits",
+      "250 AI minutes per month",
+      "Higher inbound call capacity",
       "Advanced reporting",
       "Priority support",
     ],
@@ -159,20 +158,20 @@ const plans = [
     featured: false,
   },
   {
-    name: "Custom",
-    price: "Let’s talk",
+    name: "Pro",
+    price: "$59.99",
     period: "",
-    badge: "High volume",
-    description: "For businesses that need custom usage, numbers or workflows.",
+    badge: "Draft pricing",
+    description: "For businesses with heavier inbound AI receptionist usage.",
     features: [
-      "Custom call volume",
-      "Multiple agents or numbers",
-      "Custom onboarding",
-      "Usage-based configuration",
-      "Business support",
+      "500 AI minutes per month",
+      "Everything in Business",
+      "Higher inbound call capacity",
+      "Advanced reporting",
+      "Priority support",
     ],
-    cta: "Contact Us",
-    href: "/contact",
+    cta: "Preview Plan",
+    href: "#pricing-note",
     featured: false,
   },
 ];
@@ -180,11 +179,11 @@ const plans = [
 const faqs = [
   {
     q: "What is AliwCall?",
-    a: "AliwCall is an AI receptionist and business calling dashboard designed to help small businesses handle calls, collect caller responses, track leads and review call information in one place.",
+    a: "AliwCall is an inbound AI receptionist designed to answer customer calls, capture caller responses, track leads and keep call information organized in one dashboard.",
   },
   {
-    q: "Do I need to receive reports by email?",
-    a: "No. The product is being designed so call activity, caller replies, transcripts and reports can be reviewed directly inside the AliwCall dashboard.",
+    q: "Does AliwCall make outbound calls?",
+    a: "Not in the current service. AliwCall is currently focused on inbound calls, where customers call your business and the AI receptionist answers them.",
   },
   {
     q: "Can I see each caller's response?",
@@ -192,7 +191,7 @@ const faqs = [
   },
   {
     q: "Are the paid prices final?",
-    a: "No. The Starter and Business prices shown on this preview page are draft pricing for review. Final pricing will be confirmed before this page is published to production.",
+    a: "No. The Starter, Business and Pro prices shown on this preview page are draft pricing for review. Final pricing and usage rules will be confirmed before production launch.",
   },
 ];
 
@@ -208,11 +207,10 @@ export default function AliwCallPage() {
               AliwCall by Aliwvide
             </div>
             <h1 className="max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">
-              Your AI receptionist for business calls, leads and follow-ups
+              Never miss a customer call with your AI receptionist
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-              Let AliwCall help manage business calling workflows while you track caller replies,
-              leads, transcripts and reports from one simple dashboard.
+              AliwCall answers inbound customer calls for your business and keeps caller replies, leads, transcripts and reports organized in one simple dashboard.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
@@ -285,10 +283,9 @@ export default function AliwCallPage() {
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <div className="max-w-3xl">
           <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-400">Why AliwCall</span>
-          <h2 className="mt-3 text-3xl font-black sm:text-4xl">One place to manage your AI calling workflow</h2>
+          <h2 className="mt-3 text-3xl font-black sm:text-4xl">One place to manage your inbound AI receptionist</h2>
           <p className="mt-4 text-lg leading-8 text-slate-400">
-            Built for small businesses that want a simpler way to handle calls, capture responses
-            and keep useful customer information organized.
+            Built for small businesses that want customer calls answered consistently, caller details captured, and useful follow-up information kept in one place.
           </p>
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -330,8 +327,7 @@ export default function AliwCallPage() {
           <span className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-400">Pricing</span>
           <h2 className="mt-3 text-3xl font-black sm:text-4xl">Start free. Upgrade when your call volume grows.</h2>
           <p className="mt-4 text-lg leading-8 text-slate-400">
-            Free access reflects the current AliwCall setup. Paid plan prices below are intentionally
-            marked as draft while the final telecom and AI usage model is being finalized.
+            Free access reflects the current AliwCall setup. Paid plan prices below are draft USD pricing for inbound AI receptionist usage while final provider costs and margins are being finalized.
           </p>
         </div>
         <div className="mt-12 grid gap-5 lg:grid-cols-4">
@@ -370,7 +366,7 @@ export default function AliwCallPage() {
           ))}
         </div>
         <div id="pricing-note" className="mt-6 rounded-2xl border border-amber-300/20 bg-amber-300/[0.06] p-5 text-sm leading-6 text-amber-100/80">
-          <strong className="text-amber-200">Preview pricing note:</strong> Starter and Business pricing are draft values for this design preview only. Final plan limits, telecom/AI usage charges and billing rules should be confirmed before production launch.
+          <strong className="text-amber-200">Preview pricing note:</strong> Starter, Business and Pro prices are draft USD values for this preview only. Final included minutes, overage pricing and provider costs should be confirmed before production launch.
         </div>
       </section>
 
@@ -378,7 +374,7 @@ export default function AliwCallPage() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-[.85fr_1.15fr]">
           <div>
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-sky-400">Built for business</span>
-            <h2 className="mt-3 text-3xl font-black sm:text-4xl">Keep the important information after every call</h2>
+            <h2 className="mt-3 text-3xl font-black sm:text-4xl">Know what every inbound caller needed</h2>
             <p className="mt-4 text-lg leading-8 text-slate-400">
               AliwCall is designed so your team can quickly understand what happened without listening to every call from the beginning.
             </p>

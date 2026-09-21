@@ -31,9 +31,6 @@ export const metadata = {
     "Delhi metro apps",
     "Aliwvide"
   ],
-  alternates: {
-    canonical: "/"
-  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,

@@ -21,18 +21,16 @@ const staticRoutes = [
 ];
 
 export default async function sitemap() {
-  const now = new Date();
-
+  // Do not stamp every static/country URL with the current time. Doing so tells
+  // crawlers that hundreds of unchanged pages were modified every hour.
   const pages = staticRoutes.map((route) => ({
     url: `${baseUrl}${route.path}`,
-    lastModified: now,
     changeFrequency: route.changeFrequency,
     priority: route.priority
   }));
 
   const countryPages = countries.map((country) => ({
     url: `${baseUrl}/country/${country.slug}`,
-    lastModified: now,
     changeFrequency: "weekly",
     priority: country.slug === "india" ? 0.95 : 0.8
   }));

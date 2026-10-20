@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { Check, ChevronLeft, ChevronRight, ShoppingBag, Truck } from "lucide-react";
 
 function money(value, currency) {
@@ -13,8 +12,7 @@ function money(value, currency) {
   }
 }
 
-export default function ProductDetail({ product }) {
-  const searchParams = useSearchParams();
+export default function ProductDetail({ product, source = "" }) {
   const images = Array.isArray(product.images) ? product.images : [];
   const variants = Array.isArray(product.variants) ? product.variants : [];
   const [activeImage, setActiveImage] = useState(0);
@@ -30,10 +28,9 @@ export default function ProductDetail({ product }) {
     Object.entries(selected).forEach(([key, value]) => {
       if (value) params.set(`option_${key.toLowerCase().replace(/[^a-z0-9]+/g, "_")}`, value);
     });
-    const source = searchParams.get("src");
     if (source) params.set("src", source);
     return `/checkout?${params.toString()}`;
-  }, [product.slug, quantity, selected, searchParams]);
+  }, [product.slug, quantity, selected, source]);
 
   function previousImage() {
     setActiveImage((current) => (current <= 0 ? Math.max(images.length - 1, 0) : current - 1));

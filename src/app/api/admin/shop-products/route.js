@@ -56,6 +56,23 @@ function normalizeVariants(value) {
   })).filter((variant) => variant.name && variant.values.length);
 }
 
+function normalizeOffers(value) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 8).map((offer, index) => {
+    const quantity = Math.max(1, Math.min(20, Number(offer?.quantity) || 1));
+    const price = numberOrNull(offer?.price);
+    const compareAtPrice = numberOrNull(offer?.compare_at_price);
+    return {
+      id: makeSlug(offer?.id || offer?.label || `offer-${index + 1}`) || `offer-${index + 1}`,
+      label: String(offer?.label || `Buy ${quantity}`).trim().slice(0, 80),
+      quantity,
+      price,
+      compare_at_price: compareAtPrice,
+      badge: String(offer?.badge || "").trim().slice(0, 50)
+    };
+  }).filter((offer) => offer.price !== null);
+}
+
 function publicPayload(body) {
   const name = String(body.name || "").trim();
   const slug = makeSlug(body.slug || name);
@@ -71,6 +88,7 @@ function publicPayload(body) {
     images: normalizeImages(body.images),
     video_url: normalizeUrl(body.video_url),
     variants: normalizeVariants(body.variants),
+    offers: normalizeOffers(body.offers),
     shipping_text: String(body.shipping_text || "").trim(),
     status,
     active: status === "active"

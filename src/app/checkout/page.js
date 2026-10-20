@@ -8,7 +8,7 @@ async function getProduct(slug) {
   if (!slug || !hasPublicSupabaseConfig()) return null;
   try {
     const rows = await publicSupabaseRequest("/shop_products", {
-      query: `select=id,name,slug,price,currency,images&slug=eq.${encodeURIComponent(slug)}&active=eq.true&status=eq.active&limit=1`,
+      query: `select=id,name,slug,price,compare_at_price,currency,images,offers,shipping_text&slug=eq.${encodeURIComponent(slug)}&active=eq.true&status=eq.active&limit=1`,
       revalidate: 0,
       tags: ["shop-products"]
     });
@@ -24,12 +24,22 @@ export default async function CheckoutPage({ searchParams }) {
   const product = await getProduct(slug);
   if (!product) notFound();
 
-  const quantity = Math.min(10, Math.max(1, Number(searchParams?.qty || 1) || 1));
   const selectedOptions = Object.fromEntries(
     Object.entries(searchParams || {})
       .filter(([key]) => key.startsWith("option_"))
-      .map(([key, value]) => [key.replace(/^option_/, "").replace(/_/g, " "), String(value)])
+      .map(([key, value]) => [
+        key.replace(/^option_/, "").replace(/_/g, " "),
+        String(value)
+      ])
   );
 
-  return <CheckoutPreview product={product} quantity={quantity} selectedOptions={selectedOptions} />;
+  return (
+    <CheckoutPreview
+      product={product}
+      offerId={String(searchParams?.offer || "single")}
+      selectedOptions={selectedOptions}
+      source={String(searchParams?.src || "")}
+      paypalClientId={process.env.PAYPAL_CLIENT_ID || ""}
+    />
+  );
 }

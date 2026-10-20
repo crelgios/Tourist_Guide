@@ -95,6 +95,7 @@ alter table public.shop_products
   add column if not exists images jsonb not null default '[]'::jsonb,
   add column if not exists video_url text not null default '',
   add column if not exists variants jsonb not null default '[]'::jsonb,
+  add column if not exists offers jsonb not null default '[]'::jsonb,
   add column if not exists shipping_text text not null default '',
   add column if not exists status text not null default 'draft';
 
@@ -141,3 +142,34 @@ on storage.objects
 for select
 to public
 using (bucket_id = 'product-images');
+
+
+create table if not exists public.shop_orders (
+  id uuid primary key default gen_random_uuid(),
+  order_number text not null unique,
+  product_id uuid references public.shop_products(id) on delete set null,
+  product_snapshot jsonb not null default '{}'::jsonb,
+  customer jsonb not null default '{}'::jsonb,
+  selected_options jsonb not null default '{}'::jsonb,
+  quantity integer not null default 1 check (quantity > 0),
+  amount numeric(12,2) not null check (amount >= 0),
+  currency text not null default 'USD',
+  source text not null default '',
+  paypal_order_id text unique,
+  paypal_capture_id text,
+  payment_status text not null default 'pending'
+    check (payment_status in ('pending','paid','failed','cancelled','refunded')),
+  fulfilment_status text not null default 'new'
+    check (fulfilment_status in ('new','ordered','shipped','delivered','cancelled')),
+  tracking_carrier text not null default '',
+  tracking_number text not null default '',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+drop trigger if exists shop_orders_set_updated_at on public.shop_orders;
+create trigger shop_orders_set_updated_at
+before update on public.shop_orders
+for each row execute function public.set_updated_at();
+
+alter table public.shop_orders enable row level security;

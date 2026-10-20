@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import AdminContentTabs from "@/components/AdminContentTabs";
 import AdminShopProducts from "@/components/AdminShopProducts";
+import AdminShopOrders from "@/components/AdminShopOrders";
 
 async function readJson(response) {
   const data = await response.json().catch(() => ({}));
@@ -588,6 +589,23 @@ export default function AdminPage() {
             Shop Products
           </button>
 
+          <button
+            type="button"
+            onClick={() =>
+              setActiveSection(
+                "shop-orders"
+              )
+            }
+            className={`rounded-full px-6 py-3 font-bold ${
+              activeSection ===
+              "shop-orders"
+                ? "bg-emerald-600 text-white"
+                : "bg-gray-100 text-gray-950"
+            }`}
+          >
+            Orders
+          </button>
+
         </div>
 
         {activeSection ===
@@ -783,8 +801,8 @@ export default function AdminPage() {
               <p className="mt-3">
                 Country app data still
                 exports as JSON. Blogs,
-                FAQs and shop affiliate
-                links support live
+                FAQs and dropshipping
+                products support live
                 Supabase management
                 from their admin tabs.
               </p>
@@ -808,6 +826,15 @@ export default function AdminPage() {
 
           <div className="mt-8">
             <AdminShopProducts />
+          </div>
+
+        )}
+
+        {activeSection ===
+          "shop-orders" && (
+
+          <div className="mt-8">
+            <AdminShopOrders />
           </div>
 
         )}

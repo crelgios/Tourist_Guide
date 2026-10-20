@@ -48,7 +48,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ProductPage({ params }) {
+export default async function ProductPage({ params, searchParams }) {
   const product = await getProduct(params.slug);
   if (!product) notFound();
 
@@ -71,7 +71,7 @@ export default async function ProductPage({ params }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <ProductDetail product={product} />
+      <ProductDetail product={product} source={String(searchParams?.src || "")} />
     </>
   );
 }

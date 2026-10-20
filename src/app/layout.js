@@ -80,6 +80,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const showAssistant = process.env.VERCEL_ENV !== "production";
+
   return (
     <html lang="en">
       <body>
@@ -99,7 +101,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        <SiteShell>{children}</SiteShell>
+        <SiteShell showAssistant={showAssistant}>{children}</SiteShell>
       </body>
     </html>
   );

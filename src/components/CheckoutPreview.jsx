@@ -81,7 +81,7 @@ export default function CheckoutPreview({ product, quantity = 1, selectedOptions
               <div className="mt-2 flex justify-between text-sm"><span>Shipping</span><span>Calculated before payment</span></div>
               <div className="mt-4 flex justify-between border-t border-slate-200 pt-4 text-lg font-black"><span>Total</span><span>{money(total, product.currency)}</span></div>
             </div>
-            <p className="mt-5 text-xs leading-5 text-slate-500">No money-back guarantee block is included. Final shipping, cancellation and refund terms will be shown clearly before launch.</p>
+            <p className="mt-5 text-xs leading-5 text-slate-500">Shipping, cancellation and refund terms will be shown clearly before payment.</p>
           </aside>
         </div>
       </div>

@@ -447,6 +447,36 @@ export default function ProductDetail({ product, source = "" }) {
         </div>
       </section>
 
+      <section className="border-t border-slate-800 bg-black text-white">
+        <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+          <div className="text-center">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">Available payment methods</p>
+            <h2 className="mt-2 text-2xl font-black sm:text-3xl">Pay securely your way</h2>
+          </div>
+
+          <div className="mx-auto mt-7 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="flex h-16 items-center justify-center rounded-xl bg-white px-4 text-center text-lg font-black text-[#003087]">
+              PayPal
+            </div>
+            <div className="flex h-16 items-center justify-center rounded-xl bg-white px-4 text-center text-2xl font-black italic text-[#1a1f71]">
+              VISA
+            </div>
+            <div className="flex h-16 items-center justify-center gap-2 rounded-xl bg-white px-4 text-center">
+              <span className="h-8 w-8 rounded-full bg-[#eb001b]" />
+              <span className="-ml-4 h-8 w-8 rounded-full bg-[#f79e1b] opacity-90" />
+              <span className="ml-1 text-sm font-black text-slate-900">Mastercard</span>
+            </div>
+            <div className="flex h-16 items-center justify-center rounded-xl bg-[#1679be] px-4 text-center text-lg font-black text-white">
+              AMEX
+            </div>
+          </div>
+
+          <p className="mx-auto mt-5 max-w-2xl text-center text-xs leading-5 text-slate-400">
+            PayPal processes payments securely. Card options are shown when they are available for your country, device and PayPal merchant account.
+          </p>
+        </div>
+      </section>
+
       <div className="sticky bottom-0 z-30 border-t border-slate-200 bg-white/95 p-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-lg items-center gap-3">
           <div className="min-w-0 flex-1">

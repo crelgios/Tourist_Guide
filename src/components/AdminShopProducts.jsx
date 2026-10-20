@@ -37,6 +37,35 @@ function parseVariants(value) {
     .filter((item) => item.name && item.values.length);
 }
 
+function offersToText(offers) {
+  return (offers || []).map((offer) => [
+    offer.label || `Buy ${offer.quantity || 1}`,
+    offer.quantity || 1,
+    offer.price ?? "",
+    offer.compare_at_price ?? "",
+    offer.badge || ""
+  ].join(" | ")).join("\n");
+}
+
+function parseOffers(value) {
+  return String(value || "")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, index) => {
+      const [label, quantity, price, compareAtPrice, badge] = line.split("|").map((part) => part.trim());
+      return {
+        id: slugify(label || `offer-${index + 1}`),
+        label: label || `Buy ${quantity || 1}`,
+        quantity: Math.max(1, Number(quantity) || 1),
+        price: price === "" ? null : Number(price),
+        compare_at_price: compareAtPrice === "" ? null : Number(compareAtPrice),
+        badge: badge || ""
+      };
+    })
+    .filter((offer) => Number.isFinite(offer.price) && offer.price >= 0);
+}
+
 const emptyForm = {
   id: "",
   name: "",
@@ -49,6 +78,7 @@ const emptyForm = {
   images: [],
   video_url: "",
   variants_text: "",
+  offers_text: "",
   shipping_text: "",
   supplier_url: "",
   supplier_cost: "",
@@ -100,6 +130,7 @@ export default function AdminShopProducts() {
       images: Array.isArray(product.images) ? product.images : [],
       video_url: product.video_url || "",
       variants_text: variantsToText(product.variants),
+      offers_text: offersToText(product.offers),
       shipping_text: product.shipping_text || "",
       supplier_url: product.supplier_url || "",
       supplier_cost: product.supplier_cost ?? "",
@@ -163,9 +194,11 @@ export default function AdminShopProducts() {
       const payload = {
         ...form,
         slug: form.slug || slugify(form.name),
-        variants: parseVariants(form.variants_text)
+        variants: parseVariants(form.variants_text),
+        offers: parseOffers(form.offers_text)
       };
       delete payload.variants_text;
+      delete payload.offers_text;
 
       const data = await readJson(await fetch("/api/admin/shop-products", {
         method: isEditing ? "PATCH" : "POST",
@@ -321,6 +354,20 @@ export default function AdminShopProducts() {
             Variants
             <textarea rows={3} value={form.variants_text} onChange={(e) => setField("variants_text", e.target.value)} className="rounded-xl border border-gray-300 px-4 py-3 font-mono text-sm font-normal outline-none focus:border-emerald-500" placeholder={"Color: Black, White, Blue\nSize: S, M, L"} />
             <span className="text-xs font-normal text-gray-500">One option per line. Example: Color: Black, White</span>
+          </label>
+
+          <label className="grid gap-2 text-sm font-bold">
+            Bundle pricing offers
+            <textarea
+              rows={4}
+              value={form.offers_text}
+              onChange={(e) => setField("offers_text", e.target.value)}
+              className="rounded-xl border border-gray-300 px-4 py-3 font-mono text-sm font-normal outline-none focus:border-emerald-500"
+              placeholder={"Buy 1 | 1 | 29.99 | 39.99 | Starter\nBuy 2 | 2 | 49.99 | 79.98 | Most Popular\nBuy 3 | 3 | 64.99 | 119.97 | Best Value"}
+            />
+            <span className="text-xs font-normal text-gray-500">
+              Format: Label | Quantity | Total price | Compare price | Badge. Leave blank to use the normal product price.
+            </span>
           </label>
 
           <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">

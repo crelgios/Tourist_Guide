@@ -56,6 +56,7 @@ export default function CheckoutPreview({
     country: ""
   });
   const [paypalReady, setPaypalReady] = useState(false);
+  const [cardAvailable, setCardAvailable] = useState(null);
   const [shippingLocked, setShippingLocked] = useState(false);
   const [message, setMessage] = useState("");
   const [paidOrder, setPaidOrder] = useState("");
@@ -88,19 +89,16 @@ export default function CheckoutPreview({
     if (!shippingLocked || !paypalReady || !paypalClientId || paidOrder) return;
     if (!window.paypal || !document.getElementById("paypal-button-container")) return;
 
-    const container = document.getElementById("paypal-button-container");
-    container.innerHTML = "";
+    const paypalContainer = document.getElementById("paypal-button-container");
+    const cardContainer = document.getElementById("card-button-container");
+    if (!paypalContainer) return;
 
-    const buttons = window.paypal.Buttons({
-      fundingSource: window.paypal.FUNDING.PAYPAL,
-      style: {
-        layout: "vertical",
-        shape: "rect",
-        label: "paypal",
-        height: 48
-      },
+    paypalContainer.innerHTML = "";
+    if (cardContainer) cardContainer.innerHTML = "";
+
+    const paymentHandlers = {
       async createOrder() {
-        setMessage("Starting secure PayPal checkout...");
+        setMessage("Starting secure checkout...");
         const data = await readJson(await fetch("/api/paypal/create-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -116,7 +114,7 @@ export default function CheckoutPreview({
         return data.id;
       },
       async onApprove(data) {
-        setMessage("Verifying your PayPal payment...");
+        setMessage("Verifying your payment...");
         const result = await readJson(await fetch("/api/paypal/capture-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -126,21 +124,59 @@ export default function CheckoutPreview({
         setMessage("");
       },
       onCancel() {
-        setMessage("PayPal checkout was cancelled. No payment was completed.");
+        setMessage("Checkout was cancelled. No payment was completed.");
       },
       onError(error) {
         console.error("PayPal checkout error", error);
-        setMessage("PayPal checkout could not be completed. Please try again.");
+        setMessage("Checkout could not be completed. Please try again.");
+      }
+    };
+
+    const paypalButtons = window.paypal.Buttons({
+      ...paymentHandlers,
+      fundingSource: window.paypal.FUNDING.PAYPAL,
+      style: {
+        layout: "vertical",
+        shape: "rect",
+        label: "paypal",
+        height: 48
       }
     });
 
-    buttons.render("#paypal-button-container").catch((error) => {
+    paypalButtons.render("#paypal-button-container").catch((error) => {
       console.error("Could not render PayPal button", error);
       setMessage("PayPal checkout could not be loaded.");
     });
 
+    const cardFunding = window.paypal.FUNDING?.CARD;
+    if (cardFunding && cardContainer) {
+      const cardButtons = window.paypal.Buttons({
+        ...paymentHandlers,
+        fundingSource: cardFunding,
+        style: {
+          layout: "vertical",
+          shape: "rect",
+          label: "pay",
+          height: 48
+        }
+      });
+
+      if (cardButtons.isEligible()) {
+        setCardAvailable(true);
+        cardButtons.render("#card-button-container").catch((error) => {
+          console.error("Could not render card button", error);
+          setCardAvailable(false);
+        });
+      } else {
+        setCardAvailable(false);
+      }
+    } else {
+      setCardAvailable(false);
+    }
+
     return () => {
-      if (container) container.innerHTML = "";
+      if (paypalContainer) paypalContainer.innerHTML = "";
+      if (cardContainer) cardContainer.innerHTML = "";
     };
   }, [
     shippingLocked,
@@ -181,7 +217,7 @@ export default function CheckoutPreview({
       {paypalClientId ? (
         <Script
           id="paypal-js-sdk"
-          src={`https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(paypalClientId)}&currency=${encodeURIComponent(product.currency || "USD")}&intent=capture&components=buttons`}
+          src={`https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(paypalClientId)}&currency=${encodeURIComponent(product.currency || "USD")}&intent=capture&components=buttons&enable-funding=card`}
           strategy="afterInteractive"
           onLoad={() => setPaypalReady(true)}
         />
@@ -198,7 +234,7 @@ export default function CheckoutPreview({
               <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-600">Aliwvide Checkout</p>
               <h1 className="mt-2 text-3xl font-black">Where should we send it?</h1>
               <p className="mt-2 text-sm text-slate-500">
-                Enter your delivery details, then continue to PayPal.
+                Enter your delivery details, then choose PayPal or debit/credit card.
               </p>
 
               <fieldset disabled={shippingLocked} className="mt-6 grid gap-4 sm:grid-cols-2 disabled:opacity-70">
@@ -242,13 +278,13 @@ export default function CheckoutPreview({
 
               {!shippingLocked ? (
                 <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#ffc439] px-6 py-4 font-black text-[#111]">
-                  Continue to PayPal
+                  Continue to payment
                 </button>
               ) : (
                 <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <div className="font-black">Pay with PayPal</div>
+                      <div className="font-black">Choose payment method</div>
                       <div className="mt-1 text-xs text-slate-500">Your order is not paid until PayPal confirms the payment.</div>
                     </div>
                     <button
@@ -264,10 +300,27 @@ export default function CheckoutPreview({
                   </div>
 
                   {paypalClientId ? (
-                    <div id="paypal-button-container" className="mt-4 min-h-12" />
+                    <div className="mt-4">
+                      <div className="text-xs font-black uppercase tracking-wider text-slate-500">PayPal</div>
+                      <div id="paypal-button-container" className="mt-2 min-h-12" />
+
+                      <div className="my-4 flex items-center gap-3">
+                        <div className="h-px flex-1 bg-slate-200" />
+                        <span className="text-xs font-bold uppercase text-slate-400">or</span>
+                        <div className="h-px flex-1 bg-slate-200" />
+                      </div>
+
+                      <div className="text-xs font-black uppercase tracking-wider text-slate-500">Debit or Credit Card</div>
+                      <div id="card-button-container" className="mt-2 min-h-12" />
+                      {cardAvailable === false ? (
+                        <div className="mt-2 rounded-xl bg-slate-100 p-3 text-xs font-semibold text-slate-600">
+                          Card checkout is shown when PayPal makes it available for the buyer, country and merchant account.
+                        </div>
+                      ) : null}
+                    </div>
                   ) : (
                     <div className="mt-4 rounded-xl bg-amber-50 p-4 text-sm font-semibold text-amber-900">
-                      PayPal credentials have not been added to this preview environment yet.
+                      PayPal credentials have not been added to this environment yet.
                     </div>
                   )}
                 </div>
@@ -281,7 +334,7 @@ export default function CheckoutPreview({
 
               <div className="mt-5 flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
                 <LockKeyhole className="h-3.5 w-3.5" />
-                PayPal handles the payment step securely.
+                PayPal securely handles PayPal and eligible debit/credit card payments.
               </div>
             </form>
 

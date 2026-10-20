@@ -101,7 +101,7 @@ export default function ProductDetail({ product, source = "" }) {
           <div className="text-lg font-black tracking-tight">
             Aliwvide <span className="text-emerald-600">Shop</span>
           </div>
-          <div className="text-xs font-bold text-slate-500">PayPal checkout</div>
+          <div className="text-xs font-bold text-slate-500">Secure checkout</div>
         </div>
       </div>
 
@@ -277,16 +277,27 @@ export default function ProductDetail({ product, source = "" }) {
               </div>
             ))}
 
+            <div className="mt-7 grid grid-cols-2 gap-3">
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center">
+                <div className="text-sm font-black">PayPal</div>
+                <div className="mt-1 text-xs text-slate-500">Pay with your PayPal account</div>
+              </div>
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center">
+                <div className="text-sm font-black">Debit / Credit Card</div>
+                <div className="mt-1 text-xs text-slate-500">Visa & Mastercard where available</div>
+              </div>
+            </div>
+
             <a
               href={checkoutHref}
-              className="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#ffc439] px-6 py-4 text-base font-black text-[#111] shadow-sm transition hover:brightness-95"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-4 text-base font-black text-white shadow-sm transition hover:bg-slate-800"
             >
-              Continue with PayPal
+              Continue to Checkout
             </a>
 
             <div className="mt-3 flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
               <LockKeyhole className="h-3.5 w-3.5" />
-              Payment is completed securely through PayPal
+              Secure payment through PayPal and eligible card checkout
             </div>
 
             {product.shipping_text ? (
@@ -314,8 +325,8 @@ export default function ProductDetail({ product, source = "" }) {
           <div className="flex gap-3">
             <LockKeyhole className="h-6 w-6 shrink-0 text-emerald-600" />
             <div>
-              <div className="font-black">Pay with PayPal</div>
-              <p className="mt-1 text-sm text-slate-500">Aliwvide does not ask you to enter card details directly on this page.</p>
+              <div className="font-black">Pay securely</div>
+              <p className="mt-1 text-sm text-slate-500">Choose PayPal or an eligible debit/credit card at checkout. Aliwvide does not store card details.</p>
             </div>
           </div>
           <div className="flex gap-3">
@@ -361,7 +372,7 @@ export default function ProductDetail({ product, source = "" }) {
           <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">Ready to order?</p>
           <h2 className="mt-3 text-3xl font-black sm:text-4xl">{product.name}</h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">
-            Select your preferred offer and complete payment through PayPal.
+            Select your preferred offer, then pay with PayPal or an eligible debit/credit card.
           </p>
           <a
             href="#pricing"
@@ -382,9 +393,9 @@ export default function ProductDetail({ product, source = "" }) {
           </div>
           <a
             href={checkoutHref}
-            className="rounded-xl bg-[#ffc439] px-5 py-3 text-sm font-black text-[#111]"
+            className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-black text-white"
           >
-            PayPal Checkout
+            Checkout
           </a>
         </div>
       </div>

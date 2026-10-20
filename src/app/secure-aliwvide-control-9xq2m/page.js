@@ -783,8 +783,8 @@ export default function AdminPage() {
               <p className="mt-3">
                 Country app data still
                 exports as JSON. Blogs,
-                FAQs and shop affiliate
-                links support live
+                FAQs and dropshipping
+                products support live
                 Supabase management
                 from their admin tabs.
               </p>

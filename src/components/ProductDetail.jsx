@@ -24,6 +24,79 @@ function money(value, currency) {
   }
 }
 
+function getYouTubeEmbedUrl(value) {
+  if (!value) return "";
+
+  try {
+    const url = new URL(value);
+    const host = url.hostname.replace(/^www\./, "").toLowerCase();
+    let id = "";
+
+    if (host === "youtu.be") {
+      id = url.pathname.split("/").filter(Boolean)[0] || "";
+    } else if (host === "youtube.com" || host === "m.youtube.com") {
+      if (url.pathname === "/watch") {
+        id = url.searchParams.get("v") || "";
+      } else {
+        const parts = url.pathname.split("/").filter(Boolean);
+        if (["shorts", "embed", "live"].includes(parts[0])) id = parts[1] || "";
+      }
+    }
+
+    if (!id) return "";
+
+    const safeId = encodeURIComponent(id);
+    return `https://www.youtube-nocookie.com/embed/${safeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${safeId}&playsinline=1&rel=0&modestbranding=1`;
+  } catch {
+    return "";
+  }
+}
+
+function ProductVideoPreview({ url, title }) {
+  if (!url) return null;
+
+  const youtubeEmbed = getYouTubeEmbedUrl(url);
+
+  return (
+    <div className="mt-5">
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <h2 className="text-sm font-black">Product video</h2>
+        <span className="text-[11px] font-semibold text-slate-500">Auto preview</span>
+      </div>
+
+      <div className="pointer-events-none h-64 select-none overflow-hidden rounded-[1.5rem] border border-slate-200 bg-black shadow-sm sm:h-80">
+        {youtubeEmbed ? (
+          <iframe
+            src={youtubeEmbed}
+            title={`${title} product video preview`}
+            className="h-full w-full"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            tabIndex={-1}
+            aria-hidden="true"
+          />
+        ) : (
+          <video
+            src={url}
+            className="h-full w-full object-contain"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            controls={false}
+            tabIndex={-1}
+            aria-label={`${title} product video preview`}
+          />
+        )}
+      </div>
+
+      <p className="mt-2 text-center text-[11px] font-semibold text-slate-500">
+        Preview plays automatically without opening another page.
+      </p>
+    </div>
+  );
+}
+
 function normalizeOffers(product) {
   const configured = Array.isArray(product.offers)
     ? product.offers.filter((offer) => Number.isFinite(Number(offer?.price)))
@@ -160,16 +233,7 @@ export default function ProductDetail({ product, source = "" }) {
               </div>
             )}
 
-            {product.video_url ? (
-              <a
-                href={product.video_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-black"
-              >
-                Watch product video
-              </a>
-            ) : null}
+            <ProductVideoPreview url={product.video_url} title={product.name} />
           </div>
 
           <div className="lg:sticky lg:top-5 lg:self-start">

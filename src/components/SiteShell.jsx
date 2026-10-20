@@ -9,7 +9,7 @@ const hiddenNavbarPrefixes = [
   "/secure-aliwvide-control-9xq2m"
 ];
 
-export default function SiteShell({ children }) {
+export default function SiteShell({ children, showAssistant = true }) {
   const pathname = usePathname() || "/";
 
   const hideNavbar = hiddenNavbarPrefixes.some((prefix) =>
@@ -20,7 +20,7 @@ export default function SiteShell({ children }) {
     <>
       {!hideNavbar && <Navbar />}
       {children}
-      {!hideNavbar && <FreeAiAssistant />}
+      {!hideNavbar && showAssistant && <FreeAiAssistant />}
     </>
   );
 }

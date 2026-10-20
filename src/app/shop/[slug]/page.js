@@ -8,7 +8,7 @@ async function getProduct(slug) {
   if (!hasPublicSupabaseConfig()) return null;
   try {
     const rows = await publicSupabaseRequest("/shop_products", {
-      query: `select=id,name,slug,category,description,price,compare_at_price,currency,images,video_url,variants,shipping_text&slug=eq.${encodeURIComponent(slug)}&active=eq.true&status=eq.active&limit=1`,
+      query: `select=id,name,slug,category,description,price,compare_at_price,currency,images,video_url,variants,offers,shipping_text&slug=eq.${encodeURIComponent(slug)}&active=eq.true&status=eq.active&limit=1`,
       revalidate: 300,
       tags: ["shop-products"]
     });

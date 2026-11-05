@@ -10,7 +10,6 @@ const navLinks = [
   { name: "Explore", href: "/explore" },
   { name: "Categories", href: "/category" },
   { name: "Travel Tools", href: "/tools" },
-  { name: "Shop", href: "/shop" },
   { name: "Blog", href: "/blog" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" }

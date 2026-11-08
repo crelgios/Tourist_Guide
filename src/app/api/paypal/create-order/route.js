@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminSupabaseRequest, hasAdminSupabaseConfig } from "@/lib/supabase-rest";
 import { createPayPalOrder, hasPayPalConfig } from "@/lib/paypal";
+import { getTestRedPrivacyProduct } from "@/lib/test-red-privacy-product";
 
 function cleanText(value, max = 200) {
   return String(value || "").trim().slice(0, max);
@@ -70,10 +71,11 @@ export async function POST(request) {
       return NextResponse.json({ error: "Complete all required shipping fields." }, { status: 400 });
     }
 
-    const rows = await adminSupabaseRequest("/shop_products", {
+    const testProduct = getTestRedPrivacyProduct(slug);
+    const rows = testProduct ? [] : await adminSupabaseRequest("/shop_products", {
       query: `select=id,name,slug,price,currency,images,offers&slug=eq.${encodeURIComponent(slug)}&active=eq.true&status=eq.active&limit=1`
     });
-    const product = rows?.[0];
+    const product = testProduct || rows?.[0];
     if (!product) {
       return NextResponse.json({ error: "Product is unavailable." }, { status: 404 });
     }

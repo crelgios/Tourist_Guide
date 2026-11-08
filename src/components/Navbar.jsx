@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Categories", href: "/category" },
   { name: "Travel Tools", href: "/tools" },
   { name: "Blog", href: "/blog" },
+  { name: "Shop", href: "/shop" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" }
 ];

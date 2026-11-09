@@ -8,7 +8,6 @@ import SiteLogo from "@/components/SiteLogo";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Explore", href: "/explore" },
-  { name: "Categories", href: "/category" },
   { name: "Travel Tools", href: "/tools" },
   { name: "Blog", href: "/blog" },
   { name: "Shop", href: "/shop" },

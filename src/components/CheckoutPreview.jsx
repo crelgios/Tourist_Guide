@@ -39,6 +39,7 @@ async function readJson(response) {
 export default function CheckoutPreview({
   product,
   offerId = "single",
+  quantity = 1,
   selectedOptions = {},
   source = "",
   paypalClientId = ""
@@ -105,6 +106,7 @@ export default function CheckoutPreview({
           body: JSON.stringify({
             product: product.slug,
             offer: offer.id,
+            quantity,
             selected_options: selectedOptions,
             customer,
             source
@@ -185,6 +187,7 @@ export default function CheckoutPreview({
     paidOrder,
     product.slug,
     offer.id,
+    quantity,
     selectedOptions,
     customer,
     source
@@ -350,7 +353,7 @@ export default function CheckoutPreview({
                 <div className="min-w-0 flex-1">
                   <div className="font-black">{product.name}</div>
                   <div className="mt-1 text-sm font-bold text-emerald-700">{offer.label}</div>
-                  <div className="mt-1 text-xs text-slate-500">Quantity: {offer.quantity || 1}</div>
+                  <div className="mt-1 text-xs text-slate-500">Quantity: {(offer.quantity || 1) * quantity}</div>
                   {Object.entries(selectedOptions).map(([key, value]) => (
                     <div key={key} className="text-xs capitalize text-slate-500">
                       {key}: {value}
@@ -362,7 +365,7 @@ export default function CheckoutPreview({
               <div className="mt-6 border-t border-slate-200 pt-4">
                 <div className="flex justify-between text-sm">
                   <span>Selected offer</span>
-                  <span>{money(offer.price, product.currency)}</span>
+                  <span>{money(Number(offer.price || 0) * quantity, product.currency)}</span>
                 </div>
                 <div className="mt-2 flex justify-between text-sm">
                   <span>Shipping</span>
@@ -370,7 +373,7 @@ export default function CheckoutPreview({
                 </div>
                 <div className="mt-4 flex justify-between border-t border-slate-200 pt-4 text-lg font-black">
                   <span>Total</span>
-                  <span>{money(offer.price, product.currency)}</span>
+                  <span>{money(Number(offer.price || 0) * quantity, product.currency)}</span>
                 </div>
               </div>
 

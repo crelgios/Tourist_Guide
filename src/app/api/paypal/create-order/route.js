@@ -49,6 +49,7 @@ export async function POST(request) {
     const body = await request.json();
     const slug = cleanText(body.product, 100);
     const offerId = cleanText(body.offer, 100);
+    const requestedQuantity = Math.min(10, Math.max(1, Number.parseInt(String(body.quantity || "1"), 10) || 1));
     const customer = {
       first_name: cleanText(body.customer?.first_name, 80),
       last_name: cleanText(body.customer?.last_name, 80),
@@ -94,14 +95,14 @@ export async function POST(request) {
         )
       : {};
 
-    const amount = Number(offer.price).toFixed(2);
+    const amount = (Number(offer.price) * requestedQuantity).toFixed(2);
     const currency = cleanText(product.currency || "USD", 3).toUpperCase();
     const orderNumber = makeOrderNumber();
 
     const paypalOrder = await createPayPalOrder({
       amount,
       currency,
-      description: `${product.name} — ${offer.label}`,
+      description: `${product.name} — ${offer.label} × ${requestedQuantity}`,
       customId: orderNumber
     });
 
@@ -118,7 +119,7 @@ export async function POST(request) {
         },
         customer,
         selected_options: selectedOptions,
-        quantity: offer.quantity,
+        quantity: offer.quantity * requestedQuantity,
         amount,
         currency,
         source: cleanText(body.source, 120),

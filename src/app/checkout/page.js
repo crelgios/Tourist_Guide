@@ -31,7 +31,9 @@ export default async function CheckoutPage({ searchParams }) {
       .map(([key, value]) => [key.replace(/^option_/, "").replace(/_/g, " "), String(value)])
   );
 
+  const quantity = Math.min(10, Math.max(1, Number.parseInt(String(searchParams?.quantity || "1"), 10) || 1));
+
   return <CheckoutPreview product={product} offerId={String(searchParams?.offer || "single")}
-    selectedOptions={selectedOptions} source={String(searchParams?.src || "")}
+    quantity={quantity} selectedOptions={selectedOptions} source={String(searchParams?.src || "")}
     paypalClientId={process.env.PAYPAL_CLIENT_ID || ""} />;
 }

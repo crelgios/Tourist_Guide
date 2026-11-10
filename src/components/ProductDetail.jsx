@@ -6,9 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   LockKeyhole,
-  PackageCheck,
   ShoppingBag,
-  Sparkles,
   Truck
 } from "lucide-react";
 
@@ -26,7 +24,6 @@ function money(value, currency) {
 
 function getYouTubeEmbedUrl(value) {
   if (!value) return "";
-
   try {
     const url = new URL(value);
     const host = url.hostname.replace(/^www\./, "").toLowerCase();
@@ -44,7 +41,6 @@ function getYouTubeEmbedUrl(value) {
     }
 
     if (!id) return "";
-
     const safeId = encodeURIComponent(id);
     return `https://www.youtube-nocookie.com/embed/${safeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${safeId}&playsinline=1&rel=0&modestbranding=1`;
   } catch {
@@ -54,46 +50,34 @@ function getYouTubeEmbedUrl(value) {
 
 function ProductVideoPreview({ url, title }) {
   if (!url) return null;
-
   const youtubeEmbed = getYouTubeEmbedUrl(url);
 
   return (
-    <div className="mt-5">
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <h2 className="text-sm font-black">Product video</h2>
-        <span className="text-[11px] font-semibold text-slate-500">Auto preview</span>
-      </div>
-
-      <div className="pointer-events-none h-64 select-none overflow-hidden rounded-[1.5rem] border border-slate-200 bg-black shadow-sm sm:h-80">
+    <section className="border-t border-slate-200 py-10">
+      <h2 className="text-xl font-black">Product video</h2>
+      <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-black">
         {youtubeEmbed ? (
           <iframe
             src={youtubeEmbed}
-            title={`${title} product video preview`}
-            className="h-full w-full"
+            title={`${title} product video`}
+            className="aspect-video w-full"
             allow="autoplay; encrypted-media; picture-in-picture"
             tabIndex={-1}
-            aria-hidden="true"
           />
         ) : (
           <video
             src={url}
-            className="h-full w-full object-contain"
+            className="aspect-video w-full object-contain"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
             controls={false}
-            tabIndex={-1}
-            aria-label={`${title} product video preview`}
           />
         )}
       </div>
-
-      <p className="mt-2 text-center text-[11px] font-semibold text-slate-500">
-        Preview plays automatically without opening another page.
-      </p>
-    </div>
+    </section>
   );
 }
 
@@ -106,7 +90,7 @@ function normalizeOffers(product) {
 
   return [{
     id: "single",
-    label: "Buy 1",
+    label: "1 Pack",
     quantity: 1,
     price: Number(product.price || 0),
     compare_at_price: product.compare_at_price ? Number(product.compare_at_price) : null,
@@ -118,13 +102,13 @@ export default function ProductDetail({ product, source = "" }) {
   const images = Array.isArray(product.images) ? product.images : [];
   const variants = Array.isArray(product.variants) ? product.variants : [];
   const offers = useMemo(() => normalizeOffers(product), [product]);
+
   const [activeImage, setActiveImage] = useState(0);
   const [offerId, setOfferId] = useState(offers[0]?.id || "single");
   const [selected, setSelected] = useState(() =>
-    Object.fromEntries(variants.map((variant) => [
-      variant.name,
-      variant.values?.[0] || ""
-    ]))
+    Object.fromEntries(
+      variants.map((variant) => [variant.name, variant.values?.[0] || ""])
+    )
   );
 
   const activeOffer = offers.find((offer) => offer.id === offerId) || offers[0];
@@ -159,49 +143,58 @@ export default function ProductDetail({ product, source = "" }) {
     );
   }
 
-  const saving = activeOffer?.compare_at_price &&
+  const saving =
+    activeOffer?.compare_at_price &&
     Number(activeOffer.compare_at_price) > Number(activeOffer.price)
       ? Number(activeOffer.compare_at_price) - Number(activeOffer.price)
       : 0;
 
   return (
-    <main className="min-h-screen bg-[#faf9f7] text-slate-950">
+    <main className="min-h-screen bg-white text-slate-950">
       <div className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <a href="/shop" className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-slate-950">
-            <ChevronLeft className="h-4 w-4" /> Shop
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+          <a
+            href="/shop"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-950"
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Shop
           </a>
-          <div className="text-lg font-black tracking-tight">
+          <div className="text-base font-black tracking-tight">
             Aliwvide <span className="text-emerald-600">Shop</span>
           </div>
-          <div className="text-xs font-bold text-slate-500">Secure checkout</div>
+          <div className="flex items-center gap-1 text-xs font-semibold text-slate-500">
+            <LockKeyhole className="h-3.5 w-3.5" />
+            Secure
+          </div>
         </div>
       </div>
 
-      <section className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:py-10">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-12">
+      <section className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:py-10">
+        <div className="grid gap-8 lg:grid-cols-[1.08fr_.92fr] lg:gap-12">
           <div>
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-sm">
+            <div className="relative overflow-hidden rounded-2xl bg-slate-50">
               <div className="aspect-square">
                 {images[activeImage] ? (
                   <img
                     src={images[activeImage]}
                     alt={product.name}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                   />
                 ) : (
-                  <div className="flex h-full items-center justify-center text-slate-400">
-                    <ShoppingBag className="h-14 w-14" />
+                  <div className="flex h-full flex-col items-center justify-center gap-3 text-slate-400">
+                    <ShoppingBag className="h-12 w-12" />
+                    <span className="text-sm font-semibold">Product image</span>
                   </div>
                 )}
               </div>
 
-              {images.length > 1 && (
+              {images.length > 1 ? (
                 <>
                   <button
                     type="button"
                     onClick={previousImage}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/95 p-3 shadow"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-slate-200 bg-white p-2.5 shadow-sm"
                     aria-label="Previous image"
                   >
                     <ChevronLeft className="h-5 w-5" />
@@ -209,55 +202,52 @@ export default function ProductDetail({ product, source = "" }) {
                   <button
                     type="button"
                     onClick={nextImage}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/95 p-3 shadow"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-slate-200 bg-white p-2.5 shadow-sm"
                     aria-label="Next image"
                   >
                     <ChevronRight className="h-5 w-5" />
                   </button>
                 </>
-              )}
+              ) : null}
             </div>
 
-            {images.length > 1 && (
+            {images.length > 1 ? (
               <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
                 {images.map((image, index) => (
                   <button
                     key={image + index}
                     type="button"
                     onClick={() => setActiveImage(index)}
-                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-white ${activeImage === index ? "border-slate-950" : "border-transparent"}`}
+                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-xl border bg-white ${activeImage === index ? "border-slate-950" : "border-slate-200"}`}
                   >
-                    <img src={image} alt="" className="h-full w-full object-cover" />
+                    <img src={image} alt="" className="h-full w-full object-contain" />
                   </button>
                 ))}
               </div>
-            )}
-
-            <ProductVideoPreview url={product.video_url} title={product.name} />
+            ) : null}
           </div>
 
-          <div className="lg:sticky lg:top-5 lg:self-start">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-emerald-700">
-              <Sparkles className="h-3.5 w-3.5" /> Online offer
-            </div>
-
-            <p className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-slate-500">
+          <div className="lg:sticky lg:top-6 lg:self-start">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
               {product.category || "Aliwvide Shop"}
             </p>
-            <h1 className="mt-2 text-3xl font-black leading-tight sm:text-5xl">
+
+            <h1 className="mt-2 text-3xl font-black leading-tight sm:text-4xl">
               {product.name}
             </h1>
 
-            <div className="mt-5 flex flex-wrap items-baseline gap-3">
-              <span className="text-3xl font-black">
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <span className="text-2xl font-black">
                 {money(activeOffer?.price, product.currency)}
               </span>
+
               {activeOffer?.compare_at_price &&
               Number(activeOffer.compare_at_price) > Number(activeOffer.price) ? (
-                <span className="text-lg text-slate-400 line-through">
+                <span className="text-base text-slate-400 line-through">
                   {money(activeOffer.compare_at_price, product.currency)}
                 </span>
               ) : null}
+
               {saving > 0 ? (
                 <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-black text-emerald-700">
                   Save {money(saving, product.currency)}
@@ -265,58 +255,11 @@ export default function ProductDetail({ product, source = "" }) {
               ) : null}
             </div>
 
-            <div id="pricing" className="mt-7">
-              <div className="mb-3 flex items-center justify-between gap-3">
-                <h2 className="text-base font-black">Choose your offer</h2>
-                <span className="text-xs font-semibold text-slate-500">Select one</span>
-              </div>
-
-              <div className="grid gap-3">
-                {offers.map((offer) => {
-                  const selectedOffer = offer.id === activeOffer?.id;
-                  const perItem = Number(offer.price) / Math.max(1, Number(offer.quantity || 1));
-
-                  return (
-                    <button
-                      key={offer.id}
-                      type="button"
-                      onClick={() => setOfferId(offer.id)}
-                      className={`relative w-full rounded-2xl border-2 p-4 text-left transition ${selectedOffer ? "border-slate-950 bg-white shadow-md" : "border-slate-200 bg-white/70 hover:border-slate-400"}`}
-                    >
-                      {offer.badge ? (
-                        <span className="absolute -top-3 right-4 rounded-full bg-slate-950 px-3 py-1 text-[10px] font-black uppercase tracking-wide text-white">
-                          {offer.badge}
-                        </span>
-                      ) : null}
-
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                          <span className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${selectedOffer ? "border-slate-950 bg-slate-950 text-white" : "border-slate-300"}`}>
-                            {selectedOffer ? <Check className="h-3 w-3" /> : null}
-                          </span>
-                          <div>
-                            <div className="font-black">{offer.label}</div>
-                            <div className="mt-0.5 text-xs text-slate-500">
-                              {offer.quantity} {Number(offer.quantity) === 1 ? "item" : "items"} · {money(perItem, product.currency)} each
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="text-right">
-                          <div className="font-black">{money(offer.price, product.currency)}</div>
-                          {offer.compare_at_price &&
-                          Number(offer.compare_at_price) > Number(offer.price) ? (
-                            <div className="text-xs text-slate-400 line-through">
-                              {money(offer.compare_at_price, product.currency)}
-                            </div>
-                          ) : null}
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            {product.description ? (
+              <p className="mt-4 text-sm leading-6 text-slate-600">
+                {product.description}
+              </p>
+            ) : null}
 
             {variants.map((variant) => (
               <div key={variant.name} className="mt-6">
@@ -332,7 +275,7 @@ export default function ProductDetail({ product, source = "" }) {
                           [variant.name]: value
                         }))
                       }
-                      className={`rounded-full border px-4 py-2.5 text-sm font-bold transition ${selected[variant.name] === value ? "border-slate-950 bg-slate-950 text-white" : "border-slate-300 bg-white"}`}
+                      className={`rounded-lg border px-3.5 py-2.5 text-sm font-bold transition ${selected[variant.name] === value ? "border-slate-950 bg-slate-950 text-white" : "border-slate-300 bg-white hover:border-slate-500"}`}
                     >
                       {value}
                     </button>
@@ -341,35 +284,53 @@ export default function ProductDetail({ product, source = "" }) {
               </div>
             ))}
 
-            <div className="mt-7 grid grid-cols-2 gap-3">
-              <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center">
-                <div className="text-sm font-black">PayPal</div>
-                <div className="mt-1 text-xs text-slate-500">Pay with your PayPal account</div>
-              </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-4 text-center">
-                <div className="text-sm font-black">Debit / Credit Card</div>
-                <div className="mt-1 text-xs text-slate-500">Visa & Mastercard where available</div>
+            <div className="mt-6">
+              <div className="mb-2 text-sm font-black">Quantity</div>
+              <div className="grid gap-2">
+                {offers.map((offer) => {
+                  const isSelected = offer.id === activeOffer?.id;
+                  return (
+                    <button
+                      key={offer.id}
+                      type="button"
+                      onClick={() => setOfferId(offer.id)}
+                      className={`flex items-center justify-between rounded-xl border p-3 text-left transition ${isSelected ? "border-slate-950 bg-slate-50" : "border-slate-200 bg-white"}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${isSelected ? "border-slate-950 bg-slate-950 text-white" : "border-slate-300"}`}>
+                          {isSelected ? <Check className="h-3 w-3" /> : null}
+                        </span>
+                        <div>
+                          <div className="font-bold">{offer.label}</div>
+                          {offer.badge ? (
+                            <div className="mt-0.5 text-xs font-bold text-emerald-700">{offer.badge}</div>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="font-black">{money(offer.price, product.currency)}</div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             <a
               href={checkoutHref}
-              className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-4 text-base font-black text-white shadow-sm transition hover:bg-slate-800"
+              className="mt-6 flex w-full items-center justify-center rounded-xl bg-slate-950 px-6 py-4 text-base font-black text-white transition hover:bg-slate-800"
             >
-              Continue to Checkout
+              Buy Now
             </a>
 
-            <div className="mt-3 flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
-              <LockKeyhole className="h-3.5 w-3.5" />
-              Secure payment through PayPal and eligible card checkout
+            <div className="mt-3 text-center text-xs font-semibold text-slate-500">
+              Pay securely with PayPal or eligible debit/credit card
             </div>
 
             {product.shipping_text ? (
-              <div className="mt-5 flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700">
-                <Truck className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+              <div className="mt-5 flex items-start gap-3 border-t border-slate-200 pt-5 text-sm text-slate-600">
+                <Truck className="mt-0.5 h-5 w-5 shrink-0 text-slate-700" />
                 <div>
-                  <div className="font-black">Delivery</div>
-                  <div className="mt-1">{product.shipping_text}</div>
+                  <div className="font-black text-slate-950">Delivery information</div>
+                  <div className="mt-1 leading-6">{product.shipping_text}</div>
                 </div>
               </div>
             ) : null}
@@ -377,119 +338,41 @@ export default function ProductDetail({ product, source = "" }) {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-7 sm:grid-cols-3 sm:px-6">
-          <div className="flex gap-3">
-            <PackageCheck className="h-6 w-6 shrink-0 text-emerald-600" />
-            <div>
-              <div className="font-black">Choose your package</div>
-              <p className="mt-1 text-sm text-slate-500">Pick the quantity and product options that suit you.</p>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <LockKeyhole className="h-6 w-6 shrink-0 text-emerald-600" />
-            <div>
-              <div className="font-black">Pay securely</div>
-              <p className="mt-1 text-sm text-slate-500">Choose PayPal or an eligible debit/credit card at checkout. Aliwvide does not store card details.</p>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <Truck className="h-6 w-6 shrink-0 text-emerald-600" />
-            <div>
-              <div className="font-black">Shipping details</div>
-              <p className="mt-1 text-sm text-slate-500">Your delivery address is collected during checkout.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
-        <div className="text-center">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-600">Product overview</p>
-          <h2 className="mt-2 text-3xl font-black sm:text-4xl">Everything you need to know</h2>
-        </div>
-
-        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_.9fr] lg:items-center">
-          <div className="whitespace-pre-line text-base leading-8 text-slate-700">
+      <section className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="border-t border-slate-200 py-10">
+          <h2 className="text-xl font-black">Product details</h2>
+          <div className="mt-4 whitespace-pre-line text-sm leading-7 text-slate-600">
             {product.description || "Product details will be added soon."}
           </div>
-          {images[1] || images[0] ? (
-            <div className="overflow-hidden rounded-[1.75rem] bg-white shadow-sm ring-1 ring-slate-200">
-              <img src={images[1] || images[0]} alt={product.name} className="aspect-square h-full w-full object-cover" />
-            </div>
-          ) : null}
         </div>
 
-        {images.length > 2 ? (
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {images.slice(2, 6).map((image, index) => (
-              <div key={image + index} className="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-200">
-                <img src={image} alt="" className="aspect-square w-full object-cover" />
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </section>
+        <ProductVideoPreview url={product.video_url} title={product.name} />
 
-      <section className="bg-slate-950 text-white">
-        <div className="mx-auto max-w-4xl px-4 py-12 text-center sm:px-6">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">Ready to order?</p>
-          <h2 className="mt-3 text-3xl font-black sm:text-4xl">{product.name}</h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">
-            Select your preferred offer, then pay with PayPal or an eligible debit/credit card.
+        <section className="border-t border-slate-200 py-10">
+          <h2 className="text-xl font-black">Payment methods</h2>
+          <p className="mt-2 text-sm text-slate-600">
+            Secure checkout is processed through PayPal. Eligible customers may also see debit or credit card checkout.
           </p>
-          <a
-            href="#pricing"
-            className="mt-6 inline-flex rounded-2xl bg-white px-7 py-3.5 font-black text-slate-950"
-          >
-            View pricing
-          </a>
-        </div>
-      </section>
-
-      <section className="border-t border-slate-800 bg-black text-white">
-        <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-          <div className="text-center">
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">Available payment methods</p>
-            <h2 className="mt-2 text-2xl font-black sm:text-3xl">Pay securely your way</h2>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black text-[#003087]">PayPal</span>
+            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black italic text-[#1a1f71]">VISA</span>
+            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black">Mastercard</span>
+            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black text-[#1679be]">AMEX</span>
           </div>
-
-          <div className="mx-auto mt-7 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-            <div className="flex h-16 items-center justify-center rounded-xl bg-white px-4 text-center text-lg font-black text-[#003087]">
-              PayPal
-            </div>
-            <div className="flex h-16 items-center justify-center rounded-xl bg-white px-4 text-center text-2xl font-black italic text-[#1a1f71]">
-              VISA
-            </div>
-            <div className="flex h-16 items-center justify-center gap-2 rounded-xl bg-white px-4 text-center">
-              <span className="h-8 w-8 rounded-full bg-[#eb001b]" />
-              <span className="-ml-4 h-8 w-8 rounded-full bg-[#f79e1b] opacity-90" />
-              <span className="ml-1 text-sm font-black text-slate-900">Mastercard</span>
-            </div>
-            <div className="flex h-16 items-center justify-center rounded-xl bg-[#1679be] px-4 text-center text-lg font-black text-white">
-              AMEX
-            </div>
-          </div>
-
-          <p className="mx-auto mt-5 max-w-2xl text-center text-xs leading-5 text-slate-400">
-            PayPal processes payments securely. Card options are shown when they are available for your country, device and PayPal merchant account.
-          </p>
-        </div>
+        </section>
       </section>
 
       <div className="sticky bottom-0 z-30 border-t border-slate-200 bg-white/95 p-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-lg items-center gap-3">
           <div className="min-w-0 flex-1">
-            <div className="truncate text-xs font-bold text-slate-500">
-              {activeOffer?.label || product.name}
-            </div>
+            <div className="truncate text-xs font-semibold text-slate-500">{product.name}</div>
             <div className="font-black">{money(activeOffer?.price, product.currency)}</div>
           </div>
           <a
             href={checkoutHref}
             className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-black text-white"
           >
-            Checkout
+            Buy Now
           </a>
         </div>
       </div>

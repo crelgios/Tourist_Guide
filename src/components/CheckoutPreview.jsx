@@ -15,6 +15,17 @@ function money(value, currency) {
   }
 }
 
+
+const COUNTRY_OPTIONS = [
+  "United States","Canada","United Kingdom","Australia","India","Germany","France","Italy","Spain","Netherlands",
+  "Ireland","New Zealand","Singapore","United Arab Emirates","Austria","Belgium","Switzerland","Sweden","Norway","Denmark",
+  "Finland","Portugal","Greece","Poland","Czechia","Hungary","Romania","Bulgaria","Croatia","Slovakia",
+  "Slovenia","Estonia","Latvia","Lithuania","Luxembourg","Malta","Cyprus","Iceland","Japan","South Korea",
+  "Hong Kong","Malaysia","Thailand","Indonesia","Philippines","Vietnam","Saudi Arabia","Qatar","Kuwait","Bahrain",
+  "Oman","Israel","Turkey","South Africa","Mexico","Brazil","Argentina","Chile","Colombia","Peru"
+];
+
+
 function getOffer(product, offerId) {
   const offers = Array.isArray(product.offers) ? product.offers : [];
   const selected = offers.find((offer) => offer?.id === offerId);
@@ -39,6 +50,7 @@ async function readJson(response) {
 export default function CheckoutPreview({
   product,
   offerId = "single",
+  quantity = 1,
   selectedOptions = {},
   source = "",
   paypalClientId = ""
@@ -60,6 +72,7 @@ export default function CheckoutPreview({
   const [shippingLocked, setShippingLocked] = useState(false);
   const [message, setMessage] = useState("");
   const [paidOrder, setPaidOrder] = useState("");
+
 
   const requiredComplete = [
     customer.first_name,
@@ -105,6 +118,7 @@ export default function CheckoutPreview({
           body: JSON.stringify({
             product: product.slug,
             offer: offer.id,
+            quantity,
             selected_options: selectedOptions,
             customer,
             source
@@ -185,6 +199,7 @@ export default function CheckoutPreview({
     paidOrder,
     product.slug,
     offer.id,
+    quantity,
     selectedOptions,
     customer,
     source
@@ -264,7 +279,12 @@ export default function CheckoutPreview({
                 </label>
                 <label className="grid gap-2 text-sm font-bold">
                   State / region
-                  <input value={customer.state} onChange={(e) => setField("state", e.target.value)} className="rounded-xl border border-slate-300 px-4 py-3 font-normal outline-none focus:border-emerald-500" />
+                  <input
+                    value={customer.state}
+                    onChange={(e) => setField("state", e.target.value)}
+                    placeholder="Type state / region"
+                    className="rounded-xl border border-slate-300 px-4 py-3 font-normal outline-none focus:border-emerald-500"
+                  />
                 </label>
                 <label className="grid gap-2 text-sm font-bold">
                   Postal code *
@@ -272,7 +292,20 @@ export default function CheckoutPreview({
                 </label>
                 <label className="grid gap-2 text-sm font-bold">
                   Country *
-                  <input required value={customer.country} onChange={(e) => setField("country", e.target.value)} placeholder="United States" className="rounded-xl border border-slate-300 px-4 py-3 font-normal outline-none focus:border-emerald-500" />
+                  <select
+                    required
+                    value={customer.country}
+                    onChange={(e) => {
+                      const country = e.target.value;
+                      setCustomer((current) => ({ ...current, country, state: "" }));
+                    }}
+                    className="rounded-xl border border-slate-300 bg-white px-4 py-3 font-normal outline-none focus:border-emerald-500"
+                  >
+                    <option value="">Select country</option>
+                    {COUNTRY_OPTIONS.map((country) => (
+                      <option key={country} value={country}>{country}</option>
+                    ))}
+                  </select>
                 </label>
               </fieldset>
 
@@ -350,7 +383,7 @@ export default function CheckoutPreview({
                 <div className="min-w-0 flex-1">
                   <div className="font-black">{product.name}</div>
                   <div className="mt-1 text-sm font-bold text-emerald-700">{offer.label}</div>
-                  <div className="mt-1 text-xs text-slate-500">Quantity: {offer.quantity || 1}</div>
+                  <div className="mt-1 text-xs text-slate-500">Quantity: {(offer.quantity || 1) * quantity}</div>
                   {Object.entries(selectedOptions).map(([key, value]) => (
                     <div key={key} className="text-xs capitalize text-slate-500">
                       {key}: {value}
@@ -362,7 +395,7 @@ export default function CheckoutPreview({
               <div className="mt-6 border-t border-slate-200 pt-4">
                 <div className="flex justify-between text-sm">
                   <span>Selected offer</span>
-                  <span>{money(offer.price, product.currency)}</span>
+                  <span>{money(Number(offer.price || 0) * quantity, product.currency)}</span>
                 </div>
                 <div className="mt-2 flex justify-between text-sm">
                   <span>Shipping</span>
@@ -370,7 +403,7 @@ export default function CheckoutPreview({
                 </div>
                 <div className="mt-4 flex justify-between border-t border-slate-200 pt-4 text-lg font-black">
                   <span>Total</span>
-                  <span>{money(offer.price, product.currency)}</span>
+                  <span>{money(Number(offer.price || 0) * quantity, product.currency)}</span>
                 </div>
               </div>
 

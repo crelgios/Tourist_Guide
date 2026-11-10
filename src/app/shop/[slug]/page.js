@@ -1,10 +1,13 @@
 import { notFound } from "next/navigation";
 import ProductDetail from "@/components/ProductDetail";
 import { hasPublicSupabaseConfig, publicSupabaseRequest } from "@/lib/supabase-rest";
+import { getTestRedPrivacyProduct } from "@/lib/test-red-privacy-product";
 
 export const revalidate = 300;
 
 async function getProduct(slug) {
+  const testProduct = getTestRedPrivacyProduct(slug);
+  if (testProduct) return testProduct;
   if (!hasPublicSupabaseConfig()) return null;
   try {
     const rows = await publicSupabaseRequest("/shop_products", {

@@ -1,5 +1,6 @@
 import DropshippingShop from "@/components/DropshippingShop";
 import { hasPublicSupabaseConfig, publicSupabaseRequest } from "@/lib/supabase-rest";
+import { TEST_RED_PRIVACY_PRODUCT } from "@/lib/test-red-privacy-product";
 
 const pageUrl = "https://www.aliwvide.com/shop";
 const socialImage = "https://www.aliwvide.com/brand/aliwvide-og-image.jpg";
@@ -12,19 +13,11 @@ export const metadata = {
   alternates: { canonical: "/shop" },
   robots: { index: true, follow: true },
   openGraph: {
-    type: "website",
-    url: pageUrl,
-    siteName: "Aliwvide",
-    title: "Aliwvide Shop",
+    type: "website", url: pageUrl, siteName: "Aliwvide", title: "Aliwvide Shop",
     description: "Products featured on Aliwvide and Instagram.",
     images: [{ url: socialImage, width: 1200, height: 630, alt: "Aliwvide Shop" }]
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Aliwvide Shop",
-    description: "Products featured on Aliwvide and Instagram.",
-    images: [socialImage]
-  }
+  twitter: { card: "summary_large_image", title: "Aliwvide Shop", description: "Products featured on Aliwvide and Instagram.", images: [socialImage] }
 };
 
 async function getProducts() {
@@ -32,8 +25,7 @@ async function getProducts() {
   try {
     return await publicSupabaseRequest("/shop_products", {
       query: "select=id,name,slug,category,description,price,compare_at_price,currency,images,shipping_text&active=eq.true&status=eq.active&order=sort_order.asc,name.asc",
-      revalidate: 300,
-      tags: ["shop-products"]
+      revalidate: 300, tags: ["shop-products"]
     });
   } catch (error) {
     console.error("Could not load dropshipping products.", error);
@@ -43,5 +35,6 @@ async function getProducts() {
 
 export default async function ShopPage() {
   const products = await getProducts();
-  return <DropshippingShop products={products || []} />;
+  const withoutDuplicate = (products || []).filter((product) => product.slug !== TEST_RED_PRIVACY_PRODUCT.slug);
+  return <DropshippingShop products={[TEST_RED_PRIVACY_PRODUCT, ...withoutDuplicate]} />;
 }

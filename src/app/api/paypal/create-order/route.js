@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminSupabaseRequest, hasAdminSupabaseConfig } from "@/lib/supabase-rest";
 import { createPayPalOrder, hasPayPalConfig } from "@/lib/paypal";
+import { getTestRedPrivacyProduct } from "@/lib/test-red-privacy-product";
 
 function cleanText(value, max = 200) {
   return String(value || "").trim().slice(0, max);
@@ -48,6 +49,7 @@ export async function POST(request) {
     const body = await request.json();
     const slug = cleanText(body.product, 100);
     const offerId = cleanText(body.offer, 100);
+    const requestedQuantity = Math.min(10, Math.max(1, Number.parseInt(String(body.quantity || "1"), 10) || 1));
     const customer = {
       first_name: cleanText(body.customer?.first_name, 80),
       last_name: cleanText(body.customer?.last_name, 80),
@@ -70,10 +72,11 @@ export async function POST(request) {
       return NextResponse.json({ error: "Complete all required shipping fields." }, { status: 400 });
     }
 
-    const rows = await adminSupabaseRequest("/shop_products", {
+    const testProduct = getTestRedPrivacyProduct(slug);
+    const rows = testProduct ? [] : await adminSupabaseRequest("/shop_products", {
       query: `select=id,name,slug,price,currency,images,offers&slug=eq.${encodeURIComponent(slug)}&active=eq.true&status=eq.active&limit=1`
     });
-    const product = rows?.[0];
+    const product = testProduct || rows?.[0];
     if (!product) {
       return NextResponse.json({ error: "Product is unavailable." }, { status: 404 });
     }
@@ -92,14 +95,14 @@ export async function POST(request) {
         )
       : {};
 
-    const amount = Number(offer.price).toFixed(2);
+    const amount = (Number(offer.price) * requestedQuantity).toFixed(2);
     const currency = cleanText(product.currency || "USD", 3).toUpperCase();
     const orderNumber = makeOrderNumber();
 
     const paypalOrder = await createPayPalOrder({
       amount,
       currency,
-      description: `${product.name} — ${offer.label}`,
+      description: `${product.name} — ${offer.label} × ${requestedQuantity}`,
       customId: orderNumber
     });
 
@@ -116,7 +119,7 @@ export async function POST(request) {
         },
         customer,
         selected_options: selectedOptions,
-        quantity: offer.quantity,
+        quantity: offer.quantity * requestedQuantity,
         amount,
         currency,
         source: cleanText(body.source, 120),

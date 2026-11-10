@@ -110,7 +110,7 @@ export async function POST(request) {
       method: "POST",
       body: {
         order_number: orderNumber,
-        product_id: product.id,
+        product_id: testProduct ? null : product.id,
         product_snapshot: {
           name: product.name,
           slug: product.slug,

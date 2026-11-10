@@ -1,13 +1,10 @@
 import { notFound } from "next/navigation";
 import CheckoutPreview from "@/components/CheckoutPreview";
 import { hasPublicSupabaseConfig, publicSupabaseRequest } from "@/lib/supabase-rest";
-import { getTestRedPrivacyProduct } from "@/lib/test-red-privacy-product";
 
 export const dynamic = "force-dynamic";
 
 async function getProduct(slug) {
-  const testProduct = getTestRedPrivacyProduct(slug);
-  if (testProduct) return testProduct;
   if (!slug || !hasPublicSupabaseConfig()) return null;
   try {
     const rows = await publicSupabaseRequest("/shop_products", {

@@ -4,8 +4,8 @@ const TOKEN = "OV7hfUI9SNnVVSOmmncLAnt-TOQCIs4xIptFaoYcJrw";
 const EXPIRES_AT = 1794297226472;
 
 const ALLOWED = {
-  "red-privacy-main.jpg": { type: "image/jpeg", path: "red-privacy/red-privacy-main.jpg" },
-  "red-privacy-hand.jpg": { type: "image/jpeg", path: "red-privacy/red-privacy-hand.jpg" },
+  "red-privacy-main.webp": { type: "image/webp", path: "red-privacy/red-privacy-main.webp" },
+  "red-privacy-hand.webp": { type: "image/webp", path: "red-privacy/red-privacy-hand.webp" },
   "red-privacy-demo.mp4": { type: "video/mp4", path: "red-privacy/red-privacy-demo.mp4" }
 };
 

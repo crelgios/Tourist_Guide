@@ -1,6 +1,5 @@
 import DropshippingShop from "@/components/DropshippingShop";
 import { hasPublicSupabaseConfig, publicSupabaseRequest } from "@/lib/supabase-rest";
-import { TEST_RED_PRIVACY_PRODUCT } from "@/lib/test-red-privacy-product";
 
 const pageUrl = "https://www.aliwvide.com/shop";
 const socialImage = "https://www.aliwvide.com/brand/aliwvide-og-image.jpg";
@@ -35,6 +34,5 @@ async function getProducts() {
 
 export default async function ShopPage() {
   const products = await getProducts();
-  const withoutDuplicate = (products || []).filter((product) => product.slug !== TEST_RED_PRIVACY_PRODUCT.slug);
-  return <DropshippingShop products={[TEST_RED_PRIVACY_PRODUCT, ...withoutDuplicate]} />;
+  return <DropshippingShop products={products || []} />;
 }

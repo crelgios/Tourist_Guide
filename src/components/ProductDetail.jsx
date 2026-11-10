@@ -105,6 +105,7 @@ export default function ProductDetail({ product, source = "" }) {
 
   const [activeImage, setActiveImage] = useState(0);
   const [offerId, setOfferId] = useState(offers[0]?.id || "single");
+  const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(() =>
     Object.fromEntries(
       variants.map((variant) => [variant.name, variant.values?.[0] || ""])
@@ -117,6 +118,7 @@ export default function ProductDetail({ product, source = "" }) {
     const params = new URLSearchParams();
     params.set("product", product.slug);
     params.set("offer", activeOffer?.id || "single");
+    params.set("quantity", String(quantity));
 
     Object.entries(selected).forEach(([key, value]) => {
       if (value) {
@@ -129,7 +131,7 @@ export default function ProductDetail({ product, source = "" }) {
 
     if (source) params.set("src", source);
     return `/checkout?${params.toString()}`;
-  }, [product.slug, activeOffer?.id, selected, source]);
+  }, [product.slug, activeOffer?.id, quantity, selected, source]);
 
   function previousImage() {
     setActiveImage((current) =>
@@ -238,19 +240,19 @@ export default function ProductDetail({ product, source = "" }) {
 
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <span className="text-2xl font-black">
-                {money(activeOffer?.price, product.currency)}
+                {money(Number(activeOffer?.price || 0) * quantity, product.currency)}
               </span>
 
               {activeOffer?.compare_at_price &&
               Number(activeOffer.compare_at_price) > Number(activeOffer.price) ? (
                 <span className="text-base text-slate-400 line-through">
-                  {money(activeOffer.compare_at_price, product.currency)}
+                  {money(Number(activeOffer.compare_at_price) * quantity, product.currency)}
                 </span>
               ) : null}
 
               {saving > 0 ? (
                 <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-black text-emerald-700">
-                  Save {money(saving, product.currency)}
+                  Save {money(saving * quantity, product.currency)}
                 </span>
               ) : null}
             </div>
@@ -284,33 +286,65 @@ export default function ProductDetail({ product, source = "" }) {
               </div>
             ))}
 
+            {offers.length > 1 ? (
+              <div className="mt-6">
+                <div className="mb-2 text-sm font-black">Package</div>
+                <div className="grid gap-2">
+                  {offers.map((offer) => {
+                    const isSelected = offer.id === activeOffer?.id;
+                    return (
+                      <button
+                        key={offer.id}
+                        type="button"
+                        onClick={() => setOfferId(offer.id)}
+                        className={`flex items-center justify-between rounded-xl border p-3 text-left transition ${isSelected ? "border-slate-950 bg-slate-50" : "border-slate-200 bg-white"}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${isSelected ? "border-slate-950 bg-slate-950 text-white" : "border-slate-300"}`}>
+                            {isSelected ? <Check className="h-3 w-3" /> : null}
+                          </span>
+                          <div>
+                            <div className="font-bold">{offer.label}</div>
+                            {offer.badge ? (
+                              <div className="mt-0.5 text-xs font-bold text-emerald-700">{offer.badge}</div>
+                            ) : null}
+                          </div>
+                        </div>
+                        <div className="font-black">{money(offer.price, product.currency)}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
+
             <div className="mt-6">
               <div className="mb-2 text-sm font-black">Quantity</div>
-              <div className="grid gap-2">
-                {offers.map((offer) => {
-                  const isSelected = offer.id === activeOffer?.id;
-                  return (
-                    <button
-                      key={offer.id}
-                      type="button"
-                      onClick={() => setOfferId(offer.id)}
-                      className={`flex items-center justify-between rounded-xl border p-3 text-left transition ${isSelected ? "border-slate-950 bg-slate-50" : "border-slate-200 bg-white"}`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${isSelected ? "border-slate-950 bg-slate-950 text-white" : "border-slate-300"}`}>
-                          {isSelected ? <Check className="h-3 w-3" /> : null}
-                        </span>
-                        <div>
-                          <div className="font-bold">{offer.label}</div>
-                          {offer.badge ? (
-                            <div className="mt-0.5 text-xs font-bold text-emerald-700">{offer.badge}</div>
-                          ) : null}
-                        </div>
-                      </div>
-                      <div className="font-black">{money(offer.price, product.currency)}</div>
-                    </button>
-                  );
-                })}
+              <div className="inline-flex items-center overflow-hidden rounded-xl border border-slate-300 bg-white">
+                <button
+                  type="button"
+                  onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+                  disabled={quantity <= 1}
+                  className="h-11 w-12 text-xl font-bold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300"
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+                <div className="flex h-11 min-w-14 items-center justify-center border-x border-slate-300 px-4 font-black">
+                  {quantity}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setQuantity((value) => Math.min(10, value + 1))}
+                  disabled={quantity >= 10}
+                  className="h-11 w-12 text-xl font-bold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300"
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+              <div className="mt-2 text-xs font-semibold text-slate-500">
+                Total: {money(Number(activeOffer?.price || 0) * quantity, product.currency)}
               </div>
             </div>
 
@@ -348,16 +382,33 @@ export default function ProductDetail({ product, source = "" }) {
 
         <ProductVideoPreview url={product.video_url} title={product.name} />
 
-        <section className="border-t border-slate-200 py-10">
-          <h2 className="text-xl font-black">Payment methods</h2>
-          <p className="mt-2 text-sm text-slate-600">
-            Secure checkout is processed through PayPal. Eligible customers may also see debit or credit card checkout.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black text-[#003087]">PayPal</span>
-            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black italic text-[#1a1f71]">VISA</span>
-            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black">Mastercard</span>
-            <span className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-black text-[#1679be]">AMEX</span>
+        <section className="border-t border-slate-800 bg-black py-10 text-white">
+          <div className="px-1">
+            <div className="text-center">
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-slate-400">Available payment methods</p>
+              <h2 className="mt-2 text-2xl font-black sm:text-3xl">Pay securely your way</h2>
+            </div>
+
+            <div className="mx-auto mt-7 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="flex h-16 items-center justify-center rounded-xl bg-white px-4 text-center text-lg font-black text-[#003087]">
+                PayPal
+              </div>
+              <div className="flex h-16 items-center justify-center rounded-xl bg-white px-4 text-center text-2xl font-black italic text-[#1a1f71]">
+                VISA
+              </div>
+              <div className="flex h-16 items-center justify-center gap-2 rounded-xl bg-white px-4 text-center">
+                <span className="h-8 w-8 rounded-full bg-[#eb001b]" />
+                <span className="-ml-4 h-8 w-8 rounded-full bg-[#f79e1b] opacity-90" />
+                <span className="ml-1 text-sm font-black text-slate-900">Mastercard</span>
+              </div>
+              <div className="flex h-16 items-center justify-center rounded-xl bg-[#1679be] px-4 text-center text-lg font-black text-white">
+                AMEX
+              </div>
+            </div>
+
+            <p className="mx-auto mt-5 max-w-2xl text-center text-xs leading-5 text-slate-400">
+              PayPal processes payments securely. Card options are shown when they are available for your country, device and PayPal merchant account.
+            </p>
           </div>
         </section>
       </section>
